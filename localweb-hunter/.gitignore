@@ -1,0 +1,21 @@
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# 環境変数（APIキーを含むため絶対にコミットしない）
+.env
+.env.local
+.env*.local
+
+# ローカルDB（取得した店舗データ・営業メモが入る）
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# 出力物
+exports/
+coverage/
+.DS_Store

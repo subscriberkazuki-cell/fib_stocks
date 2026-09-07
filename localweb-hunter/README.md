@@ -1,0 +1,164 @@
+# LocalWeb Hunter
+
+評価は高い（＝商売が成立している）のに、Web上の営業基盤が弱い（＝公式HPがない／古い）地域店舗を
+発掘し、ホームページ制作営業の見込み客リストと営業優先順位を作るローカル実行ツール。
+
+**APIキーなしで、いますぐ全機能を動かせます。**（モックデータ・コスト $0）
+
+```bash
+cd localweb-hunter
+npm install
+npm run dev          # → http://localhost:3000
+```
+
+`.env.local` すら要りません。検索 → 一覧 → 店舗詳細 → 営業メモ → CSV出力 → 営業指標まで、
+実際のコードパスをそのまま通して確認できます。
+
+---
+
+## これは何をするツールか
+
+単に店舗を集めるツールではなく、**「この店にHPを提案する価値が高い」と判断できる店舗を
+上位に並べる**ことを目的にしています。
+
+```
+検索条件を入力
+  ↓ 推定コストを表示 → あなたが確認して実行
+Phase 1: 安い一次スクリーニング（AIもWeb検索も使わない）
+  評価・レビュー件数・HP有無でルールベースに絞り込む
+  ↓ 重複排除
+  ↓ ここを通過した店舗だけが次に進む ← 低コストを成立させている仕組み
+Phase 2: 通過分だけの詳細調査
+  公式サイト候補の探索 → サイト品質の実測 → 公開メールの抽出 → AI営業分析
+  ↓
+Lead Score / Website Opportunity Score / 営業優先度 S〜D
+  ↓
+一覧表示 → 電話番号タップ → 営業トーク確認 → 営業メモ記録 → 成約率の計測
+```
+
+---
+
+## 画面
+
+| 画面 | できること |
+|---|---|
+| `/` 検索 | 地域・範囲・業種・最低評価・最低レビュー数の指定。**実行前に必ず推定コストを表示** |
+| `/leads` 一覧 | Lead Score / 優先度 / 評価 / レビュー数でソート、絞り込み、CSV出力 |
+| `/leads/[id]` 詳細 | 店舗概要・Web状況・営業情報・営業メモを1画面に。電話番号は `tel:` リンク |
+| `/costs` コスト | 本日／今月の使用額、種別内訳、検索ログ、API使用履歴、予算の残り |
+| `/metrics` 営業指標 | 発見 → 架電 → 到達 → 興味 → 提案 → 成約のファネルと成約率 |
+| `/settings` 設定 | Lead Score の重みと優先度閾値を変更（コードに埋め込んでいません） |
+| `/about` 利用目的 | 何のためにデータを集めているかの明示。削除依頼の窓口 |
+
+---
+
+## データソースを切り替える
+
+`.env.example` を `.env.local` にコピーして編集します。
+
+### ビジネスデータ（店舗の発見）
+
+| `BUSINESS_DATA_PROVIDER` | コスト | 評価・レビュー | 備考 |
+|---|---|---|---|
+| `mock`（デフォルト） | $0 | あり（架空） | キー不要。全機能の動作確認用 |
+| `osm` | $0 | **なし** | OpenStreetMap。評価がないため中核フィルタが効かない |
+| `dataforseo` | $0.012/req + $0.00036/件 | あり | 本番用。柏市1,300件で約 **$0.49** |
+
+### Web検索（Phase 2 Stage 2・公式サイト候補の探索）
+
+デフォルトは `none`（Stage 2をスキップ）です。**2026年9月時点で、無料で使える汎用Web検索APIが
+実質的に存在しない**ためです（Google CSE は新規停止・2027年終了予定、Brave は2026年2月に
+新規向け無料プラン廃止）。詳細と影響は [`docs/DECISIONS.md`](docs/DECISIONS.md) を参照してください。
+
+契約がある場合は `SEARCH_PROVIDER=google` または `brave` で有効になります。
+
+### AI（営業分析）
+
+| `AI_PROVIDER` | コスト | 備考 |
+|---|---|---|
+| `heuristic`（デフォルト） | $0 | ルールベース。営業トーク・メール文面・HP提案まで生成する |
+| `gemini` / `openai` / `anthropic` | 従量 | 店舗に即した文面になる |
+
+---
+
+## 守っていること
+
+このツールは他人の店舗情報と他人のサーバーを扱います。以下は設定で緩められない形で実装しています。
+
+- **予算の強制停止** — 月間・1検索あたりの上限を超える外部API呼び出しは、警告ではなく
+  例外を投げて停止します。課金される `fetch` はすべて `BudgetGuard.spend()` の内側にあり、
+  呼ぶ前ではなく**呼び出しごと**にガードがかかっています。
+- **連絡先を推測生成しない** — 店名やドメインから `info@` を組み立てるようなことはしません。
+  見つからなければ `null` で保存し、UIとCSVには「未確認」と表示します。
+- **AI推定値と実データを分離** — AIの出力は専用のカラムに隔離し、画面には「AI生成（要確認）」と
+  明示します。JSONのパースに3回失敗したら、埋めずに `null` のままにします。
+- **robots.txt の遵守** — アクセス前に必ず取得・確認し、許可されていないパスには行きません。
+  robots.txt が取得できなかった場合もアクセスを見送ります。
+- **クロール間隔2秒以上** — 同一ドメインへの間隔は最低2秒（`Crawl-delay` がより長ければそちらに従う）。
+  設定で2秒未満にはできません。User-Agent には識別子と連絡先URLを含めます。
+- **Google Maps のスクレイピングをしない** — ブラウザ自動操作による取得は実装していません。
+- **営業メールの自動送信をしない** — メールアドレスの取得・表示までです。
+- **個人の私的メールを蓄積しない** — フリーメールは、公式サイト上に事業用として
+  掲載されている場合を除いて保存しません。
+
+---
+
+## コマンド
+
+```bash
+npm run dev          # 開発サーバー
+npm run build        # 本番ビルド
+npm start            # 本番サーバー
+npm test             # ユニットテスト（147件）
+npm run typecheck    # 型チェック
+npm run db:init      # DBの初期化（初回起動時に自動で走るので通常は不要）
+npm run db:reset     # DBを削除して作り直す
+npm run check:dataforseo   # DataForSEO の疎通確認（要 login/password）
+```
+
+データは `data/localweb-hunter.db`（SQLite）に入ります。Node 22.5+ 組み込みの `node:sqlite` を
+使っているので、ネイティブビルドも追加パッケージも不要です。
+
+---
+
+## テストしていること
+
+スコアリング・判定ロジック・重複排除のバグは「静かにリストの質を下げる」ため、重点的にテストしています。
+
+| ファイル | 何を守っているか |
+|---|---|
+| `budgetGuard.test.ts` | 予算超過時に**呼び出す前に**止まること |
+| `dedupe.test.ts` | テナントビル・チェーン本部番号で誤統合しないこと |
+| `phone.test.ts` | 電話番号の正規化。整形できないものを無理に整形しないこと |
+| `detection.test.ts` | ドメイン分類。`notgoogle.com` を Google と誤判定しないこと |
+| `scoring.test.ts` | 「評価4.7・200件・HPなし」が「評価4.0・5件・HPなし」を明確に上回ること |
+| `contactExtractor.test.ts` | メールが見つからないとき `null` を返すこと（捏造しない） |
+| `robots.test.ts` | robots.txt の解釈。Allow/Disallow の優先順位、ワイルドカード |
+| `csv.test.ts` | UTF-8 BOM 付きで出力すること（Excelの文字化け防止） |
+| `phase1Filter.test.ts` | Phase 1 がAIを使わずルールだけで判定していること |
+| `costEstimator.test.ts` | 2段階分離でPhase 2のコストが実際に減っていること |
+| `jsonRetry.test.ts` | AI出力が3回失敗したら `null`（それらしい値で埋めない） |
+| `subQueryPlanner.test.ts` | 全件調査モードの地点分割に穴が空かないこと |
+
+---
+
+## ドキュメント
+
+- [`docs/DECISIONS.md`](docs/DECISIONS.md) — **実装上の判断と、ブリーフから変わった前提**。まずここを読んでください
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — アーキテクチャ、データフロー、DBスキーマ
+- [`docs/CLAUDE_CODE_BRIEF.md`](docs/CLAUDE_CODE_BRIEF.md) — 元の実装指示
+
+---
+
+## 本番データに切り替えるときの手順
+
+1. [DataForSEO](https://app.dataforseo.com/) でアカウントを作り、API の login/password を取得
+2. `cp .env.example .env.local` して `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD` を設定
+3. `npm run check:dataforseo` で疎通確認し、実レスポンスの構造を確認
+4. 現在の単価を https://dataforseo.com/pricing/business-data/business-listings-api で確認し、
+   `DATAFORSEO_COST_PER_REQUEST` / `DATAFORSEO_COST_PER_ITEM` を更新
+5. `BUSINESS_DATA_PROVIDER=dataforseo` に変更
+6. `CRAWLER_USER_AGENT` の連絡先URLを、自分の連絡先が分かるページに変更
+7. `src/app/about/page.tsx` の削除依頼の連絡先を自分のものに書き換え
+8. `MONTHLY_BUDGET_USD` / `PER_SEARCH_BUDGET_USD` を許容額に設定
+9. まずは半径3km・単一業種など**小さい範囲**で1回実行し、実コストを `/costs` で確認してから広げる
