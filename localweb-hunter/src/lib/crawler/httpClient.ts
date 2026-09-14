@@ -31,6 +31,21 @@ export interface FetchResult {
   blockedByRobots: boolean;
 }
 
+/**
+ * ループバック宛かどうか。
+ *
+ * 2秒間隔の制限は「他人のサーバーに負荷をかけない」ためのもので、
+ * 自分自身のプロセス（モック店舗サイト）を叩くときに守る理由がない。
+ * ここを区別しないと、モックの動作確認だけで何分もかかる。
+ *
+ * 判定は厳格にする。外部ホストを誤ってループバック扱いすると、
+ * よそのサーバーに対する制限が抜けてしまうため。
+ */
+export function isLoopbackHost(host: string): boolean {
+  const h = host.toLowerCase().replace(/^\[|\]$/g, '');
+  return h === 'localhost' || h === '127.0.0.1' || h === '::1' || h === '0.0.0.0';
+}
+
 export class PoliteHttpClient {
   private lastRequestByHost = new Map<string, number>();
   private robotsCache = new Map<string, RobotsRules | null>();
@@ -39,6 +54,10 @@ export class PoliteHttpClient {
 
   /** 同一ホストへの連投を防ぐ。robots.txt の Crawl-delay がより長ければそちらに従う */
   private async waitForHost(host: string, crawlDelaySec: number | null): Promise<void> {
+    // 自分自身宛（モック店舗サイト）には間隔を空けない。
+    // 制限の目的は他人のサーバーを守ることなので、ここに適用する意味がない。
+    if (isLoopbackHost(host)) return;
+
     const interval = Math.max(this.config.minIntervalMs, (crawlDelaySec ?? 0) * 1000);
     const last = this.lastRequestByHost.get(host);
     if (last !== undefined) {

@@ -7,6 +7,7 @@ import { AiBadge, Field, PriorityBadge, ScoreBar, Unconfirmed, WebsiteStatusBadg
 import { CrmPanel } from '@/components/CrmPanel';
 import { EnrichOneButton } from '@/components/EnrichOneButton';
 import { NextActionPanel } from '@/components/NextActionPanel';
+import { EmailCell } from '@/components/ContactCell';
 
 export const dynamic = 'force-dynamic';
 
@@ -83,11 +84,7 @@ export default async function LeadDetailPage({
             )}
           </Field>
           <Field label="メール">
-            {b.email ? (
-              <a href={`mailto:${b.email.value}`} className="text-sky-700 underline">{b.email.value}</a>
-            ) : (
-              <Unconfirmed />
-            )}
+            <EmailCell email={b.email} />
           </Field>
           <Field label="住所">{b.address || <Unconfirmed />}</Field>
           <Field label="営業時間">{b.openingHours ?? <Unconfirmed />}</Field>

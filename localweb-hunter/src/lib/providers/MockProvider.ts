@@ -56,7 +56,15 @@ export class MockProvider implements BusinessDataProvider {
   readonly name = 'mock';
   readonly billable = false;
 
-  constructor(private readonly countPerQuery = 120) {}
+  /**
+   * @param baseUrl モック店舗サイトを配信する自分自身のURL。
+   *   これを渡すと Phase 2（サイト解析・メール抽出）が実際に動く。
+   *   渡さない場合はサイトなし扱いになり、Phase 2 は「到達不能」として処理される。
+   */
+  constructor(
+    private readonly baseUrl: string | null = null,
+    private readonly countPerQuery = 120
+  ) {}
 
   getCostModel(): CostModel {
     return { perRequestUsd: 0, perItemUsd: 0, maxItemsPerRequest: 1000 };
@@ -115,8 +123,13 @@ export class MockProvider implements BusinessDataProvider {
         rating,
         reviewCount,
         phone: hasPhone ? `04-71${String(Math.floor(rng() * 90) + 10)}-${String(Math.floor(rng() * 9000) + 1000)}` : null,
-        hasWebsiteFieldPopulated: hasSite,
-        websiteUrlRaw: hasSite ? `https://example-${seed}-${i}.test/` : null,
+        hasWebsiteFieldPopulated: hasSite && this.baseUrl !== null,
+        // 自分自身が配信するモック店舗サイトを指す。
+        // クローラは本物として robots.txt を確認し、HTMLを解析し、mailto: を拾う。
+        websiteUrlRaw:
+          hasSite && this.baseUrl
+            ? `${this.baseUrl}/api/mock-site/${seed}-${i}?name=${encodeURIComponent(slug)}`
+            : null,
         googleMapsUrl: undefined,
         openingHours: '10:00-20:00',
       });

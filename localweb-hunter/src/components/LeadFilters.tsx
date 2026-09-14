@@ -82,6 +82,16 @@ export function LeadFilters(): React.ReactElement {
         電話あり
       </label>
 
+      <label className="flex items-center gap-2 pb-2 text-sm">
+        <input
+          type="checkbox"
+          className="h-4 w-4"
+          checked={sp.get('requireEmail') === 'true'}
+          onChange={(e) => setParam('requireEmail', e.target.checked ? 'true' : '')}
+        />
+        メールあり
+      </label>
+
       <a href={exportUrl} className="btn-secondary ml-auto" download>
         CSV出力
       </a>

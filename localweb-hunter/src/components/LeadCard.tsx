@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Business } from '@/types/business';
+import { EmailCell } from './ContactCell';
 import { PriorityBadge, ScoreBar, WebsiteStatusBadge } from './ui';
 
 /**
@@ -44,13 +45,11 @@ export function LeadCard({ business: b }: { business: Business }): React.ReactEl
             <ScoreBar value={b.leadScore} label={`Lead Score ${b.leadScore}点`} />
           </span>
         </span>
-        {b.email ? (
-          <a href={`mailto:${b.email.value}`} className="text-sky-700 underline">
-            メールあり
-          </a>
-        ) : (
-          <span className="text-stone-400">メール未確認</span>
-        )}
+      </div>
+
+      {/* メールは営業の手段そのものなので、一覧の段階でアドレスまで出す */}
+      <div className="flex min-w-0 text-sm">
+        <EmailCell email={b.email} compact />
       </div>
 
       {b.salesAnalysis?.reason && (

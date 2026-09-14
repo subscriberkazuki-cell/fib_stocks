@@ -3,6 +3,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { isAllowed, parseRobots } from '@/lib/crawler/robots';
+import { isLoopbackHost } from '@/lib/crawler/httpClient';
 
 const UA = 'LocalWebHunter/0.2 (+https://example.com/about)';
 
@@ -74,5 +75,26 @@ describe('isAllowed', () => {
     const r = parseRobots('User-agent: *\nDisallow: /search$', UA);
     expect(isAllowed(r, '/search')).toBe(false);
     expect(isAllowed(r, '/searchresults')).toBe(true);
+  });
+});
+
+describe('isLoopbackHost', () => {
+  // クロール間隔の例外はループバックだけに効くこと。
+  // ここが緩いと、よそのサーバーに対する2秒制限が抜ける。
+  it('自分自身のホストを判定する', () => {
+    expect(isLoopbackHost('localhost')).toBe(true);
+    expect(isLoopbackHost('127.0.0.1')).toBe(true);
+    expect(isLoopbackHost('::1')).toBe(true);
+    expect(isLoopbackHost('[::1]')).toBe(true);
+    expect(isLoopbackHost('LOCALHOST')).toBe(true);
+  });
+
+  it('外部ホストを誤ってループバック扱いしない', () => {
+    expect(isLoopbackHost('example.com')).toBe(false);
+    expect(isLoopbackHost('localhost.example.com')).toBe(false);
+    expect(isLoopbackHost('notlocalhost')).toBe(false);
+    expect(isLoopbackHost('127.0.0.1.example.com')).toBe(false);
+    expect(isLoopbackHost('my-localhost.jp')).toBe(false);
+    expect(isLoopbackHost('192.168.1.1')).toBe(false);
   });
 });

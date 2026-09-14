@@ -33,7 +33,9 @@ export function getBusinessDataProvider(budget: BudgetGuard): BusinessDataProvid
 
     case 'mock':
     default:
-      return new MockProvider();
+      // 自分自身が配信するモック店舗サイトを指すことで、
+      // Phase 2 のサイト解析・メール抽出まで実際のコードで動かせる。
+      return new MockProvider(env.mockSiteBaseUrl);
   }
 }
 

@@ -46,7 +46,7 @@ export default async function LeadsPage({
         <h1 className="text-2xl font-bold">リード一覧</h1>
         <p className="text-sm text-stone-600">
           全{summary.total}件 / 表示{businesses.length}件 / HPなし{summary.noWebsite}件 /
-          優先度S {summary.sTier}件 / 電話あり{summary.withPhone}件
+          優先度S {summary.sTier}件 / 電話あり{summary.withPhone}件 / メールあり{summary.withEmail}件
         </p>
       </div>
 

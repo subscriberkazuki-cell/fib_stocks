@@ -45,6 +45,18 @@ export const env = {
   overpass: {
     endpoint: str('OVERPASS_ENDPOINT', 'https://overpass-api.de/api/interpreter'),
   },
+  /**
+   * モックプロバイダが配信する店舗サイトのURL。
+   * これがあると Phase 2（サイト解析・メール抽出）をモックのまま実際に動かせる。
+   *
+   * ホスト名に localhost ではなく 127.0.0.1 を使っているのは意図的。
+   * extractHostname() は「ドットを含まない文字列はホスト名として扱わない」ように
+   * してあり（日本語の文が punycode のホスト名に化けるのを防ぐため）、
+   * localhost はその判定に引っかかって公式サイトと認識されない。
+   *
+   * dev/start のポートを変えた場合はここも合わせること。
+   */
+  mockSiteBaseUrl: str('MOCK_SITE_BASE_URL', 'http://127.0.0.1:3000'),
   searchProvider: oneOf<SearchProviderName>(
     'SEARCH_PROVIDER',
     ['none', 'dataforseo', 'google', 'brave'],
