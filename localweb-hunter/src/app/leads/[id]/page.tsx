@@ -9,6 +9,7 @@ import { EnrichOneButton } from '@/components/EnrichOneButton';
 import { NextActionPanel } from '@/components/NextActionPanel';
 import { EmailCell } from '@/components/ContactCell';
 import { SitePromptPanel } from '@/components/SitePromptPanel';
+import { SubsidyPanel } from '@/components/SubsidyPanel';
 
 export const dynamic = 'force-dynamic';
 
@@ -322,6 +323,8 @@ export default async function LeadDetailPage({
           </p>
         )}
       </div>
+
+      <SubsidyPanel business={b} />
 
       <SitePromptPanel business={b} />
 

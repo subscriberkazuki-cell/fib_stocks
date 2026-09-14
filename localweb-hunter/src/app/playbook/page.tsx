@@ -3,7 +3,11 @@ import { PROCEDURE, TALK_STRUCTURE, CALL_TIMING } from '@/config/procedure';
 import { INDUSTRY_APPROACHES, OBJECTIONS } from '@/config/approaches';
 import { LP_OFFERINGS, SITE_OFFERINGS } from '@/config/offerings';
 import { INTRO_OFFER, applyIntroOffer, firstYearTotal, getPricing, hasAnyPriceConfigured, yen } from '@/config/pricing';
-import { OUTREACH_FLOW, OUTREACH_SCRIPTS } from '@/config/outreachFlow';
+import { OUTREACH_FLOW, OUTREACH_SCRIPTS, SUBSIDY_SCRIPTS } from '@/config/outreachFlow';
+import {
+  ADVISORY_RULES, COMBINABLE_EXPENSES, ROUND_NAME, SCHEDULE, SUBSIDY, SUBSIDY_CONFLICT,
+  TRACKS, TRACK_RECORD, VERIFIED_ON, costAtWebCap, estimateSubsidy,
+} from '@/config/subsidy';
 
 export const metadata = { title: '営業手順 | LocalWeb Hunter' };
 
@@ -37,6 +41,7 @@ export default function PlaybookPage(): React.ReactElement {
           ['#industry', '業種別アプローチ'],
           ['#objection', '断られたときの対応'],
           ['#offerings', '提案プラン一覧'],
+          ['#subsidy', '補助金の活用'],
         ].map(([href, label]) => (
           <a key={href} href={href} className="text-stone-600 underline hover:text-stone-900">
             {label}
@@ -435,6 +440,117 @@ export default function PlaybookPage(): React.ReactElement {
             </div>
           </div>
         ))}
+      </section>
+
+      {/* ============ 補助金 ============ */}
+      <section id="subsidy" className="space-y-3 scroll-mt-4">
+        <h2 className="text-xl font-bold">小規模事業者持続化補助金の活用</h2>
+
+        <div className="card border-l-4 border-l-red-600 bg-red-50">
+          <p className="font-medium text-red-900">先に売ると、補助金は使えなくなります</p>
+          <p className="mt-1 text-sm text-red-950">{SUBSIDY_CONFLICT.problem}</p>
+          <p className="mt-2 text-sm text-red-950">{SUBSIDY_CONFLICT.timeline}</p>
+          <p className="mt-2 text-sm font-medium text-red-950">{SUBSIDY_CONFLICT.solution}</p>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-2">
+          {TRACKS.map((tr) => (
+            <div key={tr.key} className="card space-y-2">
+              <div className="flex items-center gap-2">
+                <h3 className="font-semibold">{tr.label}</h3>
+                <span className="badge bg-stone-100 text-stone-600">入金まで {tr.timeToCash}</span>
+              </div>
+              <p className="text-sm text-stone-600">{tr.forWhom}</p>
+              <ol className="ml-5 list-decimal space-y-1 text-sm">
+                {tr.flow.map((f) => (
+                  <li key={f}>{f}</li>
+                ))}
+              </ol>
+              <p className="rounded-md bg-red-50 p-2 text-xs text-red-950">{tr.caution}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="card space-y-3">
+          <h3 className="font-semibold">{ROUND_NAME}の要点</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[520px] text-left text-sm">
+              <tbody>
+                {[
+                  ['申請受付', `${SCHEDULE.applicationOpens} 〜 ${SCHEDULE.applicationCloses.replace('T', ' ')}`],
+                  ['様式4の発行締切', `${SCHEDULE.form4Deadline}（申請締切より11日早い）`],
+                  ['採択発表', SCHEDULE.resultAnnouncement],
+                  ['補助率', '2/3（赤字事業者は3/4）'],
+                  ['補助上限', '50万円（インボイス特例+50万・賃金引上げ特例+150万で最大250万円）'],
+                  ['ウェブ関連費の上限', `30万円（制作費45万円相当で頭打ち。第19回までの「1/4縛り」は撤廃）`],
+                  ['採択率', `${(TRACK_RECORD.rate * 100).toFixed(1)}%（${TRACK_RECORD.round}：${TRACK_RECORD.applications.toLocaleString('ja-JP')}件中${TRACK_RECORD.adopted.toLocaleString('ja-JP')}件）`],
+                  ['入金まで', '事業完了後の精算払い。申請から1年程度'],
+                ].map(([k, v]) => (
+                  <tr key={k} className="border-t border-stone-100 align-top">
+                    <td className="py-1.5 pr-4 font-medium text-stone-600">{k}</td>
+                    <td className="py-1.5">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="rounded-md bg-amber-50 p-3 text-sm">
+            <p className="font-medium text-amber-900">ウェブ費用だけでは申請できません</p>
+            <p className="mt-1 text-amber-950">
+              他の販路開拓費と組み合わせる必要があります。「他に何を申請すればいいですか」と聞かれたときの答え：
+            </p>
+            <ul className="ml-4 mt-1 list-disc text-amber-950">
+              {COMBINABLE_EXPENSES.map((e) => (
+                <li key={e.name}>
+                  <strong>{e.name}</strong>（{e.example}）
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-md bg-stone-50 p-3 text-sm">
+            <p className="font-medium">金額の目安（制作費98,000円の場合）</p>
+            <p className="mt-1">
+              補助されうる額 <strong>{estimateSubsidy(98_000).subsidized.toLocaleString('ja-JP')}円</strong> ／
+              実質のご負担 <strong>{estimateSubsidy(98_000).outOfPocket.toLocaleString('ja-JP')}円</strong>
+            </p>
+            <p className="mt-1 text-xs text-stone-600">
+              ウェブ関連費の補助上限は{SUBSIDY.webCap.toLocaleString('ja-JP')}円なので、
+              制作費が{costAtWebCap().toLocaleString('ja-JP')}円を超えても補助額は増えません。
+            </p>
+          </div>
+        </div>
+
+        <div className="card bg-red-50">
+          <h3 className="font-semibold text-red-900">案内するときの注意</h3>
+          <ul className="ml-4 mt-2 list-disc space-y-1 text-sm text-red-950">
+            {ADVISORY_RULES.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+        </div>
+
+        <h3 className="pt-2 text-lg font-semibold">補助金トラックの文面</h3>
+        {SUBSIDY_SCRIPTS.map((s) => (
+          <div key={s.label} className="card space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="badge bg-stone-900 text-white">段階 {s.stage}</span>
+              <span className="badge bg-stone-100 text-stone-700">{s.channel}</span>
+              <h4 className="font-semibold">{s.label}</h4>
+            </div>
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-stone-50 p-3 font-sans text-sm leading-relaxed">
+              {s.body}
+            </pre>
+            <p className="text-xs text-stone-600">{s.note}</p>
+          </div>
+        ))}
+
+        <p className="text-xs text-stone-500">
+          {VERIFIED_ON} 時点で確認した内容です。制度は公募回ごとに変わるため、
+          次の公募回では必ず公募要領を読み直し、
+          <code className="rounded bg-stone-100 px-1">src/config/subsidy.ts</code> を更新してください。
+        </p>
       </section>
 
       <div className="card bg-stone-900 text-white">
