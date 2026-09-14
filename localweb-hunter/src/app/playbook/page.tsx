@@ -1,10 +1,19 @@
 import Link from 'next/link';
 import { PROCEDURE, TALK_STRUCTURE, CALL_TIMING } from '@/config/procedure';
 import { INDUSTRY_APPROACHES, OBJECTIONS } from '@/config/approaches';
-import { LP_OFFERINGS, SITE_OFFERINGS, hasAnyPriceConfigured, priceLabel } from '@/config/offerings';
+import { LP_OFFERINGS, SITE_OFFERINGS } from '@/config/offerings';
+import { INTRO_OFFER, applyIntroOffer, firstYearTotal, getPricing, hasAnyPriceConfigured, yen } from '@/config/pricing';
 import { OUTREACH_FLOW, OUTREACH_SCRIPTS } from '@/config/outreachFlow';
 
 export const metadata = { title: '営業手順 | LocalWeb Hunter' };
+
+function pr_includes(key: string): React.ReactElement | null {
+  const pr = getPricing(key);
+  if (!pr || pr.withMonthly.monthly === 0) return null;
+  return (
+    <p className="text-xs text-stone-500">月額に含まれるもの: {pr.withMonthly.monthlyIncludes}</p>
+  );
+}
 
 export default function PlaybookPage(): React.ReactElement {
   return (
@@ -308,6 +317,33 @@ export default function PlaybookPage(): React.ReactElement {
           </p>
         </div>
 
+        <div className="card space-y-2 text-sm">
+          <h3 className="font-semibold">価格の考え方</h3>
+          <p>
+            日本の相場は、フリーランスで制作費10〜50万円・月額保守5,000〜1万円、
+            中小の制作会社で80〜150万円です。LP1ページ単体では中央値40万円、
+            10万円以下は個人・フリーランスにしか頼めない価格帯とされています。
+          </p>
+          <p>
+            <strong>実績がないうちほど、安くしすぎない方が持ちます。</strong>
+            1ページでも先出し制作・電話・修正・公開で6〜8時間かかるので、
+            ¥98,000 なら時給14,000円で成立しますが、¥30,000 だと時給4,300円で、
+            営業時間を足すと事業として続きません。
+          </p>
+          <p>
+            それに<strong>先出し提案の時点で、相手のリスクは既にゼロ</strong>です
+            （完成品を見てから決められる）。そこへ低価格を重ねるのは、
+            持っているカードを二重に切ることになります。
+            安くすべきは価格ではなく入口のハードルで、この2つは別物です。
+          </p>
+          <p>
+            最初の客に付けた価格は、その人の紹介客にも引き継がれます。
+            安くするなら、<strong>理由と件数を明示した割引</strong>にしてください
+            （「事例を作りたいので最初の{INTRO_OFFER.limitCount}件まで」）。
+            理由が終われば価格を戻せます。
+          </p>
+        </div>
+
         {!hasAnyPriceConfigured() && (
           <div className="card bg-amber-50 text-sm text-amber-900">
             <p className="font-medium">価格が未設定です</p>
@@ -343,20 +379,48 @@ export default function PlaybookPage(): React.ReactElement {
                     <p className="text-sm">{o.valueToClient}</p>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 text-sm">
-                    <span>
-                      <span className="text-stone-500">期間 </span>
-                      {o.leadTimeWeeks}
-                    </span>
-                    <span>
-                      <span className="text-stone-500">価格 </span>
-                      {priceLabel(o.key) === '未設定' ? (
-                        <span className="text-stone-400">未設定</span>
-                      ) : (
-                        priceLabel(o.key)
-                      )}
-                    </span>
+                  <div className="text-sm">
+                    <span className="text-stone-500">期間 </span>
+                    {o.leadTimeWeeks}
                   </div>
+
+                  {(() => {
+                    const pr = getPricing(o.key);
+                    if (!pr) return <p className="text-sm text-stone-400">価格未設定</p>;
+                    return (
+                      <table className="w-full text-sm">
+                        <tbody>
+                          <tr className="border-t border-stone-100">
+                            <td className="py-1 text-stone-600">月額あり</td>
+                            <td className="py-1 text-right font-medium">
+                              {yen(pr.withMonthly.initial)}
+                              {pr.withMonthly.monthly > 0 && ` + 月${yen(pr.withMonthly.monthly)}`}
+                            </td>
+                          </tr>
+                          {pr.withMonthly.monthly > 0 && (
+                            <tr className="border-t border-stone-100 text-stone-500">
+                              <td className="py-1">初年度の総額</td>
+                              <td className="py-1 text-right">{yen(firstYearTotal(pr.withMonthly))}</td>
+                            </tr>
+                          )}
+                          <tr className="border-t border-stone-100">
+                            <td className="py-1 text-stone-600">買い切り</td>
+                            <td className="py-1 text-right font-medium">{yen(pr.oneTime.initial)}</td>
+                          </tr>
+                          {INTRO_OFFER.enabled && (
+                            <tr className="border-t border-stone-100 text-emerald-800">
+                              <td className="py-1">事例掲載の条件で</td>
+                              <td className="py-1 text-right font-medium">
+                                {yen(applyIntroOffer(pr.withMonthly.initial))}
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    );
+                  })()}
+
+                  {pr_includes(o.key)}
 
                   <details className="text-sm">
                     <summary className="cursor-pointer text-stone-600">納品物</summary>

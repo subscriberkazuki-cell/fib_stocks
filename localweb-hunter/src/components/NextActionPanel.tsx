@@ -1,6 +1,8 @@
 import type { Business } from '@/types/business';
 import { computeNextAction } from '@/lib/scoring/nextAction';
-import { priceLabel } from '@/config/offerings';
+import {
+  INTRO_OFFER, applyIntroOffer, estimatedSubsidizedCost, firstYearTotal, getPricing, yen,
+} from '@/config/pricing';
 
 /**
  * 「この店に次に何をするか」を1箇所にまとめたパネル。
@@ -69,7 +71,7 @@ function OfferingCard({
   rank: string;
 }): React.ReactElement | null {
   if (!offering) return null;
-  const price = priceLabel(offering.key);
+  const pricing = getPricing(offering.key);
 
   return (
     <div className="rounded-md border border-stone-200 p-3">
@@ -90,23 +92,53 @@ function OfferingCard({
           <dt className="text-stone-500">相手にとっての価値</dt>
           <dd>{offering.valueToClient}</dd>
         </div>
-        <div className="flex gap-4">
-          <span>
-            <span className="text-stone-500">期間 </span>
-            {offering.leadTimeWeeks}
-          </span>
-          <span>
-            <span className="text-stone-500">価格 </span>
-            {price === '未設定' ? (
-              <span className="text-stone-400" title="src/config/offerings.ts の PRICE_HINTS に自分の価格を設定してください">
-                未設定
-              </span>
-            ) : (
-              price
-            )}
-          </span>
+        <div>
+          <span className="text-stone-500">期間 </span>
+          {offering.leadTimeWeeks}
         </div>
       </dl>
+
+      {pricing ? (
+        <div className="mt-2 space-y-1 rounded bg-stone-50 p-2 text-xs">
+          <div className="flex justify-between">
+            <span className="text-stone-600">月額あり</span>
+            <span className="font-medium">
+              {yen(pricing.withMonthly.initial)}
+              {pricing.withMonthly.monthly > 0 && ` + 月${yen(pricing.withMonthly.monthly)}`}
+            </span>
+          </div>
+          {pricing.withMonthly.monthly > 0 && (
+            // 月額だけ見せて総額を隠すと不信になるので、初年度の総額も併記する
+            <div className="flex justify-between text-stone-500">
+              <span>初年度の総額</span>
+              <span>{yen(firstYearTotal(pricing.withMonthly))}</span>
+            </div>
+          )}
+          <div className="flex justify-between">
+            <span className="text-stone-600">買い切り</span>
+            <span className="font-medium">{yen(pricing.oneTime.initial)}</span>
+          </div>
+
+          {INTRO_OFFER.enabled && (
+            <div className="mt-1 flex justify-between border-t border-stone-200 pt-1 text-emerald-800">
+              <span>事例掲載の条件で（{INTRO_OFFER.limitCount}件まで）</span>
+              <span className="font-medium">{yen(applyIntroOffer(pricing.withMonthly.initial))}</span>
+            </div>
+          )}
+
+          <p className="pt-1 text-stone-500">
+            補助金（補助率2/3）が使えた場合の実質負担の目安:{' '}
+            {yen(estimatedSubsidizedCost(pricing.withMonthly.initial))}
+            <span className="block">
+              ※ウェブ費用のみでの単独申請は不可。採択は保証されないため、商工会議所での確認を案内すること。
+            </span>
+          </p>
+        </div>
+      ) : (
+        <p className="mt-2 text-xs text-stone-400">
+          価格未設定（src/config/pricing.ts の PRICING に設定してください）
+        </p>
+      )}
 
       <details className="mt-2 text-xs">
         <summary className="cursor-pointer text-stone-600">納品物</summary>

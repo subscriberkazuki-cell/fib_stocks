@@ -180,30 +180,10 @@ export function findOffering(key: string): Offering | null {
 }
 
 // ============================================================
-// 価格の目安
+// 価格
 //
-// ★ ここを自分の価格帯に書き換えること。
-//    null のままだと、UIには金額を表示せず「未設定」と出る。
-//    根拠のない金額を勝手に見せない（相手に伝える数字なので）。
+// 実際の金額は src/config/pricing.ts に分離してある。
+// 相場の根拠と「なぜこの価格帯か」の説明もそちらにまとめている。
 // ============================================================
 
-export const PRICE_HINTS: Record<string, { min: number; max: number } | null> = {
-  site_onepage: null,
-  site_standard: null,
-  site_reservation: null,
-  site_renewal: null,
-  lp_trial: null,
-  lp_product: null,
-  lp_campaign: null,
-};
-
-export function priceLabel(key: string): string {
-  const p = PRICE_HINTS[key];
-  if (!p) return '未設定';
-  const fmt = (v: number): string => `¥${v.toLocaleString('ja-JP')}`;
-  return p.min === p.max ? fmt(p.min) : `${fmt(p.min)}〜${fmt(p.max)}`;
-}
-
-export function hasAnyPriceConfigured(): boolean {
-  return Object.values(PRICE_HINTS).some((p) => p !== null);
-}
+export { getPricing, yen, priceLabel, hasAnyPriceConfigured } from './pricing';
