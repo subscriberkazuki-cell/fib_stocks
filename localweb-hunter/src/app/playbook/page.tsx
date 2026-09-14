@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { PROCEDURE, TALK_STRUCTURE, CALL_TIMING } from '@/config/procedure';
 import { INDUSTRY_APPROACHES, OBJECTIONS } from '@/config/approaches';
 import { LP_OFFERINGS, SITE_OFFERINGS, hasAnyPriceConfigured, priceLabel } from '@/config/offerings';
+import { OUTREACH_FLOW, OUTREACH_SCRIPTS } from '@/config/outreachFlow';
 
 export const metadata = { title: '営業手順 | LocalWeb Hunter' };
 
@@ -20,6 +21,7 @@ export default function PlaybookPage(): React.ReactElement {
       <nav className="card flex flex-wrap gap-x-4 gap-y-1 text-sm">
         <span className="font-medium">目次</span>
         {[
+          ['#senchi', '先出し提案の進め方'],
           ['#procedure', '営業手順（7ステップ）'],
           ['#talk', '電話トークの型'],
           ['#timing', 'かける時間帯'],
@@ -32,6 +34,81 @@ export default function PlaybookPage(): React.ReactElement {
           </a>
         ))}
       </nav>
+
+      {/* ============ 先出し提案 ============ */}
+      <section id="senchi" className="space-y-3 scroll-mt-4">
+        <h2 className="text-xl font-bold">先出し提案の進め方</h2>
+        <div className="card bg-stone-900 text-white">
+          <p className="font-medium">「作りませんか」ではなく「もう作りました」</p>
+          <p className="mt-1 text-sm text-stone-300">
+            前者は未来の約束なので、相手は「頼むかどうか」を判断します。後者は既に存在するものなので、
+            相手は「捨てるかどうか」を判断します。実績のない事業者にとって、この差が最も大きく効きます。
+          </p>
+          <p className="mt-2 text-sm text-stone-300">
+            写真は、<strong className="text-white">作った後にもらいます</strong>。
+            先に許可と写真集めを求めると、まだ何も見ていない相手に面倒な作業を頼むことになり、そこで止まります。
+            完成物を見た後なら、写真の提供は「断る側の作業」ではなく「進める側の小さな一歩」になります。
+          </p>
+        </div>
+
+        {OUTREACH_FLOW.map((stage) => (
+          <div key={stage.no} className="card space-y-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-stone-900 text-sm font-bold text-white">
+                {stage.no}
+              </span>
+              <h3 className="text-lg font-semibold">{stage.title}</h3>
+              <span className="ml-auto text-xs text-stone-500">{stage.goal}</span>
+            </div>
+
+            <ul className="ml-5 list-disc space-y-1 text-sm">
+              {stage.actions.map((a) => (
+                <li key={a}>{a}</li>
+              ))}
+            </ul>
+
+            <div className="grid gap-2 sm:grid-cols-2">
+              <div className="rounded-md bg-sky-50 p-3">
+                <p className="text-xs font-medium text-sky-900">この段階で相手に求めるもの</p>
+                <p className="text-sm text-sky-950">{stage.askFromOwner}</p>
+              </div>
+              <div className="rounded-md bg-stone-50 p-3">
+                <p className="text-xs font-medium text-stone-500">なぜこの順番か</p>
+                <p className="text-sm">{stage.rationale}</p>
+              </div>
+            </div>
+
+            <div className="rounded-md bg-red-50 p-3">
+              <p className="text-xs font-medium text-red-900">やってはいけないこと</p>
+              <ul className="ml-4 list-disc text-sm text-red-950">
+                {stage.never.map((n) => (
+                  <li key={n}>{n}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+
+        <h3 className="pt-2 text-lg font-semibold">各段階で使う文面</h3>
+        <p className="text-sm text-stone-600">
+          【 】の部分を実データに置き換えて使ってください。店舗ごとの文面は、
+          リード詳細画面にその店の数字が入った状態で生成されています。
+        </p>
+
+        {OUTREACH_SCRIPTS.map((s) => (
+          <div key={s.label} className="card space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="badge bg-stone-900 text-white">段階 {s.stage}</span>
+              <span className="badge bg-stone-100 text-stone-700">{s.channel}</span>
+              <h4 className="font-semibold">{s.label}</h4>
+            </div>
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-stone-50 p-3 font-sans text-sm leading-relaxed">
+              {s.body}
+            </pre>
+            <p className="text-xs text-stone-600">{s.note}</p>
+          </div>
+        ))}
+      </section>
 
       {/* ============ 営業手順 ============ */}
       <section id="procedure" className="space-y-3 scroll-mt-4">

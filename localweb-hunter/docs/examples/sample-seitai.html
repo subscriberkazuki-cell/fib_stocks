@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>さくら整体院｜整体 - 千葉県柏市</title>
+<meta name="description" content="千葉県柏市旭町の整体院。10:00〜20:00（水曜定休）。お電話でのご予約を承っています。">
+<meta property="og:title" content="さくら整体院｜千葉県柏市">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFAF8; --ink:#1C1917; --accent:#166534; --sub:#57534E;
+  --line:#E7E5E4; --accent-soft:#F0F5F1;
+  --maru:'Zen Maru Gothic','Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  --sans:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:2;
+  padding-bottom:84px; /* 固定電話バーの高さ */
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--maru);line-height:1.5;margin:0}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:22px;font-weight:700;margin-bottom:8px}
+.lead{color:var(--sub);font-size:15px;line-height:1.8;margin:0 0 28px}
+
+/* ---- ヒーロー ---- */
+.hero{padding:44px 0 52px;border-top:0}
+.eyebrow{font-size:14px;color:var(--accent);font-weight:500;letter-spacing:.08em;margin:0 0 10px}
+.hero h1{font-size:clamp(30px,8vw,44px);font-weight:700;letter-spacing:.02em}
+.hero .tagline{font-size:17px;color:var(--sub);margin:14px 0 0;line-height:1.9}
+.trust{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 0}
+.stars{color:#B45309;font-size:15px;letter-spacing:.1em}
+.trust b{font-size:19px}
+.trust .src{font-size:13px;color:var(--sub)}
+
+/* ---- 営業時間 ---- */
+.hours{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin:26px 0 0}
+.status{display:inline-flex;align-items:center;gap:7px;font-size:15px;font-weight:700;margin-bottom:12px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.dot.off{background:#A8A29E}
+.hours dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0;font-size:16px}
+.hours dt{color:var(--sub)}
+.hours dd{margin:0;font-variant-numeric:tabular-nums}
+
+/* ---- 初めての方へ（この業種の中心） ---- */
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 26px 54px;counter-increment:s}
+.steps li::before{
+  content:counter(s);position:absolute;left:0;top:2px;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  font-family:var(--maru);font-weight:700;font-size:16px;
+  display:grid;place-items:center;
+}
+.steps li::after{
+  content:"";position:absolute;left:17px;top:40px;bottom:8px;width:1px;background:var(--line);
+}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:17px;font-weight:700;margin-bottom:2px}
+.steps p{margin:0;font-size:15px;color:var(--sub);line-height:1.85}
+
+/* ---- 料金 ---- */
+.menu{margin:0}
+.menu div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:15px 0;border-bottom:1px dashed var(--line)}
+.menu .name{font-weight:500}
+.menu .dur{font-size:14px;color:var(--sub);margin-left:8px}
+.menu .price{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+
+/* ---- 提案段階のプレースホルダ ---- */
+.tbd{
+  background:var(--accent-soft);border:1px dashed #A7C4B1;border-radius:10px;
+  padding:14px 16px;font-size:14px;color:#2F5D45;line-height:1.8;
+}
+.tbd b{font-family:var(--maru)}
+.ph{
+  aspect-ratio:16/10;border-radius:12px;background:var(--accent-soft);
+  border:1px dashed #A7C4B1;display:grid;place-items:center;
+  color:#3F7355;font-size:14px;margin:0 0 22px;
+}
+
+/* ---- FAQ ---- */
+details{border-bottom:1px solid var(--line);padding:14px 0}
+summary{cursor:pointer;font-weight:500;list-style:none;font-size:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";float:right;color:var(--accent);font-weight:700}
+details[open] summary::after{content:"−"}
+details p{font-size:15px;color:var(--sub);margin:10px 0 0}
+
+/* ---- アクセス ---- */
+.map{border:0;width:100%;aspect-ratio:16/10;border-radius:12px;margin-top:18px;display:block}
+address{font-style:normal;font-size:17px;line-height:1.9}
+
+/* ---- 固定電話バー ---- */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(251,250,248,.96);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+}
+.callbar .inner{max-width:760px;margin:0 auto}
+.call{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--accent);color:#fff;text-decoration:none;
+  font-family:var(--maru);font-weight:700;font-size:19px;
+  padding:15px;border-radius:12px;letter-spacing:.03em;
+}
+.call small{display:block;font-size:12px;font-weight:500;opacity:.85;letter-spacing:0}
+.call:focus-visible{outline:3px solid #1C1917;outline-offset:2px}
+
+footer{padding:34px 0 44px;font-size:13px;color:var(--sub);line-height:1.9}
+.note{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (min-width:640px){ body{font-size:17px} .hero{padding:64px 0 60px} }
+</style>
+</head>
+<body>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">千葉県柏市旭町・柏駅</p>
+      <h1>さくら整体院</h1>
+      <p class="tagline">
+        体の不調に、ひとつずつ向き合う整体院です。<br>
+        初めての方にも、施術の内容を確認しながら進めます。
+      </p>
+
+      <div class="trust">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <b>4.7</b>
+        <span class="src">口コミ 238件（Google）</span>
+      </div>
+
+      <div class="hours">
+        <p class="status" id="status"><span class="dot" id="dot"></span><span id="statusText">営業時間を確認中</span></p>
+        <dl>
+          <dt>営業時間</dt><dd>10:00 〜 20:00</dd>
+          <dt>定休日</dt><dd>水曜日</dd>
+          <dt>ご予約</dt><dd>お電話にて承ります</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="first">
+    <div class="wrap">
+      <h2>初めての方へ</h2>
+      <p class="lead">当日の流れをご案内します。ご不明な点は、お電話でもお答えします。</p>
+
+      <ol class="steps">
+        <li>
+          <h3>ご予約</h3>
+          <p>お電話でご希望の日時をお伝えください。空き状況をその場でご案内します。</p>
+        </li>
+        <li>
+          <h3>ご記入・お伺い</h3>
+          <p>気になっている箇所や、これまでの経緯をお伺いします。無理にお話しいただく必要はありません。</p>
+        </li>
+        <li>
+          <h3>お体の確認</h3>
+          <p>姿勢や動かせる範囲を確認し、どこから進めるかをご説明します。</p>
+        </li>
+        <li>
+          <h3>施術</h3>
+          <p>強さは都度確認しながら進めます。痛みを感じた場合は、遠慮なくお申し付けください。</p>
+        </li>
+        <li>
+          <h3>ご説明</h3>
+          <p>お体の状態と、ご自宅でできることをお伝えします。次回の無理なおすすめはいたしません。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="wrap">
+      <h2>施術メニュー</h2>
+      <p class="lead">すべて税込価格です。</p>
+
+      <!-- 要確認: メニュー名・所要時間・料金は店主に確認のうえ差し替える -->
+      <div class="menu">
+        <div><span><span class="name">全身調整</span><span class="dur">60分</span></span><span class="price">— 円</span></div>
+        <div><span><span class="name">部分調整</span><span class="dur">30分</span></span><span class="price">— 円</span></div>
+        <div><span><span class="name">初回カウンセリング込み</span><span class="dur">80分</span></span><span class="price">— 円</span></div>
+      </div>
+
+      <p class="tbd" style="margin-top:18px">
+        <b>メニューと料金は仮の項目です。</b><br>
+        実際のメニュー名・所要時間・料金をお知らせいただければ差し替えます。
+      </p>
+    </div>
+  </section>
+
+  <section id="staff">
+    <div class="wrap">
+      <h2>施術者のご紹介</h2>
+      <div class="ph">写真が入ります（施術者）</div>
+      <p class="tbd">
+        <b>お名前・保有資格・経験年数をお知らせください。</b><br>
+        柔道整復師・あん摩マッサージ指圧師・鍼灸師などの国家資格をお持ちの場合、
+        資格名を記載すると信頼感が大きく変わります。
+      </p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>よくあるご質問</h2>
+
+      <details open>
+        <summary>施術は痛いですか</summary>
+        <p>強さは都度確認しながら進めますので、痛みを感じた場合はその場でお申し付けください。無理に進めることはありません。</p>
+      </details>
+      <details>
+        <summary>服装はどうすればいいですか</summary>
+        <p><!-- 要確認 -->動きやすい服装でお越しください。着替えのご用意については、お電話でご確認ください。</p>
+      </details>
+      <details>
+        <summary>予約なしでも受けられますか</summary>
+        <p><!-- 要確認: 当日予約の可否 -->空き状況によります。お電話にてご確認ください。</p>
+      </details>
+      <details>
+        <summary>駐車場はありますか</summary>
+        <p><!-- 要確認: 駐車場の有無・台数 -->お電話にてご確認ください。</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="wrap">
+      <h2>アクセス</h2>
+      <address>
+        〒— 千葉県柏市旭町1-2-3 柏ビル2F<br>
+        <a href="tel:0471671111" style="color:var(--accent)">04-7167-1111</a>
+      </address>
+      <iframe class="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="さくら整体院の地図"
+        src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E6%9F%8F%E5%B8%82%E6%97%AD%E7%94%BA1-2-3&output=embed"></iframe>
+      <p class="tbd" style="margin-top:18px">
+        <b>最寄り駅からの徒歩分数と駐車場の有無をお知らせください。</b><br>
+        この2点は来院の判断に直結するため、記載しておくと問い合わせの手間が減ります。
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>さくら整体院</strong><br>
+    千葉県柏市旭町1-2-3 柏ビル2F ／ 04-7167-1111<br>
+    営業時間 10:00〜20:00（水曜定休）</p>
+    <p class="note">
+      これは制作提案用のサンプルです。山田デザインが作成しました。<br>
+      掲載内容は公開情報をもとにした仮のもので、店舗様の確認を経ていません。
+    </p>
+  </div>
+</footer>
+
+<div class="callbar">
+  <div class="inner">
+    <a class="call" href="tel:0471671111">
+      <span>📞 04-7167-1111</span>
+      <small>10:00〜20:00 水曜定休</small>
+    </a>
+  </div>
+</div>
+
+<script>
+// 営業時間の表示は営業日データから判定する（手で書き換えない）
+(function () {
+  var OPEN = 10, CLOSE = 20, CLOSED_DAY = 3; // 水曜
+  var now = new Date();
+  var h = now.getHours() + now.getMinutes() / 60;
+  var open = now.getDay() !== CLOSED_DAY && h >= OPEN && h < CLOSE;
+  var dot = document.getElementById('dot');
+  var text = document.getElementById('statusText');
+  if (!dot || !text) return;
+  text.textContent = open ? '本日営業中（20:00まで）' : '本日は営業時間外です';
+  if (!open) dot.classList.add('off');
+})();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"さくら整体院",
+"address":{"@type":"PostalAddress","addressRegion":"千葉県","addressLocality":"柏市","streetAddress":"旭町1-2-3 柏ビル2F"},
+"telephone":"+81-4-7167-1111","openingHours":"Mo,Tu,Th,Fr,Sa,Su 10:00-20:00"}
+</script>
+
+</body>
+</html>

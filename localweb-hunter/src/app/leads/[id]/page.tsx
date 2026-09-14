@@ -8,6 +8,7 @@ import { CrmPanel } from '@/components/CrmPanel';
 import { EnrichOneButton } from '@/components/EnrichOneButton';
 import { NextActionPanel } from '@/components/NextActionPanel';
 import { EmailCell } from '@/components/ContactCell';
+import { SitePromptPanel } from '@/components/SitePromptPanel';
 
 export const dynamic = 'force-dynamic';
 
@@ -321,6 +322,8 @@ export default async function LeadDetailPage({
           </p>
         )}
       </div>
+
+      <SitePromptPanel business={b} />
 
       <CrmPanel business={b} />
 
