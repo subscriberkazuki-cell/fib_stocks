@@ -31,6 +31,8 @@ create table if not exists businesses (
   longitude double precision,
 
   phone text,
+  -- normalizePhone() を通した値。重複排除の照合はこちらで行う
+  phone_normalized text,
   phone_source text,
   phone_source_url text,
   phone_verified boolean not null default false,
@@ -89,9 +91,10 @@ create index if not exists idx_businesses_lead_score on businesses(lead_score de
 create index if not exists idx_businesses_priority on businesses(sales_priority);
 create index if not exists idx_businesses_website_status on businesses(website_status);
 create index if not exists idx_businesses_lead_status on businesses(lead_status);
-create index if not exists idx_businesses_phone on businesses(phone);
+create index if not exists idx_businesses_phone on businesses(phone_normalized);
 create index if not exists idx_businesses_location on businesses(latitude, longitude);
 create index if not exists idx_businesses_owner on businesses(owner_id);
+create index if not exists idx_businesses_phase2 on businesses(phase2_completed_at, lead_score desc);
 
 -- ============================================================
 -- business_history: 変化履歴 + スコアのスナップショット

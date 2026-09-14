@@ -1,9 +1,18 @@
 import Link from 'next/link';
 import type { Business } from '@/types/business';
-import { PriorityBadge, ScoreBar, Unconfirmed, WebsiteStatusBadge } from './ui';
+import { PriorityBadge, ScoreBar, WebsiteStatusBadge } from './ui';
 
+/**
+ * 一覧のカード。
+ *
+ * 設計の意図：このツールの目的は「電話をかけること」なので、
+ * 電話番号を本文中の小さいリンクではなく、カード内で最も押しやすい要素にしている。
+ * 電話がない店舗ではボタン自体を出さず、「電話番号なし」と明示する
+ * （押せないボタンを置くより、無いと分かる方が速い）。
+ */
 export function LeadCard({ business: b }: { business: Business }): React.ReactElement {
   const phone = b.phone?.value ?? null;
+  const notContacted = b.leadStatus === '未接触';
 
   return (
     <div className="card flex flex-col gap-3">
@@ -22,39 +31,52 @@ export function LeadCard({ business: b }: { business: Business }): React.ReactEl
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
         <span>
           評価 <strong>{b.rating?.value ?? '—'}</strong>
         </span>
         <span>
-          レビュー <strong>{b.reviewCount?.value ?? '—'}</strong>件
+          口コミ <strong>{b.reviewCount?.value ?? '—'}</strong>件
         </span>
-        <span>
-          電話 {phone ? <a href={`tel:${phone}`} className="text-sky-700 underline">{phone}</a> : <Unconfirmed />}
+        <span className="flex items-center gap-1">
+          Lead Score <strong>{b.leadScore}</strong>
+          <span className="inline-block w-16 align-middle">
+            <ScoreBar value={b.leadScore} label={`Lead Score ${b.leadScore}点`} />
+          </span>
         </span>
-        <span>メール {b.email?.value ?? <Unconfirmed />}</span>
-      </div>
-
-      <div>
-        <div className="flex items-center justify-between text-xs text-stone-600">
-          <span>Lead Score</span>
-          <span className="font-semibold text-stone-900">{b.leadScore}</span>
-        </div>
-        <ScoreBar value={b.leadScore} />
+        {b.email ? (
+          <a href={`mailto:${b.email.value}`} className="text-sky-700 underline">
+            メールあり
+          </a>
+        ) : (
+          <span className="text-stone-400">メール未確認</span>
+        )}
       </div>
 
       {b.salesAnalysis?.reason && (
-        <p className="rounded bg-violet-50 p-2 text-xs text-violet-900">
-          <span className="font-medium">AI:</span> {b.salesAnalysis.reason}
-        </p>
+        <p className="rounded bg-violet-50 px-2 py-1.5 text-xs text-violet-900">{b.salesAnalysis.reason}</p>
       )}
 
-      <div className="flex flex-wrap gap-2">
-        {phone && (
-          <a href={`tel:${phone}`} className="btn-secondary">電話</a>
+      <div className="flex flex-wrap items-center gap-2 border-t border-stone-100 pt-3">
+        {phone ? (
+          <a
+            href={`tel:${phone}`}
+            className="btn-primary"
+            aria-label={`${b.name} に電話する（${phone}）`}
+          >
+            📞 {phone}
+          </a>
+        ) : (
+          <span className="text-sm text-stone-400">電話番号なし</span>
         )}
-        <Link href={`/leads/${b.id}`} className="btn-secondary">詳細</Link>
-        <span className="ml-auto self-center text-xs text-stone-500">{b.leadStatus}</span>
+        <Link href={`/leads/${b.id}`} className="btn-secondary">
+          詳細・営業トーク
+        </Link>
+        <span
+          className={`ml-auto text-xs ${notContacted ? 'text-stone-400' : 'font-medium text-stone-700'}`}
+        >
+          {b.leadStatus}
+        </span>
       </div>
     </div>
   );

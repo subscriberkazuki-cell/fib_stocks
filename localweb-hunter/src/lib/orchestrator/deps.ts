@@ -26,6 +26,7 @@ export function buildPhase2Deps(budget: BudgetGuard): Phase2Deps {
     }),
     ai: getAIProvider(budget),
     maxPagesPerSite: env.crawler.maxPagesPerSite,
+    minIntervalMs: env.crawler.minIntervalMs,
   };
 }
 

@@ -66,11 +66,27 @@ Lead Score / Website Opportunity Score / 営業優先度 S〜D
 
 ### Web検索（Phase 2 Stage 2・公式サイト候補の探索）
 
-デフォルトは `none`（Stage 2をスキップ）です。**2026年9月時点で、無料で使える汎用Web検索APIが
-実質的に存在しない**ためです（Google CSE は新規停止・2027年終了予定、Brave は2026年2月に
-新規向け無料プラン廃止）。詳細と影響は [`docs/DECISIONS.md`](docs/DECISIONS.md) を参照してください。
+| `SEARCH_PROVIDER` | コスト | 備考 |
+|---|---|---|
+| `none`（デフォルト） | $0 | Stage 2をスキップ。「HPなし」判定の精度は落ちる |
+| **`dataforseo`（有料なら推奨）** | **$0.002/クエリ** | **Business Listings と同じアカウント・請求・予算ガード** |
+| `brave` | 約$4〜5/1,000クエリ | 別アカウント。DataForSEO SERP より高い |
+| `google` | — | **新規申込不可**（2027年1月終了予定） |
 
-契約がある場合は `SEARCH_PROVIDER=google` または `brave` で有効になります。
+無料で使える汎用Web検索APIは2026年9月時点で実質存在しません。有料を許容するなら
+`SEARCH_PROVIDER=dataforseo` が最も安く、業者も1つで済みます。
+詳細は [`docs/DECISIONS.md`](docs/DECISIONS.md) §7 を参照してください。
+
+### 柏市を全件調査した場合の総額（有料構成）
+
+| 段階 | 金額 |
+|---|---|
+| Phase 1（1,300件） | $0.49 |
+| Phase 2 Stage 2（通過180件） | $0.36 |
+| AI（Gemini無料枠なら$0） | $0〜0.09 |
+| **合計** | **約 $0.85〜0.94** |
+
+`PER_SEARCH_BUDGET_USD` のデフォルトは `1` なので、全件調査をするなら上げてください。
 
 ### AI（営業分析）
 
@@ -109,7 +125,9 @@ Lead Score / Website Opportunity Score / 営業優先度 S〜D
 npm run dev          # 開発サーバー
 npm run build        # 本番ビルド
 npm start            # 本番サーバー
-npm test             # ユニットテスト（147件）
+npm test             # ユニットテスト（168件）
+npm run lint         # ESLint
+npm run check        # typecheck + lint + test をまとめて実行
 npm run typecheck    # 型チェック
 npm run db:init      # DBの初期化（初回起動時に自動で走るので通常は不要）
 npm run db:reset     # DBを削除して作り直す
@@ -118,6 +136,10 @@ npm run check:dataforseo   # DataForSEO の疎通確認（要 login/password）
 
 データは `data/localweb-hunter.db`（SQLite）に入ります。Node 22.5+ 組み込みの `node:sqlite` を
 使っているので、ネイティブビルドも追加パッケージも不要です。
+
+アプリを更新してスキーマが変わった場合は、起動時に自動でカラムが追加されます
+（`src/lib/db/migrate.ts`）。集めた店舗データと営業メモは保持されるので、
+DBを作り直す必要はありません。
 
 ---
 
@@ -139,6 +161,9 @@ npm run check:dataforseo   # DataForSEO の疎通確認（要 login/password）
 | `costEstimator.test.ts` | 2段階分離でPhase 2のコストが実際に減っていること |
 | `jsonRetry.test.ts` | AI出力が3回失敗したら `null`（それらしい値で埋めない） |
 | `subQueryPlanner.test.ts` | 全件調査モードの地点分割に穴が空かないこと |
+| `repository.test.ts` | Phase 2 の対象を取りこぼさないこと、件数が過小報告されないこと |
+| `phase2Batch.test.ts` | 実行時間の上限を超える前に自分で打ち切ること |
+| `migrate.test.ts` | 既存DBを更新しても店舗データと営業メモを失わないこと |
 
 ---
 

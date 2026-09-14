@@ -9,6 +9,7 @@
 // 見積もりを取る前は実行ボタンを出さない。
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CATEGORY_PRESETS, DEFAULT_CRITERIA, REGION_PRESETS } from '@/config/defaults';
 import type { LeadPriority, SearchCriteria } from '@/types/business';
@@ -279,6 +280,7 @@ export function SearchForm(): React.ReactElement {
           <div className="grid gap-3 rounded-md bg-stone-50 p-3 sm:grid-cols-2">
             <Checkbox
               label="SNSのみの店舗を含む"
+              hint="Phase 2 の調査後に判定されます"
               checked={criteria.includeSnsOnly}
               onChange={(v) => update({ includeSnsOnly: v })}
             />
@@ -294,6 +296,7 @@ export function SearchForm(): React.ReactElement {
             />
             <Checkbox
               label="メールがある店舗のみ"
+              hint="メールはPhase 2で初めて分かるため、調査後に絞り込まれます"
               checked={criteria.requireEmail}
               onChange={(v) => update({ requireEmail: v })}
             />
@@ -376,7 +379,7 @@ export function SearchForm(): React.ReactElement {
         {result && (
           <div className="rounded-md bg-emerald-50 p-3 text-sm text-emerald-900">
             <pre className="whitespace-pre-wrap font-sans">{result}</pre>
-            <a href="/leads" className="mt-2 inline-block underline">リード一覧を見る →</a>
+            <Link href="/leads" className="mt-2 inline-block underline">リード一覧を見る →</Link>
           </div>
         )}
       </div>
@@ -386,17 +389,27 @@ export function SearchForm(): React.ReactElement {
 
 function Checkbox({
   label,
+  hint,
   checked,
   onChange,
 }: {
   label: string;
+  hint?: string;
   checked: boolean;
   onChange: (v: boolean) => void;
 }): React.ReactElement {
   return (
-    <label className="flex items-center gap-2 text-sm">
-      <input type="checkbox" className="h-4 w-4" checked={checked} onChange={(e) => onChange(e.target.checked)} />
-      {label}
+    <label className="flex items-start gap-2 text-sm">
+      <input
+        type="checkbox"
+        className="mt-0.5 h-4 w-4 shrink-0"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <span>
+        {label}
+        {hint && <span className="block text-xs text-stone-500">{hint}</span>}
+      </span>
     </label>
   );
 }

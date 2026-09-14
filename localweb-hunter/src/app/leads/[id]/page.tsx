@@ -40,7 +40,22 @@ export default async function LeadDetailPage({
           </div>
         </div>
 
-        <h2 className="font-semibold">店舗概要</h2>
+        {/* 主アクション。スマートフォンからワンタップで発信できるようにする（§11-4） */}
+        {phone ? (
+          <a
+            href={`tel:${phone}`}
+            className="btn-primary w-full justify-center py-3 text-base sm:w-auto sm:px-8"
+            aria-label={`${b.name} に電話する（${phone}）`}
+          >
+            📞 {phone} に電話する
+          </a>
+        ) : (
+          <p className="rounded-md bg-stone-100 px-3 py-2 text-sm text-stone-600">
+            公開されている電話番号が見つかりませんでした。
+          </p>
+        )}
+
+        <h2 className="border-t border-stone-100 pt-3 font-semibold">店舗概要</h2>
 
         {b.regulatoryNotes.length > 0 && (
           <div className="rounded-md bg-amber-50 p-3 text-sm text-amber-900">
@@ -271,10 +286,19 @@ export default async function LeadDetailPage({
               </div>
             )}
 
+            {/* 電話をかける直前に読むものなので、30秒トークだけは開いた状態で出す */}
+            {ai.talk30s && (
+              <div className="rounded border border-violet-200 bg-white p-3">
+                <p className="mb-1 text-xs font-medium text-stone-600">
+                  30秒トーク（このまま読めます）
+                </p>
+                <p className="whitespace-pre-wrap text-sm leading-relaxed">{ai.talk30s}</p>
+              </div>
+            )}
+
             {[
-              ['15秒トーク', ai.talk15s],
-              ['30秒トーク', ai.talk30s],
-              ['60秒トーク', ai.talk60s],
+              ['15秒トーク（短縮版）', ai.talk15s],
+              ['60秒トーク（詳しく話す場合）', ai.talk60s],
               ['営業メール案', ai.emailDraft],
               ['HP提案の構成', ai.hpPlan],
             ]

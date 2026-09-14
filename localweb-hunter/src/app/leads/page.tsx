@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { listBusinesses, type ListFilters } from '@/lib/db/repository';
+import { getLeadSummary, listBusinesses, type ListFilters } from '@/lib/db/repository';
 import { LeadCard } from '@/components/LeadCard';
 import { LeadFilters } from '@/components/LeadFilters';
 import { EnrichButton } from '@/components/EnrichButton';
@@ -35,24 +35,18 @@ export default async function LeadsPage({
   if (single(sp['requireEmail']) === 'true') filters.requireEmail = true;
 
   const businesses = listBusinesses(filters);
-  const all = listBusinesses({ limit: 5000 });
-  const remaining = all.filter((b) => b.phase2CompletedAt === null).length;
-
-  const summary = {
-    total: all.length,
-    shown: businesses.length,
-    noWebsite: all.filter((b) =>
-      ['none', 'sns_only', 'portal_only', 'multiple_portals', 'profile_only'].includes(b.websiteStatus)
-    ).length,
-    sTier: all.filter((b) => b.salesPriority === 'S').length,
-  };
+  // サマリーは1クエリで取る。以前は全行(最大5,000)をJSに読み込んで数えていたため、
+  // 件数が増えるほど一覧の表示が重くなり、上限を超えると数字が過小になっていた。
+  const summary = getLeadSummary();
+  const remaining = summary.pendingPhase2;
 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h1 className="text-2xl font-bold">リード一覧</h1>
         <p className="text-sm text-stone-600">
-          全{summary.total}件 / 表示{summary.shown}件 / HPなし{summary.noWebsite}件 / 優先度S {summary.sTier}件
+          全{summary.total}件 / 表示{businesses.length}件 / HPなし{summary.noWebsite}件 /
+          優先度S {summary.sTier}件 / 電話あり{summary.withPhone}件
         </p>
       </div>
 

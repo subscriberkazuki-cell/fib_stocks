@@ -49,6 +49,23 @@ export function passesPhase1Filter(
   return true;
 }
 
+/**
+ * Phase 2 の実測結果が出そろった段階での絞り込み。
+ *
+ * Phase 1 では「SNSしかないのか」「メールがあるのか」がまだ分からないので、
+ * これらの条件はここでしか判定できない。検索条件として受け取っておきながら
+ * どこでも使わないと、UIのチェックボックスが黙って無効になる。
+ */
+export function passesPostEnrichFilter(
+  biz: Pick<Business, 'websiteStatus' | 'email' | 'phone'>,
+  criteria: Pick<SearchCriteria, 'includeSnsOnly' | 'requireEmail' | 'requirePhone'>
+): boolean {
+  if (!criteria.includeSnsOnly && biz.websiteStatus === 'sns_only') return false;
+  if (criteria.requireEmail && biz.email === null) return false;
+  if (criteria.requirePhone && biz.phone === null) return false;
+  return true;
+}
+
 /** Phase 1 時点の暫定スコア。Web検索・AI無しで出せる範囲だけで計算する */
 export function scoreCandidate(
   c: BusinessCandidate,

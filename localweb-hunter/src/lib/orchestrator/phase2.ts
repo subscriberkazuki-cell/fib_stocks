@@ -33,6 +33,8 @@ export interface Phase2Deps {
   http: PoliteHttpClient;
   ai: AIProvider;
   maxPagesPerSite: number;
+  /** 所要時間の見積もりに使う（phase2Batch が締め切り判定に利用する） */
+  minIntervalMs: number;
 }
 
 /** AIに最終判定を任せる閾値。ルールベースで白黒つく場合はAIを呼ばない（コスト削減） */

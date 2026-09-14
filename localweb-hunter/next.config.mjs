@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // node:sqlite / robots・HTMLパースはすべてサーバー側でのみ動く。
-  // APIキーを含むモジュールがクライアントバンドルに混ざらないよう、
-  // 外部依存を持つサーバー専用パッケージはここで明示する。
-  serverExternalPackages: [],
-  experimental: {
-    // Server Actions は使わず API Routes に寄せている（§4-1）。
-  },
+  // サーバー専用モジュール（node:sqlite・env・プロバイダ実装）は 'server-only' で
+  // クライアントからの import を禁止しているため、ここでの追加設定は不要。
+  // データソースやAIプロバイダの切り替えはすべて環境変数で行う（src/config/env.ts）。
 };
 
 export default nextConfig;

@@ -17,7 +17,7 @@ function num(key: string, fallback: number): number {
 }
 
 export type BusinessProviderName = 'mock' | 'osm' | 'dataforseo';
-export type SearchProviderName = 'none' | 'google' | 'brave';
+export type SearchProviderName = 'none' | 'dataforseo' | 'google' | 'brave';
 export type AiProviderName = 'heuristic' | 'gemini' | 'openai' | 'anthropic';
 export type StorageDriver = 'sqlite' | 'supabase';
 
@@ -45,7 +45,17 @@ export const env = {
   overpass: {
     endpoint: str('OVERPASS_ENDPOINT', 'https://overpass-api.de/api/interpreter'),
   },
-  searchProvider: oneOf<SearchProviderName>('SEARCH_PROVIDER', ['none', 'google', 'brave'], 'none'),
+  searchProvider: oneOf<SearchProviderName>(
+    'SEARCH_PROVIDER',
+    ['none', 'dataforseo', 'google', 'brave'],
+    'none'
+  ),
+  dataforseoSerp: {
+    // Live モードの単価。標準キューなら $0.0006 だが即時応答しない。
+    costPerQuery: num('DATAFORSEO_SERP_COST_PER_QUERY', 0.002),
+    locationName: str('DATAFORSEO_SERP_LOCATION', 'Japan'),
+    languageCode: str('DATAFORSEO_SERP_LANGUAGE', 'ja'),
+  },
   googleCse: {
     apiKey: str('GOOGLE_CSE_API_KEY', ''),
     cx: str('GOOGLE_CSE_CX', ''),

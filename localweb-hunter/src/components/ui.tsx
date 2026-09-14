@@ -64,10 +64,25 @@ export function AiBadge({ model }: { model?: string }): React.ReactElement {
   );
 }
 
-export function ScoreBar({ value, max = 100 }: { value: number; max?: number }): React.ReactElement {
+export function ScoreBar({
+  value,
+  max = 100,
+  label,
+}: {
+  value: number;
+  max?: number;
+  label?: string;
+}): React.ReactElement {
   const pct = Math.min(100, Math.max(0, (value / max) * 100));
   return (
-    <div className="h-1.5 w-full overflow-hidden rounded-full bg-stone-200">
+    <div
+      className="h-1.5 w-full overflow-hidden rounded-full bg-stone-200"
+      role="meter"
+      aria-valuenow={value}
+      aria-valuemin={0}
+      aria-valuemax={max}
+      aria-label={label ?? `スコア ${value} / ${max}`}
+    >
       <div className="h-full rounded-full bg-stone-700" style={{ width: `${pct}%` }} />
     </div>
   );

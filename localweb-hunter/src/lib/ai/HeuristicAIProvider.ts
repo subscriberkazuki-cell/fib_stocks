@@ -83,9 +83,18 @@ export class HeuristicAIProvider implements AIProvider {
     if (input.hasPhone) strengths.push('電話番号が公開されており、すぐに接触できる');
     if (strengths.length === 0) strengths.push('要確認');
 
+    // 「サイト未調査」と「サイトが存在しない」を区別する。
+    // HPがない店舗に「未調査のため要確認」と出すのは事実として誤り。
+    const noSite =
+      input.websiteStatus.includes('なし') ||
+      input.websiteStatus.includes('SNSのみ') ||
+      input.websiteStatus.includes('ポータル') ||
+      input.websiteStatus.includes('プロフィールのみ');
     const weaknesses = input.observedWeaknesses.length > 0
       ? input.observedWeaknesses.slice(0, 5)
-      : ['サイト未調査のため弱点は要確認'];
+      : noSite
+        ? ['公式サイトがないため、検索から来た人が情報を確認できない']
+        : ['サイト未調査のため弱点は要確認'];
 
     const offer = input.detectedPattern?.recommendedOffer ?? '5ページ型の公式サイト';
     const angle = input.detectedPattern?.reason
@@ -98,9 +107,25 @@ export class HeuristicAIProvider implements AIProvider {
     if (tags.length === 0) tags.push('地域密着型');
 
     const shopName = input.businessName;
+    // 一覧カードに出る一言。ここが全店舗で同じ文言だと、
+    // 44枚並んだときにカードの1/4を占めて何の判断材料にもならない。
+    // 店舗ごとに変わる要素（評価・件数・Web状態・パターン・SNS有無）で組み立てる。
+    const reasonParts: string[] = [];
+    if (input.detectedPattern) reasonParts.push(input.detectedPattern.label);
+    if (rating !== null && rating >= 4.5) reasonParts.push(`評価${rating}と高評価`);
+    else if (rating !== null) reasonParts.push(`評価${rating}`);
+    if (reviews !== null && reviews >= 200) reasonParts.push(`口コミ${reviews}件と集客力あり`);
+    else if (reviews !== null && reviews >= 30) reasonParts.push(`口コミ${reviews}件`);
+    else if (reviews !== null) reasonParts.push(`口コミ${reviews}件と少なめ`);
+    if (input.socialUrls.length > 0) reasonParts.push('SNS運用あり');
+    if (input.websiteOpportunityScore !== null && input.websiteOpportunityScore >= 70) {
+      reasonParts.push('サイトの改善余地大');
+    }
+    if (input.hasEmail) reasonParts.push('メール取得済');
+
     return {
       score: null, // 数値スコアは Lead Score が担当する。ここで別の数字を作らない
-      reason: `${ratingText}・${reviewText}。Web上の状態は「${input.websiteStatus}」で、${input.detectedPattern ? input.detectedPattern.label + 'に該当する' : '改善余地がある'}。`,
+      reason: reasonParts.join('・') + '。',
       strengths,
       weaknesses,
       sales_angle: angle,

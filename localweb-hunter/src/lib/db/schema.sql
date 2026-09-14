@@ -27,6 +27,10 @@ CREATE TABLE IF NOT EXISTS businesses (
 
   -- 連絡先：値と出所を必ずセットで保存する。推測生成は禁止（§2-3）
   phone TEXT,
+  -- normalizePhone() を通した値。重複排除の照合はこちらで行う。
+  -- SQL側で replace() を重ねる方式だと全角数字や括弧付きの表記を拾えず、
+  -- 候補から静かに漏れて重複が増えるため、書き込み時に正規化して持つ。
+  phone_normalized TEXT,
   phone_source TEXT,
   phone_source_url TEXT,
   phone_verified INTEGER NOT NULL DEFAULT 0,
@@ -85,7 +89,9 @@ CREATE INDEX IF NOT EXISTS idx_businesses_lead_score ON businesses(lead_score DE
 CREATE INDEX IF NOT EXISTS idx_businesses_priority ON businesses(sales_priority);
 CREATE INDEX IF NOT EXISTS idx_businesses_website_status ON businesses(website_status);
 CREATE INDEX IF NOT EXISTS idx_businesses_lead_status ON businesses(lead_status);
-CREATE INDEX IF NOT EXISTS idx_businesses_phone ON businesses(phone);
+-- Phase 2 の未調査分を引く用。ここにインデックスがないと件数が増えたとき遅くなる
+CREATE INDEX IF NOT EXISTS idx_businesses_phase2 ON businesses(phase2_completed_at, lead_score DESC);
+CREATE INDEX IF NOT EXISTS idx_businesses_phone ON businesses(phone_normalized);
 CREATE INDEX IF NOT EXISTS idx_businesses_location ON businesses(latitude, longitude);
 
 -- ============================================================

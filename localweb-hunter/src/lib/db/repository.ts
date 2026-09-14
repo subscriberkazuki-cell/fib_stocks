@@ -8,6 +8,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import { getDb } from './sqlite';
 import { rowToBusiness, rowToJob, rowToSubQuery, rowToUsage, type Row } from './rowMappers';
 import { DEFAULT_PRIORITY_THRESHOLDS, DEFAULT_WEIGHTS } from '@/config/defaults';
+import { normalizePhone } from '@/lib/dedupe/phone';
 import type {
   ApiUsageEntry,
   ApiUsageKind,
@@ -128,9 +129,11 @@ export function findDedupeCandidates(
   const rows: Row[] = [];
 
   if (args.normalizedPhone) {
+    // 正規化済みカラムで引く。SQL側で replace() を重ねる方式だと
+    // 全角数字や「(代表)」付きの表記を拾えず、候補から静かに漏れる。
     rows.push(
       ...(c
-        .prepare(`SELECT * FROM businesses WHERE replace(replace(replace(ifnull(phone,''), '-', ''), ' ', ''), '+81', '0') = ?`)
+        .prepare('SELECT * FROM businesses WHERE phone_normalized = ?')
         .all(args.normalizedPhone) as Row[])
     );
   }
@@ -162,7 +165,7 @@ export function upsertBusiness(biz: Business, db?: DatabaseSync): void {
   c.prepare(
     `INSERT INTO businesses (
        id, source, source_business_id, name, category, address, prefecture, city, latitude, longitude,
-       phone, phone_source, phone_source_url, phone_verified, phone_observed_at,
+       phone, phone_normalized, phone_source, phone_source_url, phone_verified, phone_observed_at,
        email, email_source, email_source_url, email_verified, email_observed_at,
        rating, rating_source, rating_observed_at, review_count, review_count_source, review_count_observed_at,
        website_url, website_status, web_presence_score, website_opportunity_score, website_signals_json,
@@ -170,7 +173,7 @@ export function upsertBusiness(biz: Business, db?: DatabaseSync): void {
        lead_score, lead_score_breakdown_json, sales_priority, sales_analysis_json, regulatory_notes_json,
        lead_status, next_action, last_contacted_at, next_contact_at, sales_notes, deal_value,
        phase2_completed_at, last_checked_at, created_at, updated_at
-     ) VALUES (?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?)
+     ) VALUES (?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?)
      ON CONFLICT(source, source_business_id) DO UPDATE SET
        name = excluded.name,
        category = excluded.category,
@@ -180,6 +183,7 @@ export function upsertBusiness(biz: Business, db?: DatabaseSync): void {
        latitude = excluded.latitude,
        longitude = excluded.longitude,
        phone = excluded.phone,
+       phone_normalized = excluded.phone_normalized,
        phone_source = excluded.phone_source,
        phone_source_url = excluded.phone_source_url,
        phone_verified = excluded.phone_verified,
@@ -215,7 +219,8 @@ export function upsertBusiness(biz: Business, db?: DatabaseSync): void {
   ).run(
     biz.id, biz.source, biz.sourceBusinessId, biz.name, biz.category, biz.address,
     biz.prefecture, biz.city, biz.latitude, biz.longitude,
-    biz.phone?.value ?? null, biz.phone?.source ?? null, biz.phone?.sourceUrl ?? null,
+    biz.phone?.value ?? null, normalizePhone(biz.phone?.value ?? null),
+    biz.phone?.source ?? null, biz.phone?.sourceUrl ?? null,
     biz.phone?.verified ? 1 : 0, biz.phone?.observedAt ?? null,
     biz.email?.value ?? null, biz.email?.source ?? null, biz.email?.sourceUrl ?? null,
     biz.email?.verified ? 1 : 0, biz.email?.observedAt ?? null,
@@ -242,6 +247,8 @@ export interface ListFilters {
   leadStatus?: LeadStatus;
   requireEmail?: boolean;
   requirePhone?: boolean;
+  /** true=Phase 2 実行済みのみ / false=未実行のみ。未指定なら両方 */
+  phase2Done?: boolean;
   query?: string;
   sort?: 'leadScore' | 'rating' | 'reviewCount' | 'priority' | 'updatedAt';
   limit?: number;
@@ -259,6 +266,8 @@ export function listBusinesses(filters: ListFilters = {}, db?: DatabaseSync): Bu
   if (filters.minLeadScore !== undefined) { where.push('lead_score >= ?'); params.push(filters.minLeadScore); }
   if (filters.leadStatus) { where.push('lead_status = ?'); params.push(filters.leadStatus); }
   if (filters.requireEmail) where.push("email IS NOT NULL AND email != ''");
+  if (filters.phase2Done === true) where.push('phase2_completed_at IS NOT NULL');
+  if (filters.phase2Done === false) where.push('phase2_completed_at IS NULL');
   if (filters.requirePhone) where.push("phone IS NOT NULL AND phone != ''");
   if (filters.websiteStatuses?.length) {
     where.push(`website_status IN (${filters.websiteStatuses.map(() => '?').join(',')})`);
@@ -295,6 +304,50 @@ export function listBusinesses(filters: ListFilters = {}, db?: DatabaseSync): Bu
 export function countBusinesses(db?: DatabaseSync): number {
   const row = conn(db).prepare('SELECT COUNT(*) AS c FROM businesses').get() as Row | undefined;
   return typeof row?.['c'] === 'number' ? (row['c'] as number) : 0;
+}
+
+/** Phase 2 が未実行の件数。全行を取ってJSで数えると、取得上限を超えたとき静かに過小報告になる */
+export function countPendingPhase2(db?: DatabaseSync): number {
+  const row = conn(db)
+    .prepare('SELECT COUNT(*) AS c FROM businesses WHERE phase2_completed_at IS NULL')
+    .get() as Row | undefined;
+  return typeof row?.['c'] === 'number' ? (row['c'] as number) : 0;
+}
+
+export interface LeadSummary {
+  total: number;
+  noWebsite: number;
+  sTier: number;
+  pendingPhase2: number;
+  withPhone: number;
+  withEmail: number;
+}
+
+/** 一覧画面のサマリー。1クエリで済ませる */
+export function getLeadSummary(db?: DatabaseSync): LeadSummary {
+  const row = conn(db)
+    .prepare(
+      `SELECT
+         COUNT(*) AS total,
+         SUM(CASE WHEN website_status IN ('none','sns_only','portal_only','multiple_portals','profile_only')
+                  THEN 1 ELSE 0 END) AS no_website,
+         SUM(CASE WHEN sales_priority = 'S' THEN 1 ELSE 0 END) AS s_tier,
+         SUM(CASE WHEN phase2_completed_at IS NULL THEN 1 ELSE 0 END) AS pending_phase2,
+         SUM(CASE WHEN phone IS NOT NULL AND phone != '' THEN 1 ELSE 0 END) AS with_phone,
+         SUM(CASE WHEN email IS NOT NULL AND email != '' THEN 1 ELSE 0 END) AS with_email
+       FROM businesses`
+    )
+    .get() as Row | undefined;
+
+  const n = (k: string): number => (typeof row?.[k] === 'number' ? (row[k] as number) : 0);
+  return {
+    total: n('total'),
+    noWebsite: n('no_website'),
+    sTier: n('s_tier'),
+    pendingPhase2: n('pending_phase2'),
+    withPhone: n('with_phone'),
+    withEmail: n('with_email'),
+  };
 }
 
 export interface CrmUpdate {
@@ -452,6 +505,19 @@ export function getUsageBreakdown(sinceIso: string, db?: DatabaseSync): UsageBre
     itemCount: Number(r['item_count'] ?? 0),
     costUsd: Number(r['cost_usd'] ?? 0),
   }));
+}
+
+/** ジョブ単位の種別別コスト。search_logs に実額を残すために使う */
+export function getJobCostBreakdown(jobId: string, db?: DatabaseSync): Record<ApiUsageKind, number> {
+  const rows = conn(db)
+    .prepare('SELECT kind, COALESCE(SUM(cost_usd),0) AS cost FROM api_usage WHERE job_id = ? GROUP BY kind')
+    .all(jobId) as Row[];
+  const out: Record<ApiUsageKind, number> = { business_data: 0, web_search: 0, ai: 0, crawler: 0 };
+  for (const r of rows) {
+    const kind = String(r['kind']) as ApiUsageKind;
+    if (kind in out) out[kind] = Number(r['cost'] ?? 0);
+  }
+  return out;
 }
 
 export function listRecentUsage(limit = 50, db?: DatabaseSync): ApiUsageEntry[] {
