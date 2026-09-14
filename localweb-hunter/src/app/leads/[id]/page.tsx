@@ -6,6 +6,7 @@ import { evaluateWebsiteOpportunity } from '@/lib/scoring/websitePresenceScore';
 import { AiBadge, Field, PriorityBadge, ScoreBar, Unconfirmed, WebsiteStatusBadge } from '@/components/ui';
 import { CrmPanel } from '@/components/CrmPanel';
 import { EnrichOneButton } from '@/components/EnrichOneButton';
+import { NextActionPanel } from '@/components/NextActionPanel';
 
 export const dynamic = 'force-dynamic';
 
@@ -110,6 +111,8 @@ export default async function LeadDetailPage({
           </p>
         )}
       </div>
+
+      <NextActionPanel business={b} />
 
       {/* ---- Web状況 ---- */}
       <div className="card space-y-3">

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const NAV = [
   { href: '/', label: '検索' },
   { href: '/leads', label: 'リード一覧' },
+  { href: '/playbook', label: '営業手順' },
   { href: '/costs', label: 'コスト' },
   { href: '/metrics', label: '営業指標' },
   { href: '/settings', label: '設定' },

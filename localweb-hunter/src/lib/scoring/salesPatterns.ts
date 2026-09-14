@@ -19,7 +19,10 @@ export interface PatternMatch {
   pattern: SalesPattern;
   label: string;
   reason: string;
+  /** 提案内容の説明文 */
   recommendedOffer: string;
+  /** offerings.ts のキー。UIから実際のプラン情報を引くために使う */
+  offeringKey: string;
 }
 
 /** 最も強いパターンを1つ返す。上から順に優先度が高い */
@@ -39,6 +42,7 @@ export function detectSalesPattern(input: PatternInput): PatternMatch | null {
       label: 'リニューアル営業',
       reason: `評価${rating}・レビュー${reviews}件と実績が十分ある一方、既存サイトの改善余地が大きい状態です。`,
       recommendedOffer: 'リニューアル提案（モバイル対応・予約導線・SEO基本設定の刷新）',
+      offeringKey: 'site_renewal',
     };
   }
 
@@ -49,6 +53,7 @@ export function detectSalesPattern(input: PatternInput): PatternMatch | null {
       label: '最優先ターゲット',
       reason: `評価${rating}・レビュー${reviews}件と商売が成立しているのに、公式サイトがない状態です。`,
       recommendedOffer: '5ページ型の公式サイト（店舗紹介・メニュー・アクセス・問い合わせ）',
+      offeringKey: 'site_standard',
     };
   }
 
@@ -58,7 +63,8 @@ export function detectSalesPattern(input: PatternInput): PatternMatch | null {
       pattern: 'D',
       label: '予約導線の構築',
       reason: '予約が売上に直結する業態でありながら、自前の予約導線がWeb上にない状態です。',
-      recommendedOffer: '予約対応型サイト（予約フォーム／外部予約システム連携）',
+      recommendedOffer: '予約対応サイト（予約フォーム／外部予約システム連携）',
+      offeringKey: 'site_reservation',
     };
   }
 
@@ -68,7 +74,8 @@ export function detectSalesPattern(input: PatternInput): PatternMatch | null {
       pattern: 'E',
       label: '高単価業態',
       reason: '単価が高く、事前の情報収集が意思決定に影響する業態なのに、公式サイトがありません。',
-      recommendedOffer: '高単価向けプラン（実績・料金・専門性を伝える構成）',
+      recommendedOffer: '体験・相談申込ページ（高単価業態は、まず試してもらう導線が効く）',
+      offeringKey: 'lp_trial',
     };
   }
 
@@ -79,6 +86,7 @@ export function detectSalesPattern(input: PatternInput): PatternMatch | null {
       label: 'SNS→公式HP導線',
       reason: 'SNSでの発信はあるものの、受け皿となる公式サイトがなく、流入が取りこぼされている可能性があります。',
       recommendedOffer: '1ページ型サイト（SNSからの着地点／店舗情報と問い合わせに集約）',
+      offeringKey: 'site_onepage',
     };
   }
 
