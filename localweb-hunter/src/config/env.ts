@@ -26,6 +26,31 @@ function oneOf<T extends string>(key: string, allowed: readonly T[], fallback: T
   return (allowed as readonly string[]).includes(v) ? (v as T) : fallback;
 }
 
+/**
+ * 保存先の選択。
+ *
+ * **supabase は未実装。** スキーマ（supabase/schema.sql）と型だけがあり、
+ * リポジトリの実装は SQLite しかない。
+ *
+ * 黙って sqlite にフォールバックさせない。それをすると、
+ * 「クラウドに保存しているつもりで、実際は手元のファイルに書いていた」という
+ * 最悪の勘違いが起きる。設定した時点で落として気づかせる。
+ */
+function storageDriver(): StorageDriver {
+  const v = str('STORAGE_DRIVER', 'sqlite');
+  if (v === 'supabase') {
+    throw new Error(
+      'STORAGE_DRIVER=supabase はまだ実装されていません。' +
+      'supabase/schema.sql と型定義はありますが、リポジトリの実装は SQLite のみです。' +
+      'STORAGE_DRIVER を外すか sqlite にしてください。',
+    );
+  }
+  if (v !== 'sqlite') {
+    throw new Error(`STORAGE_DRIVER に不明な値が指定されています: ${v}（使えるのは sqlite のみ）`);
+  }
+  return 'sqlite';
+}
+
 export const env = {
   budget: {
     monthlyUsd: num('MONTHLY_BUDGET_USD', 5),
@@ -102,7 +127,7 @@ export const env = {
     maxPagesPerSite: num('CRAWLER_MAX_PAGES_PER_SITE', 5),
   },
   storage: {
-    driver: oneOf<StorageDriver>('STORAGE_DRIVER', ['sqlite', 'supabase'], 'sqlite'),
+    driver: storageDriver(),
     sqlitePath: str('SQLITE_PATH', './data/localweb-hunter.db'),
   },
   supabase: {

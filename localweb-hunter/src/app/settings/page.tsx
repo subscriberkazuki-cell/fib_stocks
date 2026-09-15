@@ -29,7 +29,7 @@ export default function SettingsPage(): React.ReactElement {
               ['BUSINESS_DATA_PROVIDER', env.businessProvider],
               ['SEARCH_PROVIDER', env.searchProvider],
               ['AI_PROVIDER', env.aiProvider],
-              ['STORAGE_DRIVER', env.storage.driver],
+              ['STORAGE_DRIVER', `${env.storage.driver}（supabase は未実装）`],
               ['MONTHLY_BUDGET_USD', `$${env.budget.monthlyUsd}`],
               ['PER_SEARCH_BUDGET_USD', `$${env.budget.perSearchUsd}`],
               ['SEARCH_RATE_LIMIT_PER_HOUR', `${env.searchRateLimitPerHour}回/時`],
