@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Business } from '@/types/business';
 import { EmailCell } from './ContactCell';
 import { PriorityBadge, ScoreBar, WebsiteStatusBadge } from './ui';
+import { PROSPECT_LABELS, scoreSubsidyProspect } from '@/lib/scoring/subsidyScore';
 
 /**
  * 一覧のカード。
@@ -14,6 +15,7 @@ import { PriorityBadge, ScoreBar, WebsiteStatusBadge } from './ui';
 export function LeadCard({ business: b }: { business: Business }): React.ReactElement {
   const phone = b.phone?.value ?? null;
   const notContacted = b.leadStatus === '未接触';
+  const subsidy = scoreSubsidyProspect(b);
 
   return (
     <div className="card flex flex-col gap-3">
@@ -29,6 +31,14 @@ export function LeadCard({ business: b }: { business: Business }): React.ReactEl
         <div className="flex shrink-0 flex-wrap gap-1">
           <PriorityBadge priority={b.salesPriority} />
           <WebsiteStatusBadge status={b.websiteStatus} />
+          {subsidy.prospect === 'high' && (
+            <span
+              className={`badge ${PROSPECT_LABELS.high.tone}`}
+              title="小規模事業者持続化補助金の見込みが高い店舗"
+            >
+              補助金 見込み高
+            </span>
+          )}
         </div>
       </div>
 

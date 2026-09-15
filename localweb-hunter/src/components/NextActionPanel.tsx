@@ -3,6 +3,7 @@ import { computeNextAction } from '@/lib/scoring/nextAction';
 import {
   INTRO_OFFER, applyIntroOffer, estimatedSubsidizedCost, firstYearTotal, getPricing, yen,
 } from '@/config/pricing';
+import { Rich } from '@/components/ui';
 
 /**
  * 「この店に次に何をするか」を1箇所にまとめたパネル。
@@ -24,7 +25,7 @@ export function NextActionPanel({ business }: { business: Business }): React.Rea
 
       <div className="rounded-md bg-stone-900 p-3 text-white">
         <p className="text-lg font-bold">{next.action}</p>
-        <p className="mt-1 text-sm text-stone-300">{next.why}</p>
+        <p className="mt-1 text-sm text-stone-300"><Rich text={next.why} /></p>
         {phone && business.leadStatus === '未接触' && (
           <a
             href={`tel:${phone}`}
@@ -40,15 +41,15 @@ export function NextActionPanel({ business }: { business: Business }): React.Rea
         <div className="space-y-2">
           <div>
             <p className="text-xs font-medium text-stone-500">この業種が抱えている取りこぼし</p>
-            <p className="text-sm">{next.approach.painPoint}</p>
+            <p className="text-sm"><Rich text={next.approach.painPoint} /></p>
           </div>
           <div className="rounded-md bg-amber-50 p-3">
             <p className="text-xs font-medium text-amber-900">電話の切り口（そのまま言えます）</p>
-            <p className="mt-1 text-sm text-amber-950">「{next.approach.hook}」</p>
+            <p className="mt-1 text-sm text-amber-950">「<Rich text={next.approach.hook} />」</p>
           </div>
           <div className="rounded-md bg-red-50 p-3">
             <p className="text-xs font-medium text-red-900">この業種での注意点</p>
-            <p className="mt-1 text-sm text-red-950">{next.approach.caution}</p>
+            <p className="mt-1 text-sm text-red-950"><Rich text={next.approach.caution} /></p>
           </div>
         </div>
       )}

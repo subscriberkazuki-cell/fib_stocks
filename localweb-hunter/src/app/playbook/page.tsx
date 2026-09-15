@@ -8,6 +8,14 @@ import {
   ADVISORY_RULES, COMBINABLE_EXPENSES, ROUND_NAME, SCHEDULE, SUBSIDY, SUBSIDY_CONFLICT,
   TRACKS, TRACK_RECORD, VERIFIED_ON, costAtWebCap, estimateSubsidy,
 } from '@/config/subsidy';
+import {
+  BOUNDARY_RULES, LEGAL_BOUNDARY, OFFICIAL_WINDOW, PRICING_POLICY,
+  REFER_TO_SPECIALIST, SUPPORT_SERVICES,
+} from '@/config/subsidySupport';
+import {
+  PSYCHOLOGY_NOTES, SUBSIDY_OBJECTIONS, SUBSIDY_SUPPORT_SCRIPTS,
+} from '@/config/subsidyOutreach';
+import { Rich } from '@/components/ui';
 
 export const metadata = { title: '営業手順 | LocalWeb Hunter' };
 
@@ -42,6 +50,7 @@ export default function PlaybookPage(): React.ReactElement {
           ['#objection', '断られたときの対応'],
           ['#offerings', '提案プラン一覧'],
           ['#subsidy', '補助金の活用'],
+          ['#subsidy-biz', '補助金サポート事業'],
         ].map(([href, label]) => (
           <a key={href} href={href} className="text-stone-600 underline hover:text-stone-900">
             {label}
@@ -117,9 +126,9 @@ export default function PlaybookPage(): React.ReactElement {
               <h4 className="font-semibold">{s.label}</h4>
             </div>
             <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-stone-50 p-3 font-sans text-sm leading-relaxed">
-              {s.body}
+              <Rich text={s.body} />
             </pre>
-            <p className="text-xs text-stone-600">{s.note}</p>
+            <p className="text-xs text-stone-600"><Rich text={s.note} /></p>
           </div>
         ))}
       </section>
@@ -154,12 +163,12 @@ export default function PlaybookPage(): React.ReactElement {
 
             <div className="rounded-md bg-stone-50 p-3">
               <p className="text-xs font-medium text-stone-500">なぜそうするか</p>
-              <p className="text-sm">{step.why}</p>
+              <p className="text-sm"><Rich text={step.why} /></p>
             </div>
 
             <div className="rounded-md bg-red-50 p-3">
               <p className="text-xs font-medium text-red-900">よくある失敗</p>
-              <p className="text-sm text-red-950">{step.pitfall}</p>
+              <p className="text-sm text-red-950"><Rich text={step.pitfall} /></p>
             </div>
           </div>
         ))}
@@ -182,7 +191,7 @@ export default function PlaybookPage(): React.ReactElement {
                 <span className="text-sm text-stone-600">{t.goal}</span>
               </div>
               <p className="mt-2 rounded bg-stone-50 p-2 text-sm">{t.example}</p>
-              <p className="mt-1 text-xs text-stone-600">{t.note}</p>
+              <p className="mt-1 text-xs text-stone-600"><Rich text={t.note} /></p>
             </div>
           ))}
         </div>
@@ -210,7 +219,7 @@ export default function PlaybookPage(): React.ReactElement {
                   <td className="py-2 font-medium">{c.category}</td>
                   <td className="py-2 text-emerald-700">{c.good}</td>
                   <td className="py-2 text-red-700">{c.avoid}</td>
-                  <td className="py-2 text-stone-600">{c.reason}</td>
+                  <td className="py-2 text-stone-600"><Rich text={c.reason} /></td>
                 </tr>
               ))}
             </tbody>
@@ -241,17 +250,17 @@ export default function PlaybookPage(): React.ReactElement {
 
               <div>
                 <p className="text-xs font-medium text-stone-500">起きている取りこぼし</p>
-                <p className="text-sm">{a.painPoint}</p>
+                <p className="text-sm"><Rich text={a.painPoint} /></p>
               </div>
 
               <div className="rounded-md bg-amber-50 p-2">
                 <p className="text-xs font-medium text-amber-900">切り口</p>
-                <p className="text-sm text-amber-950">「{a.hook}」</p>
+                <p className="text-sm text-amber-950">「<Rich text={a.hook} />」</p>
               </div>
 
               <div className="rounded-md bg-red-50 p-2">
                 <p className="text-xs font-medium text-red-900">注意点</p>
-                <p className="text-sm text-red-950">{a.caution}</p>
+                <p className="text-sm text-red-950"><Rich text={a.caution} /></p>
               </div>
             </div>
           ))}
@@ -277,16 +286,16 @@ export default function PlaybookPage(): React.ReactElement {
               <div className="grid gap-2 sm:grid-cols-2">
                 <div>
                   <p className="text-xs font-medium text-stone-500">相手の本音</p>
-                  <p className="text-sm">{o.meaning}</p>
+                  <p className="text-sm"><Rich text={o.meaning} /></p>
                 </div>
                 <div>
                   <p className="text-xs font-medium text-stone-500">返し方</p>
-                  <p className="text-sm">{o.response}</p>
+                  <p className="text-sm"><Rich text={o.response} /></p>
                 </div>
               </div>
               <div className="rounded-md bg-stone-100 p-2">
                 <p className="text-xs font-medium text-stone-600">引くべきサイン</p>
-                <p className="text-sm">{o.stopIf}</p>
+                <p className="text-sm"><Rich text={o.stopIf} /></p>
               </div>
             </div>
           ))}
@@ -466,7 +475,7 @@ export default function PlaybookPage(): React.ReactElement {
                   <li key={f}>{f}</li>
                 ))}
               </ol>
-              <p className="rounded-md bg-red-50 p-2 text-xs text-red-950">{tr.caution}</p>
+              <p className="rounded-md bg-red-50 p-2 text-xs text-red-950"><Rich text={tr.caution} /></p>
             </div>
           ))}
         </div>
@@ -540,9 +549,9 @@ export default function PlaybookPage(): React.ReactElement {
               <h4 className="font-semibold">{s.label}</h4>
             </div>
             <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-stone-50 p-3 font-sans text-sm leading-relaxed">
-              {s.body}
+              <Rich text={s.body} />
             </pre>
-            <p className="text-xs text-stone-600">{s.note}</p>
+            <p className="text-xs text-stone-600"><Rich text={s.note} /></p>
           </div>
         ))}
 
@@ -551,6 +560,202 @@ export default function PlaybookPage(): React.ReactElement {
           次の公募回では必ず公募要領を読み直し、
           <code className="rounded bg-stone-100 px-1">src/config/subsidy.ts</code> を更新してください。
         </p>
+      </section>
+
+      {/* ============ 補助金サポート事業 ============ */}
+      <section id="subsidy-biz" className="space-y-3 scroll-mt-4">
+        <h2 className="text-xl font-bold">補助金サポート事業</h2>
+        <p className="text-sm text-stone-600">
+          HP制作とは別の商品として、補助金の申請サポートを有料で提供する場合の設計です。
+          最終的にはHP制作につながりますが、<strong>入口では売り込まないこと</strong>が要になります。
+        </p>
+
+        {/* 法的境界 — 最初に置く */}
+        <div className="card border-l-4 border-l-red-600 bg-red-50">
+          <h3 className="font-semibold text-red-900">⚠️ 先に法律の線を引きます</h3>
+          <p className="mt-1 text-sm text-red-950">
+            <strong>{LEGAL_BOUNDARY.law}</strong>により、報酬を得て補助金の申請書類を作成することは
+            <strong>行政書士の独占業務</strong>になりました。
+            無資格で行うと{LEGAL_BOUNDARY.penalty}の対象になり得ます。
+          </p>
+          <p className="mt-1 text-sm text-red-950">{LEGAL_BOUNDARY.judgedBy}</p>
+          <p className="mt-1 text-sm font-medium text-red-950">
+            さらに、{LEGAL_BOUNDARY.clientRisk}。自分だけの問題では済みません。
+          </p>
+          <p className="mt-2 text-sm text-red-950">
+            したがってこの事業は<strong>「書かない」ことを設計の中心</strong>に置きます。
+            店主が自分で書くのを助ける形にし、書類作成が必要になったら行政書士に引き継ぎます。
+          </p>
+        </div>
+
+        <div className="card">
+          <h3 className="font-semibold">やってよいこと / いけないこと</h3>
+          <div className="mt-2 overflow-x-auto">
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <tbody>
+                {BOUNDARY_RULES.map((r) => (
+                  <tr key={r.action} className="border-t border-stone-100 align-top">
+                    <td className="w-8 py-2">{r.allowed ? '✅' : '❌'}</td>
+                    <td className="py-2 pr-4 font-medium">{r.action}</td>
+                    <td className="py-2 text-stone-600"><Rich text={r.why} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-3 rounded-md bg-stone-50 p-3 text-sm">
+            <p className="font-medium">行政書士に引き継ぐべき状況</p>
+            <ul className="ml-4 mt-1 list-disc">
+              {REFER_TO_SPECIALIST.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-stone-600">
+              引き継ぐことは損ではありません。丸投げしたい客は手がかかるので、
+              自然に弾けるという意味では設計として都合がいいです。
+            </p>
+          </div>
+        </div>
+
+        {/* 役割分担 */}
+        <div className="card">
+          <h3 className="font-semibold">公式窓口との役割分担</h3>
+          <p className="mt-1 text-sm text-stone-600">
+            <strong>商工会議所・商工会が主、こちらは補完</strong>という位置づけを崩さないこと。
+            無料ですし、様式4はそこでしか発行できません。飛ばして自分に誘導すると、
+            相手の不利益になるうえ信用も失います。
+          </p>
+          <div className="mt-2 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-md bg-sky-50 p-3 text-sm">
+              <p className="font-medium text-sky-900">公式窓口がやること（無料）</p>
+              <ul className="ml-4 mt-1 list-disc text-sky-950">
+                {OFFICIAL_WINDOW.canDo.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-md bg-amber-50 p-3 text-sm">
+              <p className="font-medium text-amber-900">手が回りにくいところ＝こちらの領域</p>
+              <ul className="ml-4 mt-1 list-disc text-amber-950">
+                {OFFICIAL_WINDOW.hardToGet.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* サービスと料金 */}
+        <div className="card">
+          <h3 className="font-semibold">提供するサービスと料金</h3>
+          <div className="mt-2 space-y-3">
+            {SUPPORT_SERVICES.map((s) => (
+              <div key={s.key} className="rounded-md border border-stone-200 p-3 text-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h4 className="font-semibold">{s.name}</h4>
+                  <span className="font-medium">
+                    {s.price === 0 ? '無料' : `¥${(s.price ?? 0).toLocaleString('ja-JP')}`}
+                  </span>
+                </div>
+                <p className="mt-1 text-stone-600"><Rich text={s.fills} /></p>
+                <ul className="ml-4 mt-1 list-disc">
+                  {s.deliverables.map((d) => (
+                    <li key={d}>{d}</li>
+                  ))}
+                </ul>
+                <p className="mt-1 rounded bg-red-50 p-2 text-xs text-red-950"><Rich text={s.legalNote} /></p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 rounded-md bg-stone-50 p-3 text-sm">
+            <p className="font-medium">成功報酬型を採らない理由</p>
+            <p className="mt-1"><Rich text={PRICING_POLICY.reason} /></p>
+            <p className="mt-1 text-xs text-stone-600">{PRICING_POLICY.marketRate}</p>
+          </div>
+        </div>
+
+        {/* 心理設計 */}
+        <div className="card">
+          <h3 className="font-semibold">「申請してみたい」と思わせる組み立て</h3>
+          <p className="mt-1 text-sm text-stone-600">
+            補助金を使わない理由の1位は「知らない」ではなく<strong>「面倒そう」</strong>です。
+            潰すべきは情報不足ではなく、着手のハードルの方です。
+          </p>
+          <div className="mt-2 space-y-2">
+            {PSYCHOLOGY_NOTES.map((n, i) => (
+              <div key={n.principle} className="rounded-md bg-stone-50 p-3 text-sm">
+                <p className="font-medium">
+                  {i + 1}. {n.principle}
+                </p>
+                <p className="mt-1 text-stone-600"><Rich text={n.why} /></p>
+                <p className="mt-1">→ <Rich text={n.how} /></p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* HPへの流れ */}
+        <div className="card bg-stone-900 text-white">
+          <h3 className="font-semibold">HP制作につながる流れ</h3>
+          <ol className="ml-5 mt-2 list-decimal space-y-1 text-sm text-stone-300">
+            <li>無料診断 → 信頼を得る（この時点では何も売らない）</li>
+            <li>商工会議所を案内 → 無料の選択肢を先に教える（利害がないことを示す）</li>
+            <li>
+              <strong className="text-white">
+                「ウェブ費用だけでは申請できません。他に何を申請しますか？」
+              </strong>
+              → この質問への答えとしてHP制作が出てくる
+            </li>
+            <li>見積書を出す（申請書に添付が必要）</li>
+            <li>採択 → 交付決定 → HP制作を受注</li>
+            <li>月額へ</li>
+          </ol>
+          <p className="mt-2 text-sm text-stone-300">
+            売り込みではなく「申請を成立させるために必要なもの」としてHPが出てくるので、
+            抵抗が生じにくくなります。順番が効いています。
+          </p>
+        </div>
+
+        {/* 文面 */}
+        <h3 className="pt-2 text-lg font-semibold">補助金サポートの文面</h3>
+        {SUBSIDY_SUPPORT_SCRIPTS.map((s) => (
+          <div key={s.label} className="card space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="badge bg-stone-100 text-stone-700">{s.channel}</span>
+              <h4 className="font-semibold">{s.label}</h4>
+            </div>
+            <pre className="overflow-x-auto whitespace-pre-wrap rounded-md bg-stone-50 p-3 font-sans text-sm leading-relaxed">
+              <Rich text={s.body} />
+            </pre>
+            <p className="whitespace-pre-line text-xs text-stone-600"><Rich text={s.note} /></p>
+          </div>
+        ))}
+
+        {/* 断り対応 */}
+        <h3 className="pt-2 text-lg font-semibold">断られたときの対応</h3>
+        <p className="text-sm text-stone-600">
+          補助金の話は「詐欺では」と疑われやすい領域です。警戒は正当なので、
+          疑われたら<strong>自分を経由しない道（商工会議所）を示して引く</strong>のが正解です。
+        </p>
+        {SUBSIDY_OBJECTIONS.map((o) => (
+          <div key={o.said} className="card space-y-2">
+            <p className="font-semibold">「{o.said}」</p>
+            <div className="grid gap-2 sm:grid-cols-2 text-sm">
+              <div>
+                <p className="text-xs font-medium text-stone-500">相手の本音</p>
+                <p><Rich text={o.meaning} /></p>
+              </div>
+              <div>
+                <p className="text-xs font-medium text-stone-500">返し方</p>
+                <p><Rich text={o.response} /></p>
+              </div>
+            </div>
+            <div className="rounded-md bg-stone-100 p-2 text-sm">
+              <p className="text-xs font-medium text-stone-600">引くべきサイン</p>
+              <p><Rich text={o.stopIf} /></p>
+            </div>
+          </div>
+        ))}
       </section>
 
       <div className="card bg-stone-900 text-white">

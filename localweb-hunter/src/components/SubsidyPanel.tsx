@@ -1,10 +1,13 @@
 import type { Business } from '@/types/business';
 import { computeNextAction } from '@/lib/scoring/nextAction';
+import { PROSPECT_LABELS, scoreSubsidyProspect } from '@/lib/scoring/subsidyScore';
+import { BOUNDARY_RULES, LEGAL_BOUNDARY, OFFICIAL_WINDOW, SUPPORT_SERVICES } from '@/config/subsidySupport';
 import { getPricing, yen } from '@/config/pricing';
 import {
   ADVISORY_RULES, COMBINABLE_EXPENSES, ROUND_NAME, SCHEDULE, SUBSIDY, SUBSIDY_CONFLICT,
   TRACK_RECORD, VERIFIED_ON, costAtWebCap, estimateSubsidy, screenEligibility,
 } from '@/config/subsidy';
+import { Rich } from '@/components/ui';
 
 /**
  * 補助金の案内。
@@ -16,6 +19,8 @@ import {
  */
 export function SubsidyPanel({ business }: { business: Business }): React.ReactElement {
   const screen = screenEligibility(business.category, business.name);
+  const prospect = scoreSubsidyProspect(business);
+  const sparringFee = SUPPORT_SERVICES.find((s) => s.key === 'plan_sparring')?.price ?? 0;
   const next = computeNextAction(business);
   const pricing = next.primary ? getPricing(next.primary.key) : null;
   const cost = pricing?.withMonthly.initial ?? null;
@@ -42,11 +47,12 @@ export function SubsidyPanel({ business }: { business: Business }): React.ReactE
     <div className="card space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="font-semibold">小規模事業者持続化補助金</h2>
-        <span
-          className={`badge ${screen.status === 'likely_eligible' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}`}
-        >
-          {screen.status === 'likely_eligible' ? '対象になり得る' : '要確認'}
-        </span>
+        <div className="flex flex-wrap gap-2">
+          <span className={`badge ${PROSPECT_LABELS[prospect.prospect].tone}`}>
+            {PROSPECT_LABELS[prospect.prospect].label}
+          </span>
+          <span className="badge bg-stone-100 text-stone-600">見込み {prospect.score}点</span>
+        </div>
       </div>
 
       {/* 先出しモデルとの衝突。ここを読まずに案内すると必ず事故る */}
@@ -81,7 +87,7 @@ export function SubsidyPanel({ business }: { business: Business }): React.ReactE
         <div className="rounded-md bg-sky-50 p-3">
           <p className="text-xs font-medium text-sky-900">店主に確認すること</p>
           <ul className="ml-4 list-disc text-sky-950">
-            {screen.toConfirm.map((c) => (
+            {prospect.toAsk.map((c) => (
               <li key={c}>{c}</li>
             ))}
           </ul>
@@ -126,6 +132,114 @@ export function SubsidyPanel({ business }: { business: Business }): React.ReactE
             </ul>
           </div>
         </div>
+      </details>
+
+      <details className="text-sm">
+        <summary className="cursor-pointer font-medium text-stone-700">見込みの判断材料</summary>
+        <table className="mt-2 w-full text-left">
+          <tbody>
+            {prospect.factors.map((f) => (
+              <tr key={f.label} className="border-t border-stone-100 align-top">
+                <td className="py-1 pr-3">{f.label}</td>
+                <td className="py-1 pr-3 text-right font-mono text-xs">
+                  {f.points > 0 ? `+${f.points}` : f.points}
+                </td>
+                <td className="py-1 text-xs text-stone-600"><Rich text={f.note} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </details>
+
+      {/* 有料サポートを勧めてよいかの判断 */}
+      <div
+        className={`rounded-md p-3 text-sm ${prospect.supportWorthwhile ? 'bg-emerald-50' : 'bg-stone-100'}`}
+      >
+        <p className="font-medium">
+          {prospect.supportWorthwhile
+            ? '有料サポートを提案してよい水準です'
+            : 'このプラン単体では、有料サポートは勧めないでください'}
+        </p>
+        <p className="mt-1 text-stone-700">
+          今回の提案（{yen(cost ?? 0)}）に対する補助額は約{yen(prospect.subsidyOnWebOnly)}。
+          {prospect.supportWorthwhile
+            ? `サポート料（${yen(sparringFee)}）を払っても店舗に十分な手取りが残ります。`
+            : `サポート料（${yen(sparringFee)}）を引くと手取りがほとんど残りません。` +
+              `補助額が${yen(prospect.supportBreakEven)}を超える規模なら提案できます。`}
+        </p>
+        <p className="mt-2 text-xs text-stone-600">
+          ウェブ費用だけでは申請できないので、どのみち他の投資と組み合わせる必要があります。
+          <strong>「ほかに投資を考えているものはありますか」と聞くことが、
+          相手の利益にもこちらの受注にも繋がります。</strong>
+        </p>
+      </div>
+
+      <details className="text-sm">
+        <summary className="cursor-pointer font-medium text-red-800">
+          ⚠️ 有料サポートの法的な線引き（必読）
+        </summary>
+        <div className="mt-2 space-y-2">
+          <div className="rounded-md bg-red-50 p-3">
+            <p className="text-red-950">
+              <strong>{LEGAL_BOUNDARY.law}</strong> により、報酬を得て補助金の申請書類を作成することは
+              行政書士の独占業務です。違反すると{LEGAL_BOUNDARY.penalty}。
+              {LEGAL_BOUNDARY.clientRisk}。
+            </p>
+            <p className="mt-1 text-red-950">{LEGAL_BOUNDARY.judgedBy}</p>
+          </div>
+          <table className="w-full text-left text-xs">
+            <tbody>
+              {BOUNDARY_RULES.map((r) => (
+                <tr key={r.action} className="border-t border-stone-100 align-top">
+                  <td className="w-6 py-1">{r.allowed ? '✅' : '❌'}</td>
+                  <td className="py-1 pr-3">{r.action}</td>
+                  <td className="py-1 text-stone-600"><Rich text={r.why} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details className="text-sm">
+        <summary className="cursor-pointer font-medium text-stone-700">
+          公式窓口（商工会議所・商工会）との役割分担
+        </summary>
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
+          <div className="rounded-md bg-sky-50 p-3">
+            <p className="text-xs font-medium text-sky-900">公式窓口がやってくれること（無料）</p>
+            <ul className="ml-4 list-disc text-sky-950">
+              {OFFICIAL_WINDOW.canDo.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-md bg-amber-50 p-3">
+            <p className="text-xs font-medium text-amber-900">手が回りにくいところ</p>
+            <ul className="ml-4 list-disc text-amber-950">
+              {OFFICIAL_WINDOW.hardToGet.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="mt-2 text-xs text-stone-600">
+          まず公式窓口を案内してください。無料ですし、様式4はそこでしか発行できません。
+          飛ばして自分に誘導すると、相手の不利益になるうえ信用も失います。
+        </p>
+        <table className="mt-2 w-full text-left text-xs">
+          <tbody>
+            {SUPPORT_SERVICES.map((s) => (
+              <tr key={s.key} className="border-t border-stone-100 align-top">
+                <td className="py-1 pr-3 font-medium">{s.name}</td>
+                <td className="py-1 pr-3 text-right">
+                  {s.price === 0 ? '無料' : yen(s.price ?? 0)}
+                </td>
+                <td className="py-1 text-stone-600"><Rich text={s.legalNote} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </details>
 
       <details className="text-sm">

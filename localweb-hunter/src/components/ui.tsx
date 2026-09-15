@@ -3,6 +3,7 @@
 // 空欄で済ませると「調べていない」のか「無かった」のか区別できないため。
 
 import type { LeadPriority, WebsiteStatus } from '@/types/business';
+import { parseEmphasis } from '@/lib/text/emphasis';
 
 const PRIORITY_STYLES: Record<LeadPriority, string> = {
   S: 'bg-red-100 text-red-800 ring-1 ring-red-300',
@@ -92,4 +93,24 @@ export function formatUsd(v: number): string {
   if (v === 0) return '$0.00';
   if (v < 0.01) return `$${v.toFixed(4)}`;
   return `$${v.toFixed(2)}`;
+}
+
+/**
+ * 設定ファイル側の文字列に埋め込んだ `**強調**` を太字にする。
+ *
+ * これらの文字列は「法的な線引き」「やってはいけないこと」など、
+ * 読み飛ばされると実害が出る箇所に強調が入っている。
+ * そのまま出すと `**` が生の記号として画面に出てしまい、強調が効かないどころか読みにくい。
+ *
+ * Markdownを解釈するわけではなく、`**`で囲まれた部分だけを太字にする。
+ * 文字列は自分のリポジトリ内の設定ファイル由来なので、HTMLとして解釈することはしない。
+ */
+export function Rich({ text }: { text: string }): React.ReactElement {
+  return (
+    <>
+      {parseEmphasis(text).map((p, i) =>
+        p.strong ? <strong key={i}>{p.text}</strong> : <span key={i}>{p.text}</span>
+      )}
+    </>
+  );
 }
