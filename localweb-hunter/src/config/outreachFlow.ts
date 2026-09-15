@@ -18,6 +18,12 @@
 // という状態を作れる。写真の提供が、承諾のハードルではなく
 // 「もっと良くするための参加」に変わる。
 
+import { SCHEDULE } from './subsidy';
+import { form4LeadDays, jpDate, jpMonthDay } from '@/lib/subsidy/schedule';
+
+// 日付は SCHEDULE を唯一の出典にする。直書きすると公募回が変わったときに古い日付が残る。
+// （理由の詳細は src/lib/subsidy/schedule.ts の冒頭）
+
 export interface OutreachStage {
   no: number;
   title: string;
@@ -378,7 +384,7 @@ export const SUBSIDY_SCRIPTS: OutreachScript[] = [
 　1. 今お見せしているページを「提案資料」として扱います（この時点では受注しません）
 　2. 弊方から見積書をお出しします。申請書に添付してください
 　3. 商工会議所で様式4（事業支援計画書）を発行してもらいます
-　4. ご申請（受付は2026年11月5日〜12月15日）
+　4. ご申請（受付は${jpDate(SCHEDULE.applicationOpens)}〜${jpMonthDay(SCHEDULE.applicationCloses)}）
 　5. 採択発表（2027年3月頃）
 　6. 交付決定（採択から1〜2か月）
 　7. ここで正式にご発注いただき、制作・納品
@@ -390,7 +396,7 @@ export const SUBSIDY_SCRIPTS: OutreachScript[] = [
 　（機械装置費、展示会出展費、新商品開発費、店舗改装など）
 ・補助金は事業完了後の精算払いです。いったん全額をお支払いいただく形になります
 ・申請から入金までは1年程度かかります
-・★ 様式4の発行受付は2026年12月4日で締め切られます。申請締切より11日早いのでご注意ください
+・★ 様式4の発行受付は${jpDate(SCHEDULE.form4Deadline)}で締め切られます。申請締切より${form4LeadDays(SCHEDULE)}日早いのでご注意ください
 
 ■ 弊方でお手伝いできること
 ・見積書の作成

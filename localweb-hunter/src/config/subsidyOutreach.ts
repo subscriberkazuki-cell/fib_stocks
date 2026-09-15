@@ -50,6 +50,20 @@
 // 抵抗が生じにくい。
 
 import type { OutreachScript } from './outreachFlow';
+import { ROUND_NAME, SCHEDULE } from './subsidy';
+import {
+  consultBy, form4LeadDays, jpDate, jpMonthDay, shortRoundName,
+} from '@/lib/subsidy/schedule';
+
+// 日付は SCHEDULE だけを出典にする。
+// 文面に直接書くと、公募回が変わったときに古い日付が文面側に残り、
+// 誤った締切をそのまま店舗に送ってしまう。
+// （理由の詳細は src/lib/subsidy/schedule.ts の冒頭）
+const ROUND = shortRoundName(ROUND_NAME);
+const CLOSE_DATE = jpDate(SCHEDULE.applicationCloses);
+const FORM4_DATE = jpMonthDay(SCHEDULE.form4Deadline);
+const FORM4_LEAD = form4LeadDays(SCHEDULE);
+const CONSULT_BY = consultBy(SCHEDULE.form4Deadline);
 
 export const PSYCHOLOGY_NOTES: { principle: string; why: string; how: string }[] = [
   {
@@ -75,7 +89,7 @@ export const PSYCHOLOGY_NOTES: { principle: string; why: string; how: string }[]
   {
     principle: '本物の締切で動かす',
     why: '偽の緊急性は見抜かれるし、信用を失う。幸い本物の締切がある。',
-    how: '様式4の締切が申請締切より11日早い。これは事実で、伝えないと相手が損をする。',
+    how: `様式4の締切が申請締切より${FORM4_LEAD}日早い。これは事実で、伝えないと相手が損をする。`,
   },
   {
     principle: '小さな第一歩にする',
@@ -123,9 +137,9 @@ export const SUBSIDY_SUPPORT_SCRIPTS: OutreachScript[] = [
 まずはそちらにご相談されるのが一番です。費用もかかりません。
 
 ■ ひとつだけ、日程にご注意ください
-今回（第20回）の申請締切は2026年12月15日ですが、
-**商工会議所が発行する様式4の締切は12月4日**で、11日早く締め切られます。
-締切前は相談が集中するので、11月中旬までにご相談されることをおすすめします。
+今回（${ROUND}）の申請締切は${CLOSE_DATE}ですが、
+**商工会議所が発行する様式4の締切は${FORM4_DATE}**で、${FORM4_LEAD}日早く締め切られます。
+締切前は相談が集中するので、${CONSULT_BY}までにご相談されることをおすすめします。
 
 ■ ご参考までに
 どんな取り組みが対象になるか、いくらくらい戻るのかの整理でしたら、
@@ -170,8 +184,8 @@ export const SUBSIDY_SUPPORT_SCRIPTS: OutreachScript[] = [
 申請には商工会議所が出す書類が必要なので、どのみち一度は行くことになります。
 そちらにご相談いただくのが一番です。
 
-ひとつだけ、その書類の締切が申請締切より11日早いので、
-11月中旬までに一度ご相談されるといいと思います。
+ひとつだけ、その書類の締切が申請締切より${FORM4_LEAD}日早いので、
+${CONSULT_BY}までに一度ご相談されるといいと思います。
 
 もし「そもそも対象なのか」「いくらくらい戻るのか」を先に整理したい、
 ということでしたら、そこは無料でお出しできます。
@@ -229,7 +243,7 @@ export const SUBSIDY_SUPPORT_SCRIPTS: OutreachScript[] = [
 
 　柏商工会議所　04-7162-3325（※番号はご確認ください）
 
-様式4の発行締切が12月4日ですので、11月中旬までにご相談ください。
+様式4の発行締切が${FORM4_DATE}ですので、${CONSULT_BY}までにご相談ください。
 
 ■ 私の方でお手伝いできること
 商工会議所は無料ですが、締切前は相談が集中して予約が取りにくくなります。

@@ -15,7 +15,9 @@ import {
 import {
   PSYCHOLOGY_NOTES, SUBSIDY_OBJECTIONS, SUBSIDY_SUPPORT_SCRIPTS,
 } from '@/config/subsidyOutreach';
+import { form4LeadDays } from '@/lib/subsidy/schedule';
 import { Rich } from '@/components/ui';
+import { RoundStatusBanner } from '@/components/RoundStatusBanner';
 
 export const metadata = { title: '営業手順 | LocalWeb Hunter' };
 
@@ -482,12 +484,13 @@ export default function PlaybookPage(): React.ReactElement {
 
         <div className="card space-y-3">
           <h3 className="font-semibold">{ROUND_NAME}の要点</h3>
+          <RoundStatusBanner />
           <div className="overflow-x-auto">
             <table className="w-full min-w-[520px] text-left text-sm">
               <tbody>
                 {[
                   ['申請受付', `${SCHEDULE.applicationOpens} 〜 ${SCHEDULE.applicationCloses.replace('T', ' ')}`],
-                  ['様式4の発行締切', `${SCHEDULE.form4Deadline}（申請締切より11日早い）`],
+                  ['様式4の発行締切', `${SCHEDULE.form4Deadline}（申請締切より${form4LeadDays(SCHEDULE)}日早い）`],
                   ['採択発表', SCHEDULE.resultAnnouncement],
                   ['補助率', '2/3（赤字事業者は3/4）'],
                   ['補助上限', '50万円（インボイス特例+50万・賃金引上げ特例+150万で最大250万円）'],

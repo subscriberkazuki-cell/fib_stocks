@@ -7,6 +7,8 @@ import {
   ADVISORY_RULES, COMBINABLE_EXPENSES, ROUND_NAME, SCHEDULE, SUBSIDY, SUBSIDY_CONFLICT,
   TRACK_RECORD, VERIFIED_ON, costAtWebCap, estimateSubsidy, screenEligibility,
 } from '@/config/subsidy';
+import { form4LeadDays } from '@/lib/subsidy/schedule';
+import { RoundStatusBanner } from '@/components/RoundStatusBanner';
 import { Rich } from '@/components/ui';
 
 /**
@@ -99,11 +101,12 @@ export function SubsidyPanel({ business }: { business: Business }): React.ReactE
           {ROUND_NAME}のスケジュールと条件
         </summary>
         <div className="mt-2 space-y-3">
+          <RoundStatusBanner />
           <table className="w-full text-left">
             <tbody>
               {[
                 ['申請受付', `${SCHEDULE.applicationOpens} 〜 ${SCHEDULE.applicationCloses.replace('T', ' ')}`],
-                ['様式4の発行締切', `${SCHEDULE.form4Deadline} ← 申請締切より11日早い`],
+                ['様式4の発行締切', `${SCHEDULE.form4Deadline} ← 申請締切より${form4LeadDays(SCHEDULE)}日早い`],
                 ['採択発表', SCHEDULE.resultAnnouncement],
                 ['補助率', '2/3（赤字事業者は3/4）'],
                 ['補助上限', `${yen(SUBSIDY.baseCap)}（特例併用で最大${yen(SUBSIDY.maxCap)}）`],

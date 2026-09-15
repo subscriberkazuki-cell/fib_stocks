@@ -10,6 +10,8 @@
 //
 // ■ ただし、先出し提案とそのままでは両立しない（§SUBSIDY_CONFLICT を必ず読むこと）
 
+import { jpDate, jpMonthDay } from '@/lib/subsidy/schedule';
+
 export const VERIFIED_ON = '2026-09-14';
 export const ROUND_NAME = '第20回（一般型・通常枠）';
 
@@ -49,7 +51,7 @@ export const SCHEDULE = {
    * ★ 最大の罠。
    * 様式4（事業支援計画書）は商工会議所・商工会が発行するもので、
    * その発行受付の締切が申請締切より11日早い。ここを逃すと申請自体ができない。
-   * 締切直前は相談が集中するので、11月中旬には窓口に行かせること。
+   * 締切直前は相談が集中するので、3週間前には窓口に行かせること（consultBy() が算出する）。
    */
   form4Deadline: '2026-12-04',
   resultAnnouncement: '2027年3月頃',
@@ -160,7 +162,7 @@ export const TRACKS: TrackDefinition[] = [
       '先出しで作ったページを「提案資料」として見せる（この時点では受注しない）',
       '見積書を出す（申請書に添付してもらう）',
       '店舗が商工会議所で様式4を取得（申請締切より前に締切があるので注意）',
-      '店舗が申請（2026年11月5日〜12月15日）',
+      `店舗が申請（${jpDate(SCHEDULE.applicationOpens)}〜${jpMonthDay(SCHEDULE.applicationCloses)}）`,
       '採択発表（2027年3月頃）',
       '見積提出 → 交付決定（1〜2か月）',
       '★ここで正式発注 → 制作 → 納品・支払い',
