@@ -25,6 +25,7 @@
 
 import type { Business } from '@/types/business';
 import { SENDER_FIELDS, type SenderField, type SenderIdentity } from '@/config/sender';
+import { formatFindings, siteFindings } from '@/lib/outreach/siteFindings';
 
 /**
  * 差し込みが埋まらなかった理由の種類。
@@ -101,6 +102,14 @@ function resolvers(ctx: MailContext): Record<string, () => Resolution> {
       b.reviewCount
         ? ok(b.reviewCount.value.toLocaleString('ja-JP'))
         : no('口コミ件数が未取得です', 'shop'),
+    気になった点: () => {
+      // 実際にクロールして観測したことだけを根拠にする。
+      // 何も観測できていなければ、書くことが無い＝この文面は送れない。
+      const f = siteFindings(b);
+      return f.length === 0
+        ? no('サイトの調査結果が無く、指摘できる点を挙げられません', 'shop')
+        : ok(formatFindings(f));
+    },
     URL: () =>
       (ctx.previewUrl ?? '').trim() === ''
         ? no('先出しページのURLが未入力です', 'input')

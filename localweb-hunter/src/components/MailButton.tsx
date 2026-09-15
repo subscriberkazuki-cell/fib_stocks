@@ -16,7 +16,7 @@ import { useMemo, useState } from 'react';
 import type { Business } from '@/types/business';
 import type { SenderIdentity } from '@/config/sender';
 import { composeMail, isMailtoTooLong, mailtoUrl } from '@/lib/outreach/compose';
-import { chooseRoute, type RouteKey } from '@/lib/outreach/route';
+import { chooseRoute, routeFitBlockers, type RouteKey } from '@/lib/outreach/route';
 
 export function MailButton({
   business,
@@ -36,7 +36,13 @@ export function MailButton({
     [route, business, sender, previewUrl],
   );
 
-  const canSend = mail.blockers.length === 0;
+  // 文面が店舗の状態に合っているか（「サイトが無い」と書く文面をサイト持ちに送らない）を
+  // 差し込みの可否より先に出す。こちらの方が根本的な理由なので。
+  const blockers = useMemo(
+    () => [...routeFitBlockers(route.key, business), ...mail.blockers],
+    [route.key, business, mail],
+  );
+  const canSend = blockers.length === 0;
   const tooLong = canSend && isMailtoTooLong(mail);
 
   const copyBody = async (): Promise<void> => {
@@ -99,11 +105,11 @@ export function MailButton({
       )}
 
       {/* 送れない理由 */}
-      {mail.blockers.length > 0 && (
+      {blockers.length > 0 && (
         <div className="space-y-1 rounded-md border border-red-300 bg-red-50 p-3">
           <p className="text-sm font-medium text-red-950">まだ送れません</p>
           <ul className="list-disc space-y-0.5 pl-5 text-xs text-red-900">
-            {mail.blockers.map((b) => (
+            {blockers.map((b) => (
               <li key={b}>{b}</li>
             ))}
           </ul>
