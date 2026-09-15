@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getBusiness, getHistory } from '@/lib/db/repository';
+import { getBusiness, getHistory, getSenderIdentity } from '@/lib/db/repository';
 import { describeStatus } from '@/lib/labels';
 import { evaluateWebsiteOpportunity } from '@/lib/scoring/websitePresenceScore';
 import { AiBadge, Field, PriorityBadge, ScoreBar, Unconfirmed, WebsiteStatusBadge } from '@/components/ui';
 import { CrmPanel } from '@/components/CrmPanel';
 import { EnrichOneButton } from '@/components/EnrichOneButton';
 import { NextActionPanel } from '@/components/NextActionPanel';
+import { MailButton } from '@/components/MailButton';
 import { EmailCell } from '@/components/ContactCell';
 import { SitePromptPanel } from '@/components/SitePromptPanel';
 import { SubsidyPanel } from '@/components/SubsidyPanel';
@@ -112,6 +113,8 @@ export default async function LeadDetailPage({
       </div>
 
       <NextActionPanel business={b} />
+
+      <MailButton business={b} sender={getSenderIdentity()} />
 
       {/* ---- Web状況 ---- */}
       <div className="card space-y-3">

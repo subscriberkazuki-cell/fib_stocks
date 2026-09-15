@@ -219,3 +219,17 @@ CREATE TABLE IF NOT EXISTS lead_score_weights (
   is_active INTEGER NOT NULL DEFAULT 1,
   updated_at TEXT NOT NULL
 );
+
+-- ============================================================
+-- sender_identity: 差出人情報（特定電子メール法で表示が義務）
+--   1行だけ持つ。id は 'default' 固定。
+-- ============================================================
+CREATE TABLE IF NOT EXISTS sender_identity (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL DEFAULT '',
+  company TEXT NOT NULL DEFAULT '',
+  address TEXT NOT NULL DEFAULT '',
+  phone TEXT NOT NULL DEFAULT '',
+  email TEXT NOT NULL DEFAULT '',
+  updated_at TEXT NOT NULL
+);

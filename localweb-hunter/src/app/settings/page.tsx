@@ -1,6 +1,7 @@
-import { getScoringSettings } from '@/lib/db/repository';
+import { getScoringSettings, getSenderIdentity } from '@/lib/db/repository';
 import { env } from '@/config/env';
 import { WeightsForm } from '@/components/WeightsForm';
+import { SenderForm } from '@/components/SenderForm';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,6 +16,8 @@ export default function SettingsPage(): React.ReactElement {
           スコアの重みと優先度の閾値はここで変更できます。コードには埋め込まれていません。
         </p>
       </div>
+
+      <SenderForm initial={getSenderIdentity()} />
 
       <WeightsForm initialWeights={settings.weights} initialThresholds={settings.thresholds} />
 

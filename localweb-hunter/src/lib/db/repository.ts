@@ -3,6 +3,7 @@
 // Supabaseへ差し替える場合はこのファイルと同じ関数群を用意すればよい。
 
 import 'server-only';
+import { EMPTY_SENDER, type SenderIdentity } from '@/config/sender';
 import { randomUUID } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { getDb } from './sqlite';
@@ -71,6 +72,43 @@ export function getScoringSettings(db?: DatabaseSync): ScoringSettings {
       C: num('threshold_c', DEFAULT_PRIORITY_THRESHOLDS.C),
     },
   };
+}
+
+// ============================================================
+// 差出人情報
+//
+// 特定電子メール法で表示が義務づけられている項目を保持する。
+// 未設定なら送信ボタンが止まるので、DBに無いときは空文字で返す
+// （null を返して呼び出し側で分岐させると、埋め忘れを見落としやすい）。
+// ============================================================
+
+export function getSenderIdentity(db?: DatabaseSync): SenderIdentity {
+  const c = conn(db);
+  const row = c.prepare("SELECT * FROM sender_identity WHERE id = 'default'").get() as Row | undefined;
+  if (!row) return { ...EMPTY_SENDER };
+  const str = (k: string): string => (typeof row[k] === 'string' ? (row[k] as string) : '');
+  return {
+    name: str('name'),
+    company: str('company'),
+    address: str('address'),
+    phone: str('phone'),
+    email: str('email'),
+  };
+}
+
+export function saveSenderIdentity(s: SenderIdentity, db?: DatabaseSync): void {
+  const c = conn(db);
+  c.prepare(
+    `INSERT INTO sender_identity (id, name, company, address, phone, email, updated_at)
+     VALUES ('default', ?, ?, ?, ?, ?, ?)
+     ON CONFLICT(id) DO UPDATE SET
+       name = excluded.name,
+       company = excluded.company,
+       address = excluded.address,
+       phone = excluded.phone,
+       email = excluded.email,
+       updated_at = excluded.updated_at`,
+  ).run(s.name, s.company, s.address, s.phone, s.email, new Date().toISOString());
 }
 
 export function saveScoringSettings(settings: ScoringSettings, db?: DatabaseSync): void {
