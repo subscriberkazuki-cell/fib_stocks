@@ -1,0 +1,132 @@
+﻿ticker,company,fy_label,fiscal_year_end_month,eps_basic,eps_diluted,period_end_precision,source_url,source_type,notes
+AAPL,Apple Inc,FY2001,09,,-0.07,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000320193/000104746903041604/a2124888z10-k.htm,SEC 10-K,"Loss per share; 52/53-week FY (last Saturday Sept), exact day not verified"
+AAPL,Apple Inc,FY2002,09,,0.18,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000320193/000104746903041604/a2124888z10-k.htm,SEC 10-K,52/53-week FY exact day not verified
+AAPL,Apple Inc,FY2003,09,,0.19,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000320193/000104746903041604/a2124888z10-k.htm,SEC 10-K,52/53-week FY exact day not verified
+AAPL,Apple Inc,FY2006,09,2.36,2.27,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000320193/000110465906084288/a06-25759_210k.htm,SEC 10-K,52/53-week FY exact day not verified
+AAPL,Apple Inc,FY2007,09,1.64,1.55,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000320193/000104746907009340/a2181030z10-k.htm,SEC 10-K,52/53-week FY exact day not verified
+AAPL,Apple Inc,FY2009,09,1.85,1.82,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000320193/000119312509214859/d10k.htm,SEC 10-K,52/53-week FY exact day not verified
+INTC,Intel Corp,FY1999,12,,0.97,exact,https://www.sec.gov/Archives/edgar/data/0000050863/000104746903008257/a2104280z10-k.htm,SEC 10-K,"Calendar FY-end Dec 31; basic/diluted split not confirmed in snippet, treated as diluted per query framing"
+INTC,Intel Corp,FY2000,12,,1.16,exact,https://www.sec.gov/Archives/edgar/data/0000050863/000104746903008257/a2104280z10-k.htm,SEC 10-K,Calendar FY-end Dec 31
+INTC,Intel Corp,FY2001,12,,0.19,exact,https://www.sec.gov/Archives/edgar/data/0000050863/000104746903008257/a2104280z10-k.htm,SEC 10-K,Calendar FY-end Dec 31
+INTC,Intel Corp,FY2002,12,,0.46,exact,https://www.sec.gov/Archives/edgar/data/0000050863/000104746903008257/a2104280z10-k.htm,SEC 10-K,Calendar FY-end Dec 31
+INTC,Intel Corp,FY2003,12,,0.85,exact,https://www.sec.gov/Archives/edgar/data/0000050863/000119312504027430/d10k.htm,SEC 10-K,Calendar FY-end Dec 31
+CSCO,Cisco Systems Inc,FY1999,07,,0.29,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000858877/000109581100003692/f65797e10-k.txt,SEC 10-K,"52/53-week FY (last Saturday July), exact day not verified"
+CSCO,Cisco Systems Inc,FY2000,07,,0.36,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000858877/000109581100003692/f65797e10-k.txt,SEC 10-K,52/53-week FY exact day not verified
+ORCL,Oracle Corp,FY1999,05,,0.82,exact,https://www.annualreports.com/HostedData/AnnualReportArchive/o/NYSE_ORCL_2001.pdf,SEC 10-K,"FY-end May 31; pre-split-adjustment not confirmed, as-reported at time of filing"
+ORCL,Oracle Corp,FY2000,05,,0.13,exact,https://www.annualreports.com/HostedData/AnnualReportArchive/o/NYSE_ORCL_2001.pdf,SEC 10-K,FY-end May 31; large drop vs FY1999 likely reflects 1999/2000 stock splits - as-reported figures not comparable across split events
+ORCL,Oracle Corp,FY2001,05,,0.04,exact,https://www.annualreports.com/HostedData/AnnualReportArchive/o/NYSE_ORCL_2001.pdf,SEC 10-K,FY-end May 31
+MSFT,Microsoft Corp,FY1999,06,,1.42,exact,https://news.microsoft.com/source/1999/07/19/microsoft-announces-record-fiscal-year-revenue-and-income-2/,Company earnings release,FY-end Jun 30; press release not 10-K text directly but company primary source
+MSFT,Microsoft Corp,FY2000,06,,1.70,exact,https://www.microsoft.com/investor/reports/ar00/notes-earnings_per_share.htm,SEC 10-K,FY-end Jun 30; from annual report notes to financial statements
+MSFT,Microsoft Corp,FY2010,06,,2.10,exact,https://www.sec.gov/Archives/edgar/data/0000789019/000119312511200680/d10k.htm,SEC 10-K,FY-end Jun 30
+MSFT,Microsoft Corp,FY2011,06,,2.69,exact,https://www.sec.gov/Archives/edgar/data/0000789019/000119312511200680/d10k.htm,SEC 10-K,FY-end Jun 30
+MSFT,Microsoft Corp,FY2012,06,,2.00,exact,https://www.sec.gov/Archives/edgar/data/0000789019/000119312512316848/d347676d10k.htm,SEC 10-K,FY-end Jun 30
+MSFT,Microsoft Corp,FY2013,06,,2.58,exact,https://www.sec.gov/Archives/edgar/data/0000789019/000119312514289961/d722626d10k.htm,SEC 10-K,FY-end Jun 30
+MSFT,Microsoft Corp,FY2014,06,,2.63,exact,https://www.sec.gov/Archives/edgar/data/0000789019/000119312514289961/d722626d10k.htm,SEC 10-K,FY-end Jun 30
+AMZN,Amazon.com Inc,FY2004,12,,0.55,exact,https://www.sec.gov/Archives/edgar/data/0001018724/000119312505047032/d10k.htm,SEC 10-K,Calendar FY-end Dec 31
+AMZN,Amazon.com Inc,FY2005,12,,0.82,exact,https://www.sec.gov/Archives/edgar/data/0001018724/000119312506034166/d10k.htm,SEC 10-K,Calendar FY-end Dec 31
+QCOM,QUALCOMM Inc,FY2000,09,,0.85,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000804328/000091205700047095/a2029329z10-k.txt,SEC 10-K,"FY-end Sep 30. Filing explicitly states per-share amounts restated for Dec 1999 4-for-1 stock split -> split_adjusted=yes"
+AMGN,Amgen Inc,FY1999,12,,0.82,exact,https://www.sec.gov/Archives/edgar/data/0000318154/000089843001000873/0001.txt,SEC 10-K,Calendar FY-end Dec 31
+AMGN,Amgen Inc,FY2000,12,,1.02,exact,https://www.sec.gov/Archives/edgar/data/0000318154/000089843001000873/0001.txt,SEC 10-K,Calendar FY-end Dec 31
+AMGN,Amgen Inc,FY2001,12,,1.05,exact,https://www.sec.gov/Archives/edgar/data/0000318154/000089843002000744/d10k.txt,SEC 10-K,Calendar FY-end Dec 31
+NVDA,NVIDIA Corp,FY2001,01,,0.62,approx_month_end,https://www.sec.gov/Archives/edgar/data/0001045810/000101287002002262/d10k.htm,SEC 10-K,FY-end late January (52/53wk); exact day not verified
+NVDA,NVIDIA Corp,FY2002,01,,1.03,approx_month_end,https://www.sec.gov/Archives/edgar/data/0001045810/000101287002002262/d10k.htm,SEC 10-K,FY-end late January (52/53wk); exact day not verified
+ADBE,Adobe Systems Inc,FY2000,11,,1.13,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000796343/000091205701006700/a2039309z10-k.htm,SEC 10-K,FY-end early Dec (52/53wk;approx to Nov 30); exact day not verified
+ADBE,Adobe Systems Inc,FY2010,11,,1.47,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000796343/000079634311000003/form10kunofficial_pdf.pdf,SEC 10-K,FY-end early Dec (52/53wk;approx to Nov 30); exact day not verified
+PEP,PepsiCo Inc,FY2013,12,,4.32,exact,https://www.sec.gov/Archives/edgar/data/77476/000119312507035201/d10k.htm,SEC 10-K,Calendar-ish FY-end late Dec
+PEP,PepsiCo Inc,FY2014,12,,4.27,exact,https://www.sec.gov/Archives/edgar/data/77476/000119312507035201/d10k.htm,SEC 10-K,Calendar-ish FY-end late Dec
+PEP,PepsiCo Inc,FY2015,12,,3.67,exact,https://www.sec.gov/Archives/edgar/data/0000077476/000007747616000066/pepsico201510-k.htm,SEC 10-K,Calendar-ish FY-end late Dec
+PEP,PepsiCo Inc,FY2019,12,,5.20,exact,https://www.sec.gov/Archives/edgar/data/77476/000007747621000007/pep-20201226.htm,SEC 10-K,Calendar-ish FY-end late Dec
+PEP,PepsiCo Inc,FY2020,12,,5.12,exact,https://www.sec.gov/Archives/edgar/data/77476/000007747621000007/pep-20201226.htm,SEC 10-K,Calendar-ish FY-end late Dec
+COST,Costco Wholesale Corp,FY2005,08,,2.18,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000909832/000119312505223245/d10k.htm,SEC 10-K,FY-end approx Aug/Sep (52/53wk); exact day not verified
+TXN,Texas Instruments Inc,FY2000,12,,1.68,exact,https://www.sec.gov/Archives/edgar/data/0000097476/000091205700009432/0000912057-00-009432.txt,SEC filing (proxy/10-K),"Diluted EPS from continuing operations before extraordinary item; calendar FY-end Dec 31"
+TXN,Texas Instruments Inc,FY2003,12,,0.68,exact,https://www.sec.gov/Archives/edgar/data/0000097476/000119312504031317/dex11.htm,SEC 10-K,Calendar FY-end Dec 31
+CMCSA,Comcast Corp,FY2020,12,,2.28,exact,https://www.sec.gov/Archives/edgar/data/1166691/000116669121000008/cmcsa-20201231.htm,SEC 10-K,Calendar FY-end Dec 31; attributable to Comcast Corp shareholders
+INTU,Intuit Inc,FY2015,07,,1.45,exact,https://www.sec.gov/Archives/edgar/data/0000896878/000089687815000116/fy15q410-kdocument.htm,SEC 10-K,"FY-end Jul 31. Figure is diluted EPS from continuing operations"
+PCLN,priceline.com Inc,FY2005,12,,4.21,exact,https://www.sec.gov/Archives/edgar/data/1075531/000110465906010244/a06-5315_1ex99d1.htm,Company earnings release (filed as SEC EX-99.1),Calendar FY-end Dec 31
+EBAY,eBay Inc,FY2020,12,,3.54,exact,https://www.sec.gov/Archives/edgar/data/1065088/000106508821000006/ebay-20201231.htm,SEC 10-K,"Calendar FY-end Dec 31. Figure is diluted EPS from continuing operations"
+CSCO,Cisco Systems Inc,FY2018,07,,0.02,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000858877/000085887718000011/csco-2018728x10k.htm,SEC 10-K,"FY-end late July (52/53wk). Large drop due to one-time Tax Cuts and Jobs Act repatriation tax charge per filing context"
+CSCO,Cisco Systems Inc,FY2020,07,,2.64,approx_month_end,https://www.sec.gov/Archives/edgar/data/858877/000085887720000010/csco-2020725x10k.htm,SEC 10-K,FY-end late July (52/53wk)
+CSCO,Cisco Systems Inc,FY2023,07,,3.07,approx_month_end,https://www.sec.gov/Archives/edgar/data/858877/000085887723000023/csco-20230729.htm,SEC 10-K,FY-end late July (52/53wk)
+INTC,Intel Corp,FY2015,12,,2.33,exact,https://www.sec.gov/Archives/edgar/data/0000050863/000005086316000105/a10kdocument12262015q4.htm,SEC 10-K,Calendar-ish FY-end late Dec
+INTC,Intel Corp,FY2018,12,,4.48,exact,https://www.sec.gov/Archives/edgar/data/50863/000005086319000007/a12292018q4-10kdocument.htm,SEC 10-K,Calendar-ish FY-end late Dec
+INTC,Intel Corp,FY2020,12,,4.94,exact,https://www.sec.gov/Archives/edgar/data/50863/000005086321000010/intc-20201226.htm,SEC 10-K,Calendar-ish FY-end late Dec
+META,Meta Platforms Inc,FY2023,12,,14.87,exact,https://www.sec.gov/Archives/edgar/data/1326801/000132680124000012/meta-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+TSLA,Tesla Inc,FY2021,12,,1.63,exact,https://www.sec.gov/Archives/edgar/data/1318605/000095017022000796/tsla-20211231.htm,SEC 10-K,Calendar FY-end Dec 31
+TSLA,Tesla Inc,FY2022,12,,3.62,exact,https://www.sec.gov/Archives/edgar/data/1318605/000095017023001409/tsla-20221231.htm,SEC 10-K,Calendar FY-end Dec 31
+TSLA,Tesla Inc,FY2023,12,,4.30,exact,https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm,SEC 10-K,Calendar FY-end Dec 31 (cited in FY2024 10-K comparative)
+TSLA,Tesla Inc,FY2024,12,,2.04,exact,https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm,SEC 10-K,Calendar FY-end Dec 31
+NFLX,Netflix Inc,FY2018,12,,2.68,exact,https://www.sec.gov/Archives/edgar/data/1065280/000106528019000043/form10k_q418.htm,SEC 10-K,Calendar FY-end Dec 31
+NFLX,Netflix Inc,FY2020,12,,6.08,exact,https://www.sec.gov/Archives/edgar/data/1065280/000106528021000040/nflx-20201231.htm,SEC 10-K,Calendar FY-end Dec 31
+PYPL,PayPal Holdings Inc,FY2018,12,,1.71,exact,https://www.sec.gov/Archives/edgar/data/1633917/000163391719000043/pypl201810-k.htm,SEC 10-K,Calendar FY-end Dec 31
+PYPL,PayPal Holdings Inc,FY2020,12,,3.54,exact,https://www.sec.gov/Archives/edgar/data/1633917/000163391721000018/pypl-20201231.htm,SEC 10-K,Calendar FY-end Dec 31
+PYPL,PayPal Holdings Inc,FY2023,12,,3.84,exact,https://www.sec.gov/Archives/edgar/data/1633917/000163391724000024/pypl-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+MU,Micron Technology Inc,FY2015,08,,2.47,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000723125/000072312515000112/a2015q4.htm,SEC 10-K,FY-end approx Aug/Sep (52/53wk)
+MU,Micron Technology Inc,FY2018,08,,11.51,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000723125/000072312518000092/a2018q4.htm,SEC 10-K,FY-end approx Aug/Sep (52/53wk)
+MU,Micron Technology Inc,FY2020,08,,2.37,approx_month_end,https://www.sec.gov/Archives/edgar/data/723125/000072312520000082/mu-20200903.htm,SEC 10-K,FY-end approx Aug/Sep (52/53wk)
+MU,Micron Technology Inc,FY2023,08,,-5.34,approx_month_end,https://www.sec.gov/Archives/edgar/data/723125/000072312523000054/mu-20230831.htm,SEC 10-K,"FY-end approx Aug/Sep (52/53wk); net loss year (memory downturn)"
+ADI,Analog Devices Inc,FY2018,11,,3.97,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000006281/000000628118000126/adi-1132018x10k.htm,SEC 10-K,FY-end early Nov (52/53wk)
+LRCX,Lam Research Corp,FY2018,06,,13.17,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000707549/000070754918000115/lrcx_10kx2018xdocument.htm,SEC 10-K,FY-end late June (52/53wk)
+LRCX,Lam Research Corp,FY2020,06,,15.10,approx_month_end,https://www.sec.gov/Archives/edgar/data/707549/000070754920000138/lrcx10k2020document.htm,SEC 10-K,FY-end late June (52/53wk)
+LRCX,Lam Research Corp,FY2023,06,,33.21,approx_month_end,https://www.sec.gov/Archives/edgar/data/707549/000070754923000102/lrcx-20230625.htm,SEC 10-K,FY-end late June (52/53wk)
+KLAC,KLA Corp,FY2018,06,,5.10,exact,https://www.sec.gov/Archives/edgar/data/0000319201/000031920118000045/klac10k2018.htm,SEC 10-K,FY-end Jun 30; attributable to KLA
+KLAC,KLA Corp,FY2020,06,,7.70,exact,https://www.sec.gov/Archives/edgar/data/319201/000031920120000047/klac-20200630.htm,SEC 10-K,FY-end Jun 30; attributable to KLA
+KLAC,KLA Corp,FY2023,06,,24.15,exact,https://www.sec.gov/Archives/edgar/data/319201/000031920123000031/klac-20230630.htm,SEC 10-K,FY-end Jun 30; attributable to KLA
+MDLZ,Mondelez International Inc,FY2023,12,,3.62,exact,https://www.sec.gov/Archives/edgar/data/1103982/000110398224000019/mdlz-20231231.htm,SEC 10-K,Calendar FY-end Dec 31; attributable to Mondelez
+HON,Honeywell International Inc,FY2015,12,,6.04,exact,https://www.sec.gov/Archives/edgar/data/0000773840/000093041316005457/c83288_10k.htm,SEC 10-K,Calendar FY-end Dec 31
+HON,Honeywell International Inc,FY2018,12,,8.98,exact,https://www.sec.gov/Archives/edgar/data/773840/000093041319000366/c92779_10k.htm,SEC 10-K,Calendar FY-end Dec 31
+HON,Honeywell International Inc,FY2020,12,,6.72,exact,https://www.sec.gov/Archives/edgar/data/773840/000077384021000015/hon-20201231.htm,SEC 10-K,Calendar FY-end Dec 31
+SBUX,Starbucks Corp,FY2018,09,,3.24,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000829224/000082922418000052/Financial_Report.xlsx,SEC 10-K,FY-end approx late Sep/early Oct (52/53wk)
+SBUX,Starbucks Corp,FY2020,09,,0.79,approx_month_end,https://www.sec.gov/Archives/edgar/data/829224/000082922420000078/Financial_Report.xlsx,SEC 10-K,"FY-end approx late Sep/early Oct (52/53wk); COVID-19 impacted year"
+SBUX,Starbucks Corp,FY2023,09,,3.58,approx_month_end,https://www.sec.gov/Archives/edgar/data/829224/000082922423000058/Financial_Report.xlsx,SEC 10-K,FY-end approx late Sep/early Oct (52/53wk)
+GILD,Gilead Sciences Inc,FY2021,12,,4.93,exact,https://www.sec.gov/Archives/edgar/data/882095/000088209523000007/gild-20221231.htm,SEC 10-K,Calendar FY-end Dec 31 (cited as comparative in FY2022 10-K)
+GILD,Gilead Sciences Inc,FY2022,12,,3.64,exact,https://www.sec.gov/Archives/edgar/data/882095/000088209523000007/gild-20221231.htm,SEC 10-K,Calendar FY-end Dec 31
+GILD,Gilead Sciences Inc,FY2023,12,,4.50,exact,https://www.sec.gov/Archives/edgar/data/882095/000088209524000007/gild-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+GILD,Gilead Sciences Inc,FY2024,12,,0.38,exact,https://www.sec.gov/Archives/edgar/data/882095/000088209525000006/gild-20241231.htm,SEC 10-K,"Calendar FY-end Dec 31; low value likely reflects large one-time charge (unverified specifics)"
+VRTX,Vertex Pharmaceuticals Inc,FY2018,12,,8.09,exact,https://www.sec.gov/Archives/edgar/data/875320/000087532019000006/a201810k-main.htm,SEC 10-K,Calendar FY-end Dec 31
+VRTX,Vertex Pharmaceuticals Inc,FY2020,12,,10.29,exact,https://www.sec.gov/Archives/edgar/data/875320/000087532021000006/vrtx-20201231.htm,SEC 10-K,Calendar FY-end Dec 31
+VRTX,Vertex Pharmaceuticals Inc,FY2023,12,,13.89,exact,https://www.sec.gov/Archives/edgar/data/875320/000087532024000062/vrtx-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+REGN,Regeneron Pharmaceuticals Inc,FY2015,12,,6.17,exact,https://www.sec.gov/Archives/edgar/data/0000872589/000153217616000045/regn-123115x10k.htm,SEC 10-K,Calendar FY-end Dec 31
+REGN,Regeneron Pharmaceuticals Inc,FY2023,12,,34.77,exact,https://www.sec.gov/Archives/edgar/data/872589/000180422024000009/regn-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+ISRG,Intuitive Surgical Inc,FY2018,12,,9.49,exact,https://www.sec.gov/Archives/edgar/data/1035267/000103526719000012/isrg-20181231x10k.htm,SEC 10-K,Calendar FY-end Dec 31
+ISRG,Intuitive Surgical Inc,FY2020,12,,8.82,exact,https://www.sec.gov/Archives/edgar/data/1035267/000103526721000028/isrg-20201231.htm,SEC 10-K,Calendar FY-end Dec 31
+ISRG,Intuitive Surgical Inc,FY2023,12,,5.03,exact,https://www.sec.gov/Archives/edgar/data/1035267/000103526724000021/isrg-20231231.htm,SEC 10-K,"Calendar FY-end Dec 31; note ISRG did 3-for-1 split in Oct 2021, FY2023 reported on post-split share count"
+AVGO,Broadcom Inc,FY2023,10,,32.98,approx_month_end,https://www.sec.gov/Archives/edgar/data/1730168/000173016823000096/avgo-20231029.htm,SEC 10-K,FY-end approx late Oct/early Nov (52/53wk)
+MAR,Marriott International Inc,FY2018,12,,5.38,exact,https://www.sec.gov/Archives/edgar/data/1048286/000162828019002337/mar-q42018x10k.htm,SEC 10-K,Calendar FY-end Dec 31
+MAR,Marriott International Inc,FY2019,12,,3.80,exact,https://www.sec.gov/Archives/edgar/data/1048286/000162828021002433/mar-20201231.htm,SEC 10-K,Calendar FY-end Dec 31 (cited as comparative in FY2020 10-K)
+MAR,Marriott International Inc,FY2020,12,,-0.82,exact,https://www.sec.gov/Archives/edgar/data/1048286/000162828021002433/mar-20201231.htm,SEC 10-K,"Calendar FY-end Dec 31; COVID-19 impacted loss year"
+TMUS,T-Mobile US Inc,FY2018,12,,3.36,exact,https://www.sec.gov/Archives/edgar/data/1283699/000128369919000015/tmus12312018form10-k.htm,SEC 10-K,Calendar FY-end Dec 31
+TMUS,T-Mobile US Inc,FY2020,12,,2.65,exact,https://www.sec.gov/Archives/edgar/data/1283699/000128369921000039/tmus-20201231.htm,SEC 10-K,Calendar FY-end Dec 31
+TMUS,T-Mobile US Inc,FY2023,12,,6.93,exact,https://www.sec.gov/Archives/edgar/data/1283699/000128369924000008/tmus-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+ASML,ASML Holding NV,FY2018,12,,6.08,exact,https://www.sec.gov/Archives/edgar/data/937966/000093796619000007/a2018integratedreportbased.htm,SEC 20-F,"Calendar FY-end Dec 31. Foreign private issuer; EUR reporting currency (eps_currency=EUR)"
+ASML,ASML Holding NV,FY2020,12,,8.48,exact,https://www.sec.gov/Archives/edgar/data/937966/000093796621000007/asml-20201231.htm,SEC 20-F,"Calendar FY-end Dec 31. Foreign private issuer; EUR reporting currency (eps_currency=EUR)"
+SNPS,Synopsys Inc,FY2023,10,,7.92,approx_month_end,https://www.sec.gov/Archives/edgar/data/883241/000088324123000019/snps-20231031.htm,SEC 10-K,FY-end approx Oct 31 (52/53wk)
+CDNS,Cadence Design Systems Inc,FY2014,01,,0.52,exact,https://www.sec.gov/Archives/edgar/data/0000813672/000081367215000008/cdns0103201510-k.htm,SEC 10-K,"FY ended Jan 3 2015 (labeled FY2014 in filing); unusual FY-end at time, later moved to calendar Dec 31"
+CDNS,Cadence Design Systems Inc,FY2023,12,,3.82,exact,https://www.sec.gov/Archives/edgar/data/813672/000081367224000034/cdns-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+ADP,Automatic Data Processing Inc,FY2015,06,,2.89,exact,https://www.sec.gov/Archives/edgar/data/0000008670/000000867015000021/q4fy1510k.htm,SEC 10-K,"FY-end Jun 30; diluted EPS from continuing operations"
+ADP,Automatic Data Processing Inc,FY2018,06,,3.66,exact,https://www.sec.gov/Archives/edgar/data/0000008670/000000867018000011/q4fy1810k.htm,SEC 10-K,FY-end Jun 30
+ADP,Automatic Data Processing Inc,FY2023,06,,8.21,exact,https://www.sec.gov/Archives/edgar/data/8670/000000867023000030/adp-20230630.htm,SEC 10-K,FY-end Jun 30
+ATVI,Activision Blizzard Inc,FY2021,12,,3.44,exact,https://www.sec.gov/Archives/edgar/data/718877/000162828023004842/atvi-20221231.htm,SEC 10-K,Calendar FY-end Dec 31 (cited as comparative in FY2022 10-K)
+ATVI,Activision Blizzard Inc,FY2022,12,,1.92,exact,https://www.sec.gov/Archives/edgar/data/718877/000162828023004842/atvi-20221231.htm,SEC 10-K,Calendar FY-end Dec 31
+PAYX,Paychex Inc,FY2015,05,,1.86,exact,https://www.sec.gov/Archives/edgar/data/0000723531/000072353115000011/payx-053115x10k.htm,SEC 10-K,FY-end May 31
+PAYX,Paychex Inc,FY2018,05,,2.58,exact,https://www.sec.gov/Archives/edgar/data/0000723531/000072353118000026/payx-20180531x10k.htm,SEC 10-K,FY-end May 31
+PAYX,Paychex Inc,FY2023,05,,4.30,exact,https://www.sec.gov/Archives/edgar/data/723531/000095017023032988/payx-20230531.htm,SEC 10-K,FY-end May 31
+ORLY,O'Reilly Automotive Inc,FY2020,12,,23.53,exact,https://www.sec.gov/Archives/edgar/data/898173/000089817321000012/orly-20201231x10k.htm,SEC 10-K,"Calendar FY-end Dec 31; as-reported pre-2025 15-for-1 split (not restated)"
+ORLY,O'Reilly Automotive Inc,FY2023,12,,38.47,exact,https://finance.yahoo.com/news/o-reilly-automotive-inc-reports-213000297.html,Company earnings release (also in SEC 10-K),"Calendar FY-end Dec 31; as-reported pre-2025 15-for-1 split (not restated)"
+ROST,Ross Stores Inc,FY2015,01,,2.51,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000745732/000074573215000009/rost-20150131x10k.htm,SEC 10-K,FY-end late Jan/early Feb (52/53wk)
+ROST,Ross Stores Inc,FY2019,01,,4.60,approx_month_end,https://www.sec.gov/Archives/edgar/data/745732/000074573220000016/rost-20200201.htm,SEC 10-K,FY-end late Jan/early Feb (52/53wk) - labeled fiscal 2019 (FYE Feb 1 2020)
+ROST,Ross Stores Inc,FY2023,01,,4.38,approx_month_end,https://www.sec.gov/Archives/edgar/data/745732/000074573223000013/rost-20230128.htm,SEC 10-K,FY-end late Jan/early Feb (52/53wk)
+AMAT,Applied Materials Inc,FY2020,10,,3.92,approx_month_end,https://www.sec.gov/Archives/edgar/data/6951/000000695120000048/amat-20201025.htm,SEC 10-K,FY-end late Oct (52/53wk)
+AMAT,Applied Materials Inc,FY2023,10,,8.11,approx_month_end,https://www.sec.gov/Archives/edgar/data/6951/000000695123000041/amat-20231029.htm,SEC 10-K,FY-end late Oct (52/53wk)
+ADSK,Autodesk Inc,FY2023,01,,3.78,approx_month_end,https://www.sec.gov/Archives/edgar/data/769397/000076939723000036/adsk-20230131.htm,SEC 10-K,FY-end Jan 31
+ABNB,Airbnb Inc,FY2021,12,,-0.57,exact,https://www.sec.gov/Archives/edgar/data/1559720/000155972022000006/abnb-20211231.htm,SEC 10-K,Calendar FY-end Dec 31
+ABNB,Airbnb Inc,FY2022,12,,2.79,exact,https://www.sec.gov/Archives/edgar/data/1559720/000155972023000003/abnb-20221231.htm,SEC 10-K,Calendar FY-end Dec 31
+COST,Costco Wholesale Corp,FY2015,08,,5.37,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000909832/000090983215000014/cost10k83015.htm,SEC 10-K,FY-end approx Aug/Sep (52/53wk)
+NVDA,NVIDIA Corp,FY2018,01,,4.82,approx_month_end,https://www.sec.gov/Archives/edgar/data/0001045810/000104581018000010/nvda-2018x10k.htm,SEC 10-K,"FY-end late January (52/53wk); as-reported pre-2021 4-for-1 and pre-2024 10-for-1 splits"
+NVDA,NVIDIA Corp,FY2023,01,,1.74,approx_month_end,https://www.sec.gov/Archives/edgar/data/1045810/000104581023000017/nvda-20230129.htm,SEC 10-K,"FY-end late January (52/53wk); as-reported pre-2024 10-for-1 split"
+BKNG,Booking Holdings Inc,FY2023,12,,117.40,exact,https://www.sec.gov/Archives/edgar/data/1075531/000107553124000014/bkng-20231231.htm,SEC 10-K,Calendar FY-end Dec 31
+SUNW,Sun Microsystems Inc,FY1999,06,,0.31,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000709519/000089161899004343/0000891618-99-004343.txt,SEC 10-K,FY-end Jun 30
+SUNW,Sun Microsystems Inc,FY2000,06,,0.55,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000709519/000089161802004480/f83969e10vk.htm,SEC 10-K,FY-end Jun 30 (cited as comparative in FY2002 10-K)
+SUNW,Sun Microsystems Inc,FY2001,06,,0.27,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000709519/000089161802004480/f83969e10vk.htm,SEC 10-K,FY-end Jun 30 (cited as comparative in FY2002 10-K)
+DELL,Dell Computer Corp,FY2000,01,,0.16,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000826083/000095013400003430/0000950134-00-003430.txt,SEC 10-K,"FY ended Jan 28 2000 (52/53wk); as-reported pre later splits"
+DELL,Dell Inc,FY2005,01,,1.18,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000826083/000095013405004423/d22995e10vk.htm,SEC 10-K,FY ended Jan 28 2005 (52/53wk)
+DELL,Dell Inc,FY2010,01,,0.73,approx_month_end,https://www.sec.gov/Archives/edgar/data/0000826083/000095012310025998/d70787e10vk.htm,SEC 10-K,FY ended Jan 29 2010 (52/53wk)

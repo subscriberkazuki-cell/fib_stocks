@@ -1,0 +1,235 @@
+﻿ticker,company,member_start,member_end,start_confidence,end_confidence,notes,source_url
+AAPL,Apple Inc,1999-01,,general_knowledge_unverified,,Continuous NDX member since well before 1999; foundational constituent,
+MSFT,Microsoft Corp,1999-01,,general_knowledge_unverified,,Continuous NDX member since inception (1985),
+INTC,Intel Corp,1999-01,,general_knowledge_unverified,,Continuous NDX member since inception,
+CSCO,Cisco Systems Inc,1999-01,,general_knowledge_unverified,,Continuous NDX member since early 1990s,
+ORCL,Oracle Corp,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+AMZN,Amazon.com Inc,1999-01,,general_knowledge_unverified,,NDX member since 1999 IPO era,
+QCOM,QUALCOMM Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+AMGN,Amgen Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+SBUX,Starbucks Corp,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+COST,Costco Wholesale Corp,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+ADBE,Adobe Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member (Adobe Systems),
+PAYX,Paychex Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+FAST,Fastenal Co,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+BIIB,Biogen Inc,1999-01,2025-12-22,general_knowledge_unverified,verified_2026session,"Biogen / Biogen Idec (merger 2003); removed Dec 2025 reconstitution",https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+GILD,Gilead Sciences Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+SIAL,Sigma-Aldrich Corp,1999-01,2015,general_knowledge_unverified,general_knowledge_unverified,Acquired by Merck KGaA ~Nov 2015; removed from NDX around acquisition close,
+PCAR,PACCAR Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+CTAS,Cintas Corp,1999-01,2010,general_knowledge_unverified,verified_2026session,"Removed Dec 2010 reconstitution (replaced by F5/Akamai/Netflix/Micron/Whole Foods/Ctrip/Dollar Tree cohort); re-added later (see second spell row)",https://finance.yahoo.com/news/nasdaq-100-rebalance-trade-no-130008591.html
+CTAS,Cintas Corp,2016-12-19,,verified_2026session,,"Re-added Dec 2016 reconstitution (largest addition that year)",https://www.nasdaq.com/articles/nasdaq-100-2016-annual-evaluation-2017-02-13
+SUNW,Sun Microsystems Inc,1999-01,2010,general_knowledge_unverified,general_knowledge_unverified,Acquired by Oracle Jan 2010; delisted,
+WCOM,WorldCom Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Accounting scandal; bankruptcy July 2002; removed from NDX 2002,
+JDSU,JDS Uniphase Corp,1999-01,2004,general_knowledge_unverified,general_knowledge_unverified,Optical components maker; shrank sharply post dot-com bust; believed removed early-mid 2000s,
+YHOO,Yahoo! Inc,1999-01,2017,general_knowledge_unverified,general_knowledge_unverified,Long-standing member; acquired by Verizon 2017 (became Altaba),
+PALM,Palm Inc,1999-01,2003,general_knowledge_unverified,general_knowledge_unverified,PDA maker; spun off Palmsource 2003; believed removed from NDX shortly after,
+DELL,Dell Inc,1999-01,2013,general_knowledge_unverified,general_knowledge_unverified,Long-standing member; taken private Oct 2013; removed from NDX at that time,
+COMS,3Com Corp,1999-01,2001,general_knowledge_unverified,general_knowledge_unverified,Networking equipment; believed removed early 2000s as market cap fell,
+NOVL,Novell Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Software company; believed removed early 2000s,
+PSFT,PeopleSoft Inc,1999-01,2005,general_knowledge_unverified,general_knowledge_unverified,Acquired by Oracle Jan 2005; removed from NDX at that time,
+SEBL,Siebel Systems Inc,1999-01,2006,general_knowledge_unverified,general_knowledge_unverified,Acquired by Oracle Jan 2006; removed from NDX at that time,
+BEAS,BEA Systems Inc,1999-01,2008-04-30,general_knowledge_unverified,verified_2026session,Acquired by Oracle 2008; replaced by DIRECTV in NDX effective Apr 30 2008,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+CPWR,Compuware Corp,1999-01,2003,general_knowledge_unverified,general_knowledge_unverified,Believed removed early-mid 2000s as market cap fell,
+VRTS,Veritas Software Corp,1999-01,2005,general_knowledge_unverified,general_knowledge_unverified,Merged with Symantec 2005; removed from NDX at that time,
+IMNX,Immunex Corp,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Acquired by Amgen 2002; removed from NDX at that time,
+GENZ,Genzyme Corp,1999-01,2011,general_knowledge_unverified,general_knowledge_unverified,Acquired by Sanofi 2011; removed from NDX at that time,
+MEDI,MedImmune Inc,1999-01,2007,general_knowledge_unverified,general_knowledge_unverified,Acquired by AstraZeneca 2007; removed from NDX at that time,
+LVLT,Level 3 Communications Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Telecom; believed removed early 2000s post dot-com bust,
+GBLX,Global Crossing Ltd,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Bankruptcy Jan 2002; removed from NDX,
+NXTL,Nextel Communications Inc,1999-01,2005,general_knowledge_unverified,general_knowledge_unverified,Merged with Sprint 2005 (became Sprint Nextel); removed from NDX,
+RNWK,RealNetworks Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Believed removed early-mid 2000s as market cap fell,
+CMVT,Comverse Technology Inc,1999-01,2007,general_knowledge_unverified,general_knowledge_unverified,Believed removed mid-2000s,
+VTSS,Vitesse Semiconductor Corp,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Believed removed early 2000s post dot-com bust,
+PMCS,PMC-Sierra Inc,1999-01,2003,general_knowledge_unverified,general_knowledge_unverified,Believed removed early 2000s,
+CNET,CNET Networks Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust,
+DCLK,DoubleClick Inc,1999-01,2001,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust; acquired by Google 2008 (after going private 2005),
+INKT,Inktomi Corp,1999-01,2001,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust; acquired by Yahoo 2003,
+ARBA,Ariba Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust,
+ITWO,i2 Technologies Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust,
+VIGN,Vignette Corp,1999-01,2001,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust,
+BVSN,BroadVision Inc,1999-01,2001,general_knowledge_unverified,general_knowledge_unverified,Believed removed post dot-com bust,
+NETA,Network Associates Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Later renamed McAfee Inc; believed removed from NDX early 2000s then possibly re-evaluated,
+LGTO,Legato Systems Inc,1999-01,2001,general_knowledge_unverified,general_knowledge_unverified,Acquired by EMC 2003; believed removed from NDX ~2001-2002,
+ADPT,Adaptec Inc,1999-01,2002,general_knowledge_unverified,general_knowledge_unverified,Believed removed early 2000s,
+XMSR,XM Satellite Radio Holdings Inc,2004,2008,general_knowledge_unverified,general_knowledge_unverified,Merged with Sirius 2008; removed from NDX at that time,
+SIRI,Sirius XM Radio Inc,2008,2014,general_knowledge_unverified,general_knowledge_unverified,Believed member for a period after Sirius/XM merger; exact window unverified,
+GMCR,Green Mountain Coffee Roasters / Keurig Green Mountain Inc,2011,2016-03,general_knowledge_unverified,general_knowledge_unverified,Taken private by JAB Holding Mar 2016,
+KDP,Keurig Dr Pepper Inc,2018-07,,general_knowledge_unverified,,Formed by Keurig/Dr Pepper Snapple merger July 2018; continued as NDX member,
+LLTC,Linear Technology Corp,1999-01,2017,general_knowledge_unverified,general_knowledge_unverified,Acquired by Analog Devices Mar 2017; removed from NDX,
+MXIM,Maxim Integrated Products Inc,1999-01,2021-08,general_knowledge_unverified,general_knowledge_unverified,Acquired by Analog Devices Aug 2021; removed from NDX,
+ADI,Analog Devices Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+ALTR,Altera Corp,1999-01,2015-12,general_knowledge_unverified,general_knowledge_unverified,Acquired by Intel Dec 2015; removed from NDX,
+XLNX,Xilinx Inc,1999-01,2022-02,general_knowledge_unverified,general_knowledge_unverified,Acquired by AMD Feb 2022; removed from NDX,
+AMD,Advanced Micro Devices Inc,2018-12-24,,verified_2026session,,"Added Dec 2018 reconstitution (also removed pre-1999? unverified) - treated here as single spell from 2018",https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+KLAC,KLA Corp,1999-01,,general_knowledge_unverified,,Long-standing NDX member (KLA-Tencor),
+AMAT,Applied Materials Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+MU,Micron Technology Inc,1999-01,,general_knowledge_unverified,,"Long-standing member; may have brief gaps historically, unverified",
+MCHP,Microchip Technology Inc,2010,2013-12-23,general_knowledge_unverified,verified_2026session,Removed Dec 2013 reconstitution,https://www.globenewswire.com/news-release/2013/12/14/596871/10061456/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+QLGC,QLogic Corp,2003,2006,general_knowledge_unverified,general_knowledge_unverified,Believed brief NDX member mid-2000s; unverified window,
+BRCM,Broadcom Corp (original),1999-01,2016-02,general_knowledge_unverified,general_knowledge_unverified,Acquired by Avago Technologies Feb 2016; combined company took Broadcom name/ticker AVGO,
+AVGO,Broadcom Inc (fka Avago Technologies),2009,,general_knowledge_unverified,,"Avago Technologies added to NDX at some point after 2009 IPO; continued as Broadcom Inc post-2016 merger",
+NVDA,NVIDIA Corp,2001,,general_knowledge_unverified,,Long-standing NDX member since early 2000s,
+TXN,Texas Instruments Inc,1999-01,2004,general_knowledge_unverified,general_knowledge_unverified,"Long-time member; believed removed at some point (index eligibility/financial sector rules) - window unverified; NOTE: may have returned later, needs verification",
+CA,CA Inc (Computer Associates),2008-05-19,2018-11,verified_2026session,general_knowledge_unverified,"Added May 19 2008 replacing Tellabs; acquired by Broadcom Nov 2018",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+TLAB,Tellabs Inc,1999-01,2008-05-19,general_knowledge_unverified,verified_2026session,Replaced by CA Inc effective May 19 2008,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+DTV,DIRECTV Group Inc,2008-04-30,2015,verified_2026session,general_knowledge_unverified,"Added Apr 30 2008 replacing BEA Systems; acquired by AT&T 2015",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+FLIR,FLIR Systems Inc,2008-07-21,2021,verified_2026session,general_knowledge_unverified,"Added Jul 21 2008 replacing UAL Corp; acquired by Teledyne 2021",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+UAUA,UAL Corp,1999-01,2008-07-21,general_knowledge_unverified,verified_2026session,Replaced by FLIR Systems effective Jul 21 2008,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+STX,Seagate Technology,2008-11-10,2009-12-21,verified_2026session,verified_2026session,"Returned to NDX Nov 10 2008 replacing Monster Worldwide; removed Dec 2009 reconstitution",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+STX,Seagate Technology Holdings plc,2025-12-22,,verified_2026session,,Re-added Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+MWW,Monster Worldwide Inc,1999-01,2008-11-10,general_knowledge_unverified,verified_2026session,Replaced by Seagate Technology effective Nov 10 2008,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+ADP,Automatic Data Processing Inc,2008-12-22,,verified_2026session,,Added Dec 2008 reconstitution,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+FSLR,First Solar Inc,2008-12-22,2013,verified_2026session,general_knowledge_unverified,"Added Dec 2008 reconstitution; believed removed later as market cap fell (window unverified)",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+LIFE,Life Technologies Corp,2008-12-22,2014-02,verified_2026session,general_knowledge_unverified,Added Dec 2008 reconstitution; acquired by Thermo Fisher Feb 2014,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+AMLN,Amylin Pharmaceuticals Inc,1999-01,2008-12-22,general_knowledge_unverified,verified_2026session,Removed Dec 2008 reconstitution,https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+CDNS,Cadence Design Systems Inc,1999-01,2008-12-22,general_knowledge_unverified,verified_2026session,"Removed Dec 2008 reconstitution; re-added later (see second spell)",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+CDNS,Cadence Design Systems Inc,2017-12-18,,verified_2026session,,Re-added Dec 2017 reconstitution,https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+DISCA,Discovery Holding Co / Discovery Communications,1999-01,2008-12-22,general_knowledge_unverified,verified_2026session,"Removed Dec 2008 reconstitution as Discovery Holding; Discovery Communications Series A/C later rejoined and were removed again Dec 2017",https://sites.google.com/site/unofficialnasdaq100site/index-of-changes
+DISCA,Discovery Communications Inc (Series A),2009,2017-12-18,general_knowledge_unverified,verified_2026session,Removed Dec 2017 reconstitution,https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+DISCK,Discovery Communications Inc (Series C),2009,2017-12-18,general_knowledge_unverified,verified_2026session,Removed Dec 2017 reconstitution,https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+VOD,Vodafone Group plc,2009-12-21,2018-12-24,verified_2026session,verified_2026session,"Added Dec 2009 reconstitution; removed Dec 2018 reconstitution. Foreign private issuer, files 20-F, GBP reporting currency",https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+MAT,Mattel Inc,2009-12-21,,verified_2026session,,Added Dec 2009 reconstitution,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+BMC,BMC Software Inc,2009-12-21,2013-09,verified_2026session,general_knowledge_unverified,Added Dec 2009 reconstitution; taken private Sep 2013,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+MYL,Mylan Inc,2009-12-21,2020-11,verified_2026session,general_knowledge_unverified,Added Dec 2009 reconstitution; merged into Viatris Nov 2020,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+QGEN,QIAGEN NV,2009-12-21,,verified_2026session,,"Added Dec 2009 reconstitution. Netherlands-domiciled, IFRS/foreign private issuer",https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+SNDK,SanDisk Corp,2009-12-21,2016-05,verified_2026session,general_knowledge_unverified,Added Dec 2009 reconstitution; acquired by Western Digital May 2016,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+VMED,Virgin Media Inc,2009-12-21,2013-06,verified_2026session,general_knowledge_unverified,Added Dec 2009 reconstitution; acquired by Liberty Global Jun 2013,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+AKAM,Akamai Technologies Inc,1999-01,2009-12-21,general_knowledge_unverified,verified_2026session,"Removed Dec 2009 reconstitution; re-added Dec 2010 (see next spell)",https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+AKAM,Akamai Technologies Inc,2010-12-20,2017-12-18,verified_2026session,verified_2026session,Re-added Dec 2010; removed Dec 2017 reconstitution,https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+HANS,Hansen Natural Corp / Monster Beverage Corp,2011-12-19,,verified_2026session,,"Added Dec 2011 reconstitution as Hansen Natural; renamed Monster Beverage (MNST) 2012, continues as NDX member",https://thenextweb.com/news/troubled-blackberry-maker-rim-has-been-removed-from-the-nasdaq-100-index
+FOSL,Fossil Inc,2011-12-19,2013-12-23,verified_2026session,verified_2026session,Added Dec 2011; removed Dec 2013 reconstitution,https://www.globenewswire.com/news-release/2013/12/14/596871/10061456/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+GOLD,Randgold Resources Ltd,2011-12-19,2012,verified_2026session,general_knowledge_unverified,"Added Dec 2011 reconstitution; merged into Barrick Gold 2019, but likely removed from NDX earlier (window unverified)",https://thenextweb.com/news/troubled-blackberry-maker-rim-has-been-removed-from-the-nasdaq-100-index
+NUAN,Nuance Communications Inc,2011-12-19,2013-12-23,verified_2026session,verified_2026session,Added Dec 2011; removed Dec 2013 reconstitution,https://www.globenewswire.com/news-release/2013/12/14/596871/10061456/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+NFLX,Netflix Inc,2010-12-20,2012-12-24,verified_2026session,verified_2026session,"Added Dec 2010 reconstitution; removed Dec 2012 (replaced by Facebook); re-added later (see second spell)",https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+NFLX,Netflix Inc,2013,,general_knowledge_unverified,,"Re-added to NDX (year approximate, unverified) and continues as member",
+RIMM,Research In Motion Ltd (BlackBerry),1999-01,2012-12-24,general_knowledge_unverified,verified_2026session,Removed Dec 2012 reconstitution,https://thenextweb.com/news/troubled-blackberry-maker-rim-has-been-removed-from-the-nasdaq-100-index
+META,Meta Platforms Inc (fka Facebook),2012-12-24,,verified_2026session,,"Added Dec 2012 reconstitution as Facebook Inc (FB); renamed Meta Platforms (META) 2022",https://thenextweb.com/news/troubled-blackberry-maker-rim-has-been-removed-from-the-nasdaq-100-index
+F5,F5 Inc (fka F5 Networks),2010-12-20,,verified_2026session,,Added Dec 2010 reconstitution,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+MRVL,Marvell Technology Inc,2010-12-20,2013,verified_2026session,general_knowledge_unverified,"Added Dec 2010 reconstitution; removed at some point (window unverified); re-added Dec 2020 (see second spell)",https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+MRVL,Marvell Technology Inc,2020-12-21,,verified_2026session,,Re-added Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+WFM,Whole Foods Market Inc,1999-01,2016-12-16,general_knowledge_unverified,verified_2026session,Removed Dec 2016 reconstitution; acquired by Amazon 2017,https://www.nasdaq.com/articles/nasdaq-100-2016-annual-evaluation-2017-02-13
+CTRP,Ctrip.com International / Trip.com Group,2010-12-20,2021-12-20,verified_2026session,verified_2026session,"Added Dec 2010 reconstitution; renamed Trip.com Group (TCOM); removed Dec 2021 reconstitution",https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+DLTR,Dollar Tree Inc,2010-12-20,,verified_2026session,,Added Dec 2010 reconstitution,https://www.nasdaq.com/docs/global-indexes/nasdaq-100/NDX_one-pager
+CTXS,Citrix Systems Inc,1999-01,2020-12-21,general_knowledge_unverified,verified_2026session,Removed Dec 2020 reconstitution; taken private 2022,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+CHKP,Check Point Software Technologies Ltd,1999-01,2021-12-20,general_knowledge_unverified,verified_2026session,"Removed Dec 2021 reconstitution. Israel-domiciled, foreign private issuer",https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+CERN,Cerner Corp,1999-01,2021-12-20,general_knowledge_unverified,verified_2026session,Removed Dec 2021 reconstitution; acquired by Oracle 2022,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+INCY,Incyte Corp,2013,2021-12-20,general_knowledge_unverified,verified_2026session,Removed Dec 2021 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+FOXA,Fox Corp,2019-04,2021-12-20,general_knowledge_unverified,verified_2026session,"Spun off from 21st Century Fox Mar 2019; removed Dec 2021 reconstitution",https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+CDW,CDW Corp,2021-12-20,2025-12-22,verified_2026session,verified_2026session,"Added Dec 2021 reconstitution (per 2021 result set, first spell context uncertain); removed Dec 2025",https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+ABNB,Airbnb Inc,2021-12-20,,verified_2026session,,Added Dec 2021 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+FTNT,Fortinet Inc,2021-12-20,,verified_2026session,,Added Dec 2021 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+PANW,Palo Alto Networks Inc,2021-12-20,,verified_2026session,,Added Dec 2021 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+LCID,Lucid Group Inc,2021-12-20,2023-12-18,verified_2026session,verified_2026session,Added Dec 2021; removed Dec 2023 reconstitution,https://prasanthragupathy.com/2024/12/nasdaq-100-index-companies-added-removed-in-2024-annual-rebalancing/
+ZS,Zscaler Inc,2021-12-20,2026-06-22,verified_2026session,verified_2026session,Added Dec 2021 reconstitution; removed June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+DDOG,Datadog Inc,2021-12-20,,verified_2026session,,Added Dec 2021 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+AEP,American Electric Power Co Inc,2020-12-21,,verified_2026session,,Added Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+MTCH,Match Group Inc,2020-12-21,2022-12-19,verified_2026session,general_knowledge_unverified,Added Dec 2020 reconstitution; removed Dec 2022 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+OKTA,Okta Inc,2020-12-21,2022,verified_2026session,general_knowledge_unverified,"Added Dec 2020 reconstitution; removed later (window unverified)",https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+PTON,Peloton Interactive Inc,2020-12-21,2022,verified_2026session,general_knowledge_unverified,"Added Dec 2020 reconstitution; removed later (window unverified)",https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+TEAM,Atlassian Corp,2020-12-21,,verified_2026session,,Added Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+BMRN,BioMarin Pharmaceutical Inc,1999-01,2020-12-21,general_knowledge_unverified,verified_2026session,Removed Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+EXPE,Expedia Group Inc,1999-01,2020-12-21,general_knowledge_unverified,verified_2026session,Removed Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+LBTYA,Liberty Global plc (Class A),2005,2020-12-21,general_knowledge_unverified,verified_2026session,Removed Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+TTWO,Take-Two Interactive Software Inc,2014-12,2020-12-21,verified_2026session,verified_2026session,"Added Dec 2014 reconstitution; removed Dec 2020; re-added later (window for re-add unverified)",https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+ULTA,Ulta Beauty Inc,2016,2020-12-21,general_knowledge_unverified,verified_2026session,Removed Dec 2020 reconstitution,https://pro.thestreet.com/portfolio/whos-in-and-whos-out-in-the-nasdaq-100s-reconstitution
+AAL,American Airlines Group Inc,2014-12,2020,verified_2026session,general_knowledge_unverified,"Added Dec 2014 reconstitution; removed later amid COVID-19 market cap decline (window unverified)",
+EA,Electronic Arts Inc,2014-12,,verified_2026session,,Added Dec 2014 reconstitution,
+LRCX,Lam Research Corp,2014-12,,verified_2026session,,Added Dec 2014 reconstitution,
+CSGP,CoStar Group Inc,2022-12-19,,verified_2026session,,Added Dec 2022 reconstitution,
+RIVN,Rivian Automotive Inc,2022-12-19,2023,verified_2026session,general_knowledge_unverified,"Added Dec 2022 reconstitution; removed later as market cap fell (window unverified)",
+WBD,Warner Bros Discovery Inc,2022-12-19,,verified_2026session,,"Added Dec 2022 reconstitution (formed via WarnerMedia/Discovery merger Apr 2022); corporate split into two companies announced/executed 2025-2026, NDX status post-split unverified",
+GFS,GlobalFoundries Inc,2022-12-19,2025-12-22,verified_2026session,verified_2026session,Added Dec 2022; removed Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+BKR,Baker Hughes Co,2022-12-19,,verified_2026session,,Added Dec 2022 reconstitution,
+FANG,Diamondback Energy Inc,2022-12-19,,verified_2026session,,Added Dec 2022 reconstitution,
+VRSN,VeriSign Inc,1999-01,2013,general_knowledge_unverified,general_knowledge_unverified,"Long-time early NDX member; removed at some point (window unverified); re-added Dec 2018 (see second spell)",
+VRSN,VeriSign Inc,2018-12-24,,verified_2026session,,Re-added Dec 2018 reconstitution,
+SWKS,Skyworks Solutions Inc,2010,2022-12-19,general_knowledge_unverified,verified_2026session,Removed Dec 2022 reconstitution,
+SPLK,Splunk Inc,2018,2022-12-19,general_knowledge_unverified,verified_2026session,"Removed Dec 2022 reconstitution; re-added Dec 2023 (see second spell)",
+SPLK,Splunk Inc,2023-12-18,2024,verified_2026session,general_knowledge_unverified,Re-added Dec 2023 reconstitution; acquired by Cisco Mar 2024,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+BIDU,Baidu Inc,2007,2022-12-19,general_knowledge_unverified,verified_2026session,"Foreign private issuer (China, ADS); removed Dec 2022 reconstitution",
+DOCU,DocuSign Inc,2020,2022-12-19,general_knowledge_unverified,verified_2026session,Removed Dec 2022 reconstitution,
+NTES,NetEase Inc,2010,2022-12-19,general_knowledge_unverified,verified_2026session,"Foreign private issuer (China, ADS); removed Dec 2022 reconstitution",
+CDW,CDW Corp,2023-12-18,2025-12-22,verified_2026session,verified_2026session,Added Dec 2023 reconstitution (second spell); removed Dec 2025,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+CCEP,Coca-Cola Europacific Partners plc,2023-12-18,,verified_2026session,,"Added Dec 2023 reconstitution. UK-domiciled bottler, IFRS filer",https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+DASH,DoorDash Inc,2023-12-18,,verified_2026session,,Added Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+MDB,MongoDB Inc,2023-12-18,,verified_2026session,,Added Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+ROP,Roper Technologies Inc,2023-12-18,,verified_2026session,,Added Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+ALGN,Align Technology Inc,2017,2023-12-18,general_knowledge_unverified,verified_2026session,Removed Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+EBAY,eBay Inc,1999-01,2023-12-18,general_knowledge_unverified,verified_2026session,Long-standing early NDX member; removed Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+ENPH,Enphase Energy Inc,2021,2023-12-18,general_knowledge_unverified,verified_2026session,Removed Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+JD,JD.com Inc,2017,2023-12-18,general_knowledge_unverified,verified_2026session,"Foreign private issuer (China, ADS); removed Dec 2023 reconstitution",https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+ZM,Zoom Video Communications Inc,2020,2023-12-18,general_knowledge_unverified,verified_2026session,Removed Dec 2023 reconstitution,https://www.globenewswire.com/news-release/2023/12/09/2793414/0/en/Annual-Changes-to-the-Nasdaq-100-Index.html
+PLTR,Palantir Technologies Inc,2024-12-23,,verified_2026session,,Added Dec 2024 reconstitution,
+MSTR,MicroStrategy Inc / Strategy,2024-12-23,,verified_2026session,,Added Dec 2024 reconstitution,
+AXON,Axon Enterprise Inc,2024-12-23,,verified_2026session,,Added Dec 2024 reconstitution,
+ILMN,Illumina Inc,2000,2024-12-23,general_knowledge_unverified,verified_2026session,Removed Dec 2024 reconstitution,
+SMCI,Super Micro Computer Inc,2017,2024-12-23,general_knowledge_unverified,verified_2026session,Removed Dec 2024 reconstitution,
+MRNA,Moderna Inc,2021,2024-12-23,general_knowledge_unverified,verified_2026session,Removed Dec 2024 reconstitution,
+ALNY,Alnylam Pharmaceuticals Inc,2025-12-22,,verified_2026session,,Added Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+FER,Ferrovial SE,2025-12-22,,verified_2026session,,"Added Dec 2025 reconstitution. Netherlands/Spain-domiciled infrastructure co, foreign private issuer",https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+INSM,Insmed Inc,2025-12-22,2026-06-22,verified_2026session,verified_2026session,Added Dec 2025 reconstitution; removed June 2026 quarterly change (short tenure),https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+MPWR,Monolithic Power Systems Inc,2025-12-22,,verified_2026session,,Added Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+WDC,Western Digital Corp,2025-12-22,,verified_2026session,,Added Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+LULU,lululemon athletica inc,2018-12-24,2025-12-22,verified_2026session,verified_2026session,Added Dec 2018 reconstitution; removed Dec 2025,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+ON,ON Semiconductor Corp,2015,2025-12-22,general_knowledge_unverified,verified_2026session,Removed Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+TTD,The Trade Desk Inc,2020,2025-12-22,general_knowledge_unverified,verified_2026session,Removed Dec 2025 reconstitution,https://www.globenewswire.com/news-release/2025/12/13/3204942/6948/en/annual-changes-to-the-nasdaq-100-index.html
+ALAB,Astera Labs Inc,2026-06-22,,verified_2026session,,Added June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+CRWV,CoreWeave Inc,2026-06-22,,verified_2026session,,Added June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+NBIS,Nebius Group NV,2026-06-22,,verified_2026session,,"Added June 2026 quarterly change. Netherlands-domiciled, foreign private issuer",https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+RKLB,Rocket Lab Corp,2026-06-22,,verified_2026session,,Added June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+TER,Teradyne Inc,2026-06-22,,verified_2026session,,Added June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+CHTR,Charter Communications Inc,2016,2026-06-22,general_knowledge_unverified,verified_2026session,Removed June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+CTSH,Cognizant Technology Solutions Corp,2006,2026-06-22,general_knowledge_unverified,verified_2026session,Removed June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+VRSK,Verisk Analytics Inc,2018,2026-06-22,general_knowledge_unverified,verified_2026session,Removed June 2026 quarterly change,https://www.globenewswire.com/news-release/2026/06/12/3310860/6948/en/Nasdaq-100-Index-June-2026-Quarterly-Changes.html
+NTAP,NetApp Inc,2018-12-24,,verified_2026session,,Added Dec 2018 reconstitution,
+UAL,United Continental Holdings / United Airlines Holdings,2018-12-24,,verified_2026session,,Added Dec 2018 reconstitution,
+WLTW,Willis Towers Watson plc,2018-12-24,2021,verified_2026session,general_knowledge_unverified,"Added Dec 2018 reconstitution. Ireland-domiciled. Removed later (window unverified)",
+ESRX,Express Scripts Holding Co,1999-01,2018-12-24,general_knowledge_unverified,verified_2026session,Removed Dec 2018 reconstitution; acquired by Cigna Dec 2018,
+HOLX,Hologic Inc,2005,2018-12-24,general_knowledge_unverified,verified_2026session,"Removed Dec 2018 reconstitution (also briefly removed Dec 2010, re-added later - window imprecise)",
+QRTEA,Qurate Retail Inc (fka Liberty Interactive),2010,2018-12-24,general_knowledge_unverified,verified_2026session,Removed Dec 2018 reconstitution,
+SHPG,Shire plc,2015,2018-12-24,general_knowledge_unverified,verified_2026session,"Ireland-domiciled, foreign private issuer; removed Dec 2018 reconstitution; acquired by Takeda Jan 2019",
+ASML,ASML Holding NV,2017-12-18,,verified_2026session,,"Added Dec 2017 reconstitution. Netherlands-domiciled, foreign private issuer, EUR reporting, files 20-F",https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+SNPS,Synopsys Inc,2017-12-18,,verified_2026session,,Added Dec 2017 reconstitution,https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+WDAY,Workday Inc,2017-12-18,,verified_2026session,,Added Dec 2017 reconstitution,https://www.globenewswire.com/news-release/2017/12/09/1250472/0/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+DISH,DISH Network Corp,2013-12-23,2019,verified_2026session,general_knowledge_unverified,"Added Dec 2013 reconstitution; removed later (window unverified)",https://www.globenewswire.com/news-release/2013/12/14/596871/10061456/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+ILMN,Illumina Inc,2013-12-23,2024-12-23,verified_2026session,verified_2026session,Re-added Dec 2013 reconstitution (per verified event); removed Dec 2024,https://www.globenewswire.com/news-release/2013/12/14/596871/10061456/en/Annual-Changes-to-the-NASDAQ-100-Index.html
+PYPL,PayPal Holdings Inc,2015-07,,general_knowledge_unverified,,Spun off from eBay Jul 2015; added to NDX around spin-off,
+GOOGL,Alphabet Inc (Class A),2004-08,,general_knowledge_unverified,,"Google Inc IPO Aug 2004, added to NDX shortly after; renamed Alphabet Inc 2015 (dual-class structure GOOGL/GOOG)",
+GOOG,Alphabet Inc (Class C),2014-04,,general_knowledge_unverified,,Class C shares created via stock split Apr 2014; both share classes are NDX members,
+TSLA,Tesla Inc,2020-12-21,,general_knowledge_unverified,,Believed added to NDX around Dec 2020 S&P 500 inclusion era (window unverified this session),
+HON,Honeywell International Inc,2018,,general_knowledge_unverified,,Believed added following 2018 Nasdaq relisting move (window unverified),
+CMCSA,Comcast Corp,1999-01,,general_knowledge_unverified,,Long-standing NDX member (Class A common),
+ADSK,Autodesk Inc,1999-01,2020,general_knowledge_unverified,general_knowledge_unverified,"Long-time member; removed at some point (window unverified)",
+INTU,Intuit Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+ISRG,Intuitive Surgical Inc,2004,,general_knowledge_unverified,,Long-standing NDX member since early-mid 2000s,
+VRTX,Vertex Pharmaceuticals Inc,2013,,general_knowledge_unverified,,Long-standing NDX member,
+REGN,Regeneron Pharmaceuticals Inc,2013,,general_knowledge_unverified,,Long-standing NDX member,
+IDXX,IDEXX Laboratories Inc,2018,,general_knowledge_unverified,,NDX member since approx 2018 (window unverified),
+CPRT,Copart Inc,2019,,general_knowledge_unverified,,NDX member since approx 2019 (window unverified),
+ROST,Ross Stores Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+ORLY,O'Reilly Automotive Inc,2009,,general_knowledge_unverified,,NDX member since approx 2009 (window unverified),
+MNST,Monster Beverage Corp,2012,,general_knowledge_unverified,,"Renamed from Hansen Natural 2012, continues NDX member (see HANS row for addition date)",
+XEL,Xcel Energy Inc,2018,,general_knowledge_unverified,,NDX member since approx 2018 (window unverified),
+EXC,Exelon Corp,2011,,general_knowledge_unverified,,NDX member since approx 2011 (window unverified),
+CSX,CSX Corp,2019,,general_knowledge_unverified,,NDX member since approx 2019 (window unverified),
+ODFL,Old Dominion Freight Line Inc,2020,,general_knowledge_unverified,,NDX member since approx 2020 (window unverified),
+PDD,PDD Holdings Inc,2023,,general_knowledge_unverified,,"Foreign private issuer (China, ADS); NDX member since approx 2023 (window unverified)",
+MELI,MercadoLibre Inc,2019,,general_knowledge_unverified,,"Foreign private issuer (Argentina/Uruguay); NDX member since approx 2019 (window unverified)",
+GEHC,GE HealthCare Technologies Inc,2023-01,,general_knowledge_unverified,,Spun off from General Electric Jan 2023; added to NDX around spin-off,
+ARM,Arm Holdings plc,2024,,general_knowledge_unverified,,"UK-domiciled, foreign private issuer, files 20-F; IPO Sep 2023, added to NDX approx 2024 (window unverified)",
+APP,AppLovin Corp,2024,,general_knowledge_unverified,,NDX member since approx 2024 (window unverified),
+CRWD,CrowdStrike Holdings Inc,2023,,general_knowledge_unverified,,NDX member since approx 2023 (window unverified),
+PEP,PepsiCo Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+MDLZ,Mondelez International Inc,2012-10,,general_knowledge_unverified,,Spun off from Kraft Foods Oct 2012; added to NDX around spin-off,
+BKNG,Booking Holdings Inc (fka priceline.com),1999-01,,general_knowledge_unverified,,Long-standing NDX member,
+MAR,Marriott International Inc,2016,,general_knowledge_unverified,,NDX member since approx 2016 (window unverified),
+TMUS,T-Mobile US Inc,2019,,general_knowledge_unverified,,NDX member since approx 2019 (window unverified),
+LIN,Linde plc,2020,,general_knowledge_unverified,,"UK/Ireland-domiciled following Praxair/Linde AG merger 2018; NDX member since approx 2020 (window unverified)",
+HON,Honeywell International Inc,2018,,general_knowledge_unverified,,Believed NDX member since approx 2018 (window unverified),
+NXPI,NXP Semiconductors NV,2013,,general_knowledge_unverified,,"Netherlands-domiciled, foreign private issuer; NDX member since approx 2013 (window unverified)",
+ANSS,ANSYS Inc,2018,,general_knowledge_unverified,,NDX member since approx 2018 (window unverified),
+FISV,Fiserv Inc,1999-01,,general_knowledge_unverified,,Long-standing NDX member (ticker later FI),
+ATVI,Activision Blizzard Inc,1999-01,2023-10,general_knowledge_unverified,general_knowledge_unverified,Acquired by Microsoft Oct 2023; removed from NDX at that time,
+CELG,Celgene Corp,1999-01,2019-11,general_knowledge_unverified,general_knowledge_unverified,Acquired by Bristol-Myers Squibb Nov 2019; removed from NDX,
+DGX,Genentech Inc,1999-01,2009-03,general_knowledge_unverified,general_knowledge_unverified,Fully acquired by Roche Mar 2009; removed from NDX (ticker was DNA),
+PCLN,priceline.com Inc / The Priceline Group Inc,1999-01,2018-02,general_knowledge_unverified,general_knowledge_unverified,"Same company/CIK as BKNG (Booking Holdings); ticker was PCLN until renamed BKNG Feb 2018. Listed as separate row to preserve historical ticker for records filed under PCLN.",
