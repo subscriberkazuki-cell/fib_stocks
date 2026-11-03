@@ -160,11 +160,30 @@ export function getBusiness(id: string, db?: DatabaseSync): Business | null {
  * ここでは「候補」だけを広めに取り、統合の可否は dedupe 側の複合条件で判断する。
  */
 export function findDedupeCandidates(
-  args: { normalizedPhone: string | null; name: string; latitude: number | null; longitude: number | null },
+  args: {
+    source?: string;
+    sourceBusinessId?: string;
+    normalizedPhone: string | null;
+    name: string;
+    latitude: number | null;
+    longitude: number | null;
+  },
   db?: DatabaseSync
 ): Business[] {
   const c = conn(db);
   const rows: Row[] = [];
+
+  // 同じ要素IDの行は、名前・電話・座標が変わっていても必ず候補に入れる。
+  // ここで漏れると新規扱いになり、別の id を発行したうえで INSERT が
+  // ON CONFLICT(source, source_business_id) で既存行の更新に化ける。
+  // その結果、履歴だけが存在しない id を指して外部キー制約で落ちる。
+  if (args.source && args.sourceBusinessId) {
+    rows.push(
+      ...(c
+        .prepare('SELECT * FROM businesses WHERE source = ? AND source_business_id = ?')
+        .all(args.source, args.sourceBusinessId) as Row[])
+    );
+  }
 
   if (args.normalizedPhone) {
     // 正規化済みカラムで引く。SQL側で replace() を重ねる方式だと

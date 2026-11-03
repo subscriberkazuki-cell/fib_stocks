@@ -118,7 +118,8 @@ export async function runPhase1Job(job: SearchJob, deps: Phase1Deps): Promise<Ph
       const result = await runSubQuery(sq, criteria, deps, job.id);
       candidates = result.candidates;
       progress.costUsd += result.costUsd;
-      repo.updateSubQuery(sq.id, { status: 'completed', errorMessage: null }, deps.db);
+      // ここではまだ completed にしない。保存の途中で落ちたときに
+      // 「完了済み」として再開対象から外れ、残りの候補が永久に保存されなくなるため。
     } catch (e) {
       if (e instanceof BudgetExceededError) {
         // 予算上限：即座に停止する。ここまでの成果は保持したまま抜ける（§12-3）
@@ -154,72 +155,20 @@ export async function runPhase1Job(job: SearchJob, deps: Phase1Deps): Promise<Ph
     progress.duplicates += duplicateCount;
 
     for (const c of unique) {
-      if (!passesPhase1Filter(c, criteria, providerHasRatings)) continue;
-
-      const existingCandidates = repo.findDedupeCandidates(
-        {
-          normalizedPhone: normalizePhone(c.phone),
-          name: c.name,
-          latitude: c.latitude,
-          longitude: c.longitude,
-        },
-        deps.db
-      );
-
-      const dup = findDuplicate(c, existingCandidates);
-      const merged = dup ? mergeIntoExisting(c, dup.existing) : c;
-      const { business } = scoreCandidate(merged, settings);
-
-      if (dup) {
-        progress.duplicates++;
-        progress.updated++;
-        const before = dup.existing;
-        // 既存レコードの営業メモ・ステータスは絶対に上書きしない
-        repo.upsertBusiness(
-          {
-            ...business,
-            id: before.id,
-            createdAt: before.createdAt,
-            updatedAt: new Date().toISOString(),
-            leadStatus: before.leadStatus,
-            nextAction: before.nextAction,
-            lastContactedAt: before.lastContactedAt,
-            nextContactAt: before.nextContactAt,
-            salesNotes: before.salesNotes,
-            dealValue: before.dealValue,
-            // Phase 2 の調査結果も、再取得で消さない
-            email: business.email ?? before.email,
-            websiteSignals: business.websiteSignals ?? before.websiteSignals,
-            websiteOpportunityScore: business.websiteOpportunityScore ?? before.websiteOpportunityScore,
-            salesAnalysis: before.salesAnalysis,
-            phase2CompletedAt: before.phase2CompletedAt,
-          },
-          deps.db
-        );
-        recordChangeIfAny(before, business, deps.db);
-      } else {
-        const id = randomUUID();
-        const nowIso = new Date().toISOString();
-        repo.upsertBusiness({ ...business, id, createdAt: nowIso, updatedAt: nowIso }, deps.db);
-        repo.recordHistory(
-          {
-            businessId: id,
-            event: 'created',
-            rating: business.rating?.value ?? null,
-            reviewCount: business.reviewCount?.value ?? null,
-            websiteStatus: business.websiteStatus,
-            leadScore: business.leadScore,
-            leadScoreBreakdown: business.leadScoreBreakdown,
-            leadStatus: business.leadStatus,
-            note: null,
-          },
-          deps.db
-        );
-        progress.created++;
+      try {
+        saveCandidate(c);
+      } catch (e) {
+        // 1件の不整合で、そのエリアの結果を全部捨てない。理由は job の errorMessage に残る。
+        const msg = e instanceof Error ? e.message : String(e);
+        progress.errors.push(`${c.name}（${c.source}:${c.sourceBusinessId}）: ${msg}`);
       }
-
-      if (meetsMinPriority(business.salesPriority, criteria.minPriority)) progress.qualified++;
     }
+
+    repo.updateSubQuery(
+      sq.id,
+      { status: 'completed', errorMessage: null },
+      deps.db
+    );
 
     repo.updateJob(
       job.id,
@@ -232,6 +181,84 @@ export async function runPhase1Job(job: SearchJob, deps: Phase1Deps): Promise<Ph
       },
       deps.db
     );
+  }
+
+  /** 候補1件を保存する。既存店と同一ならマージ、そうでなければ新規作成 */
+  function saveCandidate(c: BusinessCandidate): void {
+    if (!passesPhase1Filter(c, criteria, providerHasRatings)) return;
+
+    const existingCandidates = repo.findDedupeCandidates(
+      {
+        source: c.source,
+        sourceBusinessId: c.sourceBusinessId,
+        normalizedPhone: normalizePhone(c.phone),
+        name: c.name,
+        latitude: c.latitude,
+        longitude: c.longitude,
+      },
+      deps.db
+    );
+
+    const dup = findDuplicate(c, existingCandidates);
+    const merged = dup ? mergeIntoExisting(c, dup.existing) : c;
+    const { business } = scoreCandidate(merged, settings);
+
+    if (dup) {
+      progress.duplicates++;
+      progress.updated++;
+      const before = dup.existing;
+      // 既存レコードの営業メモ・ステータスは絶対に上書きしない
+      repo.upsertBusiness(
+        {
+          ...business,
+          id: before.id,
+          // 識別子は既存行のものを必ず使う。候補側の source_business_id を持ち込むと
+          // 「id は既存行・(source, source_business_id) は新規」という行になり、
+          // ON CONFLICT に拾われず主キーの UNIQUE 制約で落ちる。
+          // OSM で再マッピングされた店舗など、名前・電話・座標では一致するのに
+          // 要素IDだけが違う候補で発生する（柏駅→柏の葉の重なり検索で実際に踏んだ）。
+          source: before.source,
+          sourceBusinessId: before.sourceBusinessId,
+          createdAt: before.createdAt,
+          updatedAt: new Date().toISOString(),
+          leadStatus: before.leadStatus,
+          nextAction: before.nextAction,
+          lastContactedAt: before.lastContactedAt,
+          nextContactAt: before.nextContactAt,
+          salesNotes: before.salesNotes,
+          dealValue: before.dealValue,
+          // Phase 2 の調査結果も、再取得で消さない
+          email: business.email ?? before.email,
+          websiteSignals: business.websiteSignals ?? before.websiteSignals,
+          websiteOpportunityScore: business.websiteOpportunityScore ?? before.websiteOpportunityScore,
+          salesAnalysis: before.salesAnalysis,
+          phase2CompletedAt: before.phase2CompletedAt,
+        },
+        deps.db
+      );
+      recordChangeIfAny(before, business, deps.db);
+    } else {
+      const id = randomUUID();
+      const nowIso = new Date().toISOString();
+      repo.upsertBusiness({ ...business, id, createdAt: nowIso, updatedAt: nowIso }, deps.db);
+      repo.recordHistory(
+        {
+          businessId: id,
+          event: 'created',
+          rating: business.rating?.value ?? null,
+          reviewCount: business.reviewCount?.value ?? null,
+          websiteStatus: business.websiteStatus,
+          leadScore: business.leadScore,
+          leadScoreBreakdown: business.leadScoreBreakdown,
+          leadStatus: business.leadStatus,
+          note: null,
+        },
+        deps.db
+      );
+      progress.created++;
+    }
+
+    if (meetsMinPriority(business.salesPriority, criteria.minPriority)) progress.qualified++;
   }
 
   const stillPending = repo.getPendingSubQueries(job.id, deps.db);

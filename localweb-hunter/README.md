@@ -406,7 +406,7 @@ HP営業とは別に、補助金の申請サポートを有料で行うための
 npm run dev          # 開発サーバー
 npm run build        # 本番ビルド
 npm start            # 本番サーバー
-npm test             # ユニットテスト（410件）
+npm test             # ユニットテスト（414件）
 npm run lint         # ESLint
 npm run check        # typecheck + lint + test をまとめて実行
 npm run typecheck    # 型チェック
@@ -452,6 +452,7 @@ DBを作り直す必要はありません。
 | `subsidySupport.test.ts` | 申請書類の作成が禁止側に分類されていること、商工会議所を先に案内すること、利益相反を開示すること、見合わないサポートを勧めないこと |
 | `emphasis.test.ts` | 文面の強調が記号のまま画面に出ないこと |
 | `subsidySchedule.test.ts` | 文面の日付がすべて `SCHEDULE` から導かれていること、様式4の締切を過ぎた回で文面を使用不可にすること |
+| `phase1Merge.test.ts` / `phase1Isolation.test.ts` | 範囲の重なる再検索で、要素IDだけ違う同じ店をマージしても落ちないこと。候補1件の失敗でエリア全体の結果を捨てないこと |
 | `mailCompose.test.ts` | 未取得の数字を推測で埋めず一文ごと落とすこと、法定表示が無ければ送信を止めること、差し込みが残ったまま送れないこと |
 
 ---
